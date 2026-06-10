@@ -2,7 +2,7 @@
     <div class="container site-header-inner">
         <a href="{{ route('beranda') }}" class="site-brand">
             <img src="{{ asset('src/img/logo.png') }}" alt="Logo Poltekkes Kemenkes Banten" class="site-brand-logo">
-            <span class="site-brand-text">Layanan Akademik Poltekkes Kemenkes Banten</span>
+            <span class="site-brand-text">Layanan Polkesten</span>
         </a>
 
         <nav class="site-nav">

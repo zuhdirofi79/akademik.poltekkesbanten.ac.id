@@ -25,7 +25,13 @@ class ServiceFormController extends Controller
         $config = ServiceFormConfig::get($slug);
         abort_if(! $config, 404);
 
-        $serviceType = ServiceType::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        $serviceType = ServiceType::where('slug', $slug)->firstOrFail();
+
+        if (! $serviceType->is_active) {
+            return redirect()
+                ->route('beranda')
+                ->with('error', "Layanan {$serviceType->name} saat ini tidak tersedia.");
+        }
 
         $captcha = $this->generateCaptcha();
 
@@ -42,7 +48,12 @@ class ServiceFormController extends Controller
     {
         $slug = ServiceFormConfig::resolveSlug($slug);
 
-        $serviceType = ServiceType::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        $serviceType = ServiceType::where('slug', $slug)->firstOrFail();
+
+        if (! $serviceType->is_active) {
+            abort(410, 'Layanan ini tidak tersedia.');
+        }
+
         $config = ServiceFormConfig::get($slug);
 
         $files = [];

@@ -22,12 +22,14 @@ class Submission extends Model
         'email',
         'whatsapp',
         'semester',
+        'gpa_score',
         'mother_name',
         'request_type',
         'corrected_data',
         'purpose',
         'issue_type',
         'leave_reason',
+        'exit_reason',
         'entry_year',
         'graduation_year',
         'alumni_letter_type',
@@ -44,6 +46,7 @@ class Submission extends Model
     protected function casts(): array
     {
         return [
+            'gpa_score' => 'decimal:2',
             'ready_to_send_email' => 'boolean',
             'email_sent_at' => 'datetime',
             'data_confirmed' => 'boolean',

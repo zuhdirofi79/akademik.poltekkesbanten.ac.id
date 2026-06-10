@@ -22,12 +22,25 @@
         <tr><th>Email</th><td>{{ $submission->email }}</td></tr>
         <tr><th>WhatsApp</th><td>{{ $submission->whatsapp }}</td></tr>
         @if($submission->semester)<tr><th>Semester</th><td>{{ $submission->semester }}</td></tr>@endif
+        @if($submission->gpa_score !== null)<tr><th>IPS/IPK</th><td>{{ number_format((float) $submission->gpa_score, 2, '.', '') }}</td></tr>@endif
         @if($submission->mother_name)<tr><th>Nama Ibu Kandung</th><td>{{ $submission->mother_name }}</td></tr>@endif
         @if($submission->request_type)<tr><th>Jenis Permohonan</th><td>{{ $submission->request_type }}</td></tr>@endif
         @if($submission->corrected_data)<tr><th>Data Diperbaiki</th><td>{{ $submission->corrected_data }}</td></tr>@endif
-        @if($submission->purpose)<tr><th>Keperluan</th><td>{{ $submission->purpose }}</td></tr>@endif
+        @if($submission->purpose)
+            <tr>
+                <th>
+                    @if($submission->serviceType->slug === 'surat-keterangan-beasiswa')
+                        Keperluan Surat Beasiswa Apa?
+                    @else
+                        Keperluan
+                    @endif
+                </th>
+                <td>{{ $submission->purpose }}</td>
+            </tr>
+        @endif
         @if($submission->issue_type)<tr><th>Kendala SIAKAD</th><td>{{ $submission->issue_type }}</td></tr>@endif
         @if($submission->leave_reason)<tr><th>Alasan Cuti</th><td>{{ $submission->leave_reason }}</td></tr>@endif
+        @if($submission->exit_reason)<tr><th>Alasan Keluar</th><td>{{ $submission->exit_reason }}</td></tr>@endif
         @if($submission->entry_year)<tr><th>Tahun Masuk</th><td>{{ $submission->entry_year }}</td></tr>@endif
         @if($submission->graduation_year)<tr><th>Tahun Keluar</th><td>{{ $submission->graduation_year }}</td></tr>@endif
         @if($submission->alumni_letter_type)<tr><th>Jenis Surat Alumni (Legacy)</th><td>{{ $submission->alumni_letter_type }}</td></tr>@endif

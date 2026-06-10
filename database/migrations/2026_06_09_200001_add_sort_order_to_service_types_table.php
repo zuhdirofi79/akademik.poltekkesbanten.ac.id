@@ -8,15 +8,23 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('service_types', function (Blueprint $table) {
-            $table->unsignedInteger('sort_order')->nullable()->default(0)->after('is_active');
-        });
+        if (! Schema::hasColumn('service_types', 'sort_order')) {
+            Schema::table('service_types', function (Blueprint $table) {
+                if (Schema::hasColumn('service_types', 'is_active')) {
+                    $table->unsignedInteger('sort_order')->nullable()->default(0)->after('is_active');
+                } else {
+                    $table->unsignedInteger('sort_order')->nullable()->default(0);
+                }
+            });
+        }
     }
 
     public function down(): void
     {
-        Schema::table('service_types', function (Blueprint $table) {
-            $table->dropColumn('sort_order');
-        });
+        if (Schema::hasColumn('service_types', 'sort_order')) {
+            Schema::table('service_types', function (Blueprint $table) {
+                $table->dropColumn('sort_order');
+            });
+        }
     }
 };

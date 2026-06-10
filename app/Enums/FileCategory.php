@@ -10,8 +10,11 @@ enum FileCategory: string
     case StudentRegistrationProof = 'student_registration_proof';
     case LeaveRegistrationProof = 'leave_registration_proof';
     case LeaveRequestLetter = 'leave_request_letter';
+    case KhsActiveProof = 'khs_active_proof';
+    case StatementLetter = 'statement_letter';
     case Diploma = 'diploma';
     case AdditionalSupportingData = 'additional_supporting_data';
+    case AlumniSupportingData = 'alumni_supporting_data';
     case OptionalSupportingData = 'optional_supporting_data';
     case FinalResult = 'final_result';
 
@@ -20,6 +23,8 @@ enum FileCategory: string
     case SupportingKrs = 'supporting_krs';
     case SupportingLeaveRegistration = 'supporting_leave_registration';
     case SupportingLeaveRequest = 'supporting_leave_request';
+    case SupportingKhsActiveProof = 'supporting_khs_active_proof';
+    case SupportingStatementLetter = 'supporting_statement_letter';
     case SupportingDiploma = 'supporting_diploma';
 
     public function label(): string
@@ -31,8 +36,11 @@ enum FileCategory: string
             self::StudentRegistrationProof => 'Bukti Registrasi Mahasiswa',
             self::LeaveRegistrationProof, self::SupportingLeaveRegistration => 'Bukti Registrasi Cuti',
             self::LeaveRequestLetter, self::SupportingLeaveRequest => 'Surat Permohonan Cuti',
+            self::KhsActiveProof, self::SupportingKhsActiveProof => 'Bukti KHS Aktif',
+            self::StatementLetter, self::SupportingStatementLetter => 'Surat Pernyataan Tertulis Bermaterai',
             self::Diploma, self::SupportingDiploma => 'Ijazah',
             self::AdditionalSupportingData => 'Data Dukung Tambahan',
+            self::AlumniSupportingData => 'Surat Pernyataan Magang dan Scan Ijazah',
             self::OptionalSupportingData => 'Data Dukung (Opsional)',
             self::FinalResult => 'File Hasil',
         };

@@ -216,7 +216,7 @@ a { color: inherit; text-decoration: none; }
     min-height: 430px;
     background-image:
         linear-gradient(rgba(15, 23, 42, 0.68), rgba(15, 23, 42, 0.68)),
-        url('/src/img/dashboard-gedung-poltekkesbanten.png');
+        var(--hero-bg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -270,11 +270,15 @@ a { color: inherit; text-decoration: none; }
     min-height: 390px;
 }
 
-.campus-image-card img {
+.campus-image-card img,
+.home-building-image {
     width: 100%;
     height: 100%;
-    min-height: 390px;
+    min-height: 520px;
     object-fit: cover;
+    object-position: center;
+    image-rendering: auto;
+    filter: none;
     display: block;
 }
 
@@ -720,7 +724,8 @@ a { color: inherit; text-decoration: none; }
     }
 
     .campus-image-card,
-    .campus-image-card img {
+    .campus-image-card img,
+    .home-building-image {
         min-height: 260px;
     }
 }

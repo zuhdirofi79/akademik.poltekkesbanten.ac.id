@@ -6,7 +6,7 @@
 @php
     $slug = $config['slug'];
     $semesterSlugs = \App\Support\ServiceFormConfig::semesterSlugs();
-    $aktifKuliahSlugs = \App\Support\ServiceFormConfig::aktifKuliahPatternSlugs();
+    $rekomendasiSlug = \App\Support\ServiceFormConfig::rekomendasiSlug();
 @endphp
 
 <div class="page-title-bar">{{ $config['title'] }}</div>
@@ -125,10 +125,33 @@
                             </div>
                         @endif
 
-                        @if(in_array($slug, $aktifKuliahSlugs))
+                        @if($slug === 'surat-keterangan-aktif-kuliah')
                             <div class="form-group full">
-                                <label for="registration_proof">Data Dukung - Bukti Registrasi</label>
-                                <input type="file" name="registration_proof" id="registration_proof" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <label for="active_krs">Data Dukung - KRS Periode Aktif</label>
+                                <input type="file" name="active_krs" id="active_krs" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="form-group full">
+                                <label for="purpose">{{ $config['purpose_label'] ?? 'Keperluan Surat' }}</label>
+                                <textarea name="purpose" id="purpose" class="form-control" rows="3" required>{{ old('purpose') }}</textarea>
+                            </div>
+                        @endif
+
+                        @if($slug === 'surat-keterangan-berkelakuan-baik')
+                            <div class="form-group full">
+                                <label for="active_krs">Data Dukung - KRS Periode Aktif</label>
+                                <input type="file" name="active_krs" id="active_krs" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="form-group full">
+                                <label for="purpose">{{ $config['purpose_label'] ?? 'Keperluan Surat' }}</label>
+                                <textarea name="purpose" id="purpose" class="form-control" rows="3" required>{{ old('purpose') }}</textarea>
+                            </div>
+                        @endif
+
+                        @if($slug === $rekomendasiSlug)
+                            <div class="form-group full">
+                                <label for="alumni_supporting_data">DATA DUKUNG ALUMNI - SURAT PERNYATAAN MAGANG DAN SCAN IJAZAH</label>
+                                <input type="file" name="alumni_supporting_data" id="alumni_supporting_data" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <small>Unggah surat pernyataan magang dan scan ijazah dalam satu file PDF, atau unggah dokumen pendukung dalam format JPG/PNG.</small>
                             </div>
                             <div class="form-group full">
                                 <label for="active_krs">Data Dukung - KRS Periode Aktif</label>
@@ -136,6 +159,21 @@
                             </div>
                             <div class="form-group full">
                                 <label for="purpose">{{ $config['purpose_label'] ?? 'Keperluan Surat' }}</label>
+                                <textarea name="purpose" id="purpose" class="form-control" rows="3" required>{{ old('purpose') }}</textarea>
+                            </div>
+                        @endif
+
+                        @if($slug === 'surat-keterangan-beasiswa')
+                            <div class="form-group">
+                                <label for="gpa_score">IPS/IPK</label>
+                                <input type="text" name="gpa_score" id="gpa_score" class="form-control" value="{{ old('gpa_score') }}" placeholder="Contoh: 3.75" inputmode="decimal" required>
+                            </div>
+                            <div class="form-group full">
+                                <label for="active_krs">Data Dukung - KRS Periode Aktif</label>
+                                <input type="file" name="active_krs" id="active_krs" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="form-group full">
+                                <label for="purpose">{{ $config['purpose_label'] ?? 'Keperluan Surat Beasiswa Apa?' }}</label>
                                 <textarea name="purpose" id="purpose" class="form-control" rows="3" required>{{ old('purpose') }}</textarea>
                             </div>
                         @endif
@@ -161,8 +199,29 @@
                                 <input type="file" name="leave_request_letter" id="leave_request_letter" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
                             </div>
                             <div class="form-group full">
+                                <label for="statement_letter">Data Dukung - Surat Pernyataan Tertulis Bermaterai</label>
+                                <input type="file" name="statement_letter" id="statement_letter" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <small>Unggah surat pernyataan tertulis bermaterai dalam format PDF/JPG/PNG.</small>
+                            </div>
+                            <div class="form-group full">
                                 <label for="leave_reason">Alasan Cuti</label>
                                 <textarea name="leave_reason" id="leave_reason" class="form-control" rows="3" required>{{ old('leave_reason') }}</textarea>
+                            </div>
+                        @endif
+
+                        @if($slug === 'surat-keluar-mahasiswa')
+                            <div class="form-group full">
+                                <label for="khs_active_proof">Data Dukung - Bukti KHS Aktif</label>
+                                <input type="file" name="khs_active_proof" id="khs_active_proof" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="form-group full">
+                                <label for="statement_letter">Data Dukung - Surat Pernyataan Tertulis Bermaterai</label>
+                                <input type="file" name="statement_letter" id="statement_letter" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <small>Unggah surat pernyataan tertulis bermaterai dalam format PDF/JPG/PNG.</small>
+                            </div>
+                            <div class="form-group full">
+                                <label for="exit_reason">Alasan Keluar</label>
+                                <textarea name="exit_reason" id="exit_reason" class="form-control" rows="3" required>{{ old('exit_reason') }}</textarea>
                             </div>
                         @endif
 

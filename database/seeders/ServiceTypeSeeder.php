@@ -27,18 +27,18 @@ class ServiceTypeSeeder extends Seeder
                 'sort_order' => 2,
             ],
             [
-                'code' => 'REGISTRASI',
-                'name' => 'Surat Keterangan Registrasi',
-                'slug' => 'surat-keterangan-registrasi',
-                'description' => 'Untuk mengusulkan pembuatan Surat Keterangan Registrasi.',
-                'is_active' => true,
-                'sort_order' => 3,
-            ],
-            [
                 'code' => 'CUTI',
                 'name' => 'Surat Cuti Mahasiswa',
                 'slug' => 'surat-cuti-mahasiswa',
                 'description' => 'Untuk mengusulkan Surat Cuti Mahasiswa.',
+                'is_active' => true,
+                'sort_order' => 3,
+            ],
+            [
+                'code' => 'KELUAR',
+                'name' => 'Surat Keluar Mahasiswa',
+                'slug' => 'surat-keluar-mahasiswa',
+                'description' => 'Untuk mengusulkan Surat Keluar Mahasiswa.',
                 'is_active' => true,
                 'sort_order' => 4,
             ],
@@ -104,6 +104,14 @@ class ServiceTypeSeeder extends Seeder
         }
 
         $legacyServices = [
+            [
+                'code' => 'REGISTRASI',
+                'name' => 'Surat Keterangan Registrasi',
+                'slug' => 'surat-keterangan-registrasi',
+                'description' => 'Layanan lama/nonaktif.',
+                'is_active' => false,
+                'sort_order' => 99,
+            ],
             [
                 'code' => 'PDM_LEGACY',
                 'name' => 'Perbaikan Data Mahasiswa (Legacy)',

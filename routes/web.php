@@ -33,6 +33,7 @@ $serviceRoutes = [
     'surat-keterangan-aktif-kuliah',
     'surat-keterangan-registrasi',
     'surat-cuti-mahasiswa',
+    'surat-keluar-mahasiswa',
     'surat-keterangan-beasiswa',
     'surat-keterangan-berkelakuan-baik',
     'surat-keterangan-verifikasi-ijazah-alumni',

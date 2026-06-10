@@ -37,22 +37,27 @@ class ServiceFormConfig
     {
         return [
             'surat-keterangan-aktif-kuliah',
-            'surat-keterangan-registrasi',
             'surat-cuti-mahasiswa',
+            'surat-keluar-mahasiswa',
             'surat-keterangan-beasiswa',
             'surat-keterangan-berkelakuan-baik',
             'surat-rekomendasi',
         ];
     }
 
-    public static function aktifKuliahPatternSlugs(): array
+    public static function rekomendasiSlug(): string
     {
-        return [
-            'surat-keterangan-aktif-kuliah',
-            'surat-keterangan-beasiswa',
-            'surat-keterangan-berkelakuan-baik',
-            'surat-rekomendasi',
-        ];
+        return 'surat-rekomendasi';
+    }
+
+    public static function berkelakuanBaikSlug(): string
+    {
+        return 'surat-keterangan-berkelakuan-baik';
+    }
+
+    public static function beasiswaSlug(): string
+    {
+        return 'surat-keterangan-beasiswa';
     }
 
     public static function all(): array
@@ -84,10 +89,9 @@ class ServiceFormConfig
                 'card_title' => 'Usulan Surat Keterangan Aktif Kuliah',
                 'submit_label' => 'Ajukan Usulan Surat Keterangan Aktif Kuliah',
                 'info_title' => 'Informasi Penting',
-                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keterangan Aktif Kuliah. Siapkan bukti registrasi dan KRS periode aktif.',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keterangan Aktif Kuliah. Siapkan KRS periode aktif.',
                 'purpose_label' => 'Keperluan Surat',
                 'file_fields' => [
-                    'registration_proof' => 'Data Dukung - Bukti Registrasi',
                     'active_krs' => 'Data Dukung - KRS Periode Aktif',
                 ],
             ],
@@ -109,10 +113,23 @@ class ServiceFormConfig
                 'card_title' => 'Usulan Surat Cuti Mahasiswa',
                 'submit_label' => 'Ajukan Usulan Surat Cuti Mahasiswa',
                 'info_title' => 'Informasi Penting',
-                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Cuti Mahasiswa. Siapkan bukti registrasi cuti dan surat permohonan cuti.',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Cuti Mahasiswa. Siapkan bukti registrasi cuti, surat permohonan cuti, dan surat pernyataan tertulis bermaterai.',
                 'file_fields' => [
                     'leave_registration_proof' => 'Data Dukung - Bukti Registrasi Cuti',
                     'leave_request_letter' => 'Data Dukung - Surat Permohonan Cuti',
+                    'statement_letter' => 'Data Dukung - Surat Pernyataan Tertulis Bermaterai',
+                ],
+            ],
+            'surat-keluar-mahasiswa' => [
+                'slug' => 'surat-keluar-mahasiswa',
+                'title' => 'Usulan Surat Keluar Mahasiswa',
+                'card_title' => 'Usulan Surat Keluar Mahasiswa',
+                'submit_label' => 'Ajukan Usulan Surat Keluar Mahasiswa',
+                'info_title' => 'Informasi Penting',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keluar Mahasiswa. Siapkan Bukti KHS Aktif dan Surat Pernyataan Tertulis Bermaterai.',
+                'file_fields' => [
+                    'khs_active_proof' => 'Data Dukung - Bukti KHS Aktif',
+                    'statement_letter' => 'Data Dukung - Surat Pernyataan Tertulis Bermaterai',
                 ],
             ],
             'surat-keterangan-beasiswa' => [
@@ -121,10 +138,9 @@ class ServiceFormConfig
                 'card_title' => 'Usulan Surat Keterangan Beasiswa',
                 'submit_label' => 'Ajukan Usulan Surat Keterangan Beasiswa',
                 'info_title' => 'Informasi Penting',
-                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keterangan Beasiswa. Siapkan data akademik dan dokumen pendukung yang diperlukan.',
-                'purpose_label' => 'Keperluan Surat',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keterangan Beasiswa. Siapkan KRS periode aktif dan informasi IPS/IPK terbaru.',
+                'purpose_label' => 'Keperluan Surat Beasiswa Apa?',
                 'file_fields' => [
-                    'registration_proof' => 'Data Dukung - Bukti Registrasi',
                     'active_krs' => 'Data Dukung - KRS Periode Aktif',
                 ],
             ],
@@ -134,10 +150,9 @@ class ServiceFormConfig
                 'card_title' => 'Usulan Surat Keterangan Berkelakuan Baik',
                 'submit_label' => 'Ajukan Usulan Surat Keterangan Berkelakuan Baik',
                 'info_title' => 'Informasi Penting',
-                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keterangan Berkelakuan Baik. Pastikan data identitas dan dokumen pendukung sudah sesuai.',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keterangan Berkelakuan Baik. Siapkan KRS periode aktif.',
                 'purpose_label' => 'Keperluan Surat',
                 'file_fields' => [
-                    'registration_proof' => 'Data Dukung - Bukti Registrasi',
                     'active_krs' => 'Data Dukung - KRS Periode Aktif',
                 ],
             ],
@@ -160,10 +175,10 @@ class ServiceFormConfig
                 'card_title' => 'Usulan Surat Rekomendasi Mahasiswa/Alumni',
                 'submit_label' => 'Ajukan Usulan Surat Rekomendasi Mahasiswa/Alumni',
                 'info_title' => 'Informasi Penting',
-                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Rekomendasi Mahasiswa/Alumni, termasuk untuk keperluan magang dan keperluan lainnya. Siapkan bukti registrasi dan KRS periode aktif jika masih mahasiswa aktif, atau dokumen pendukung lain jika alumni.',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Rekomendasi Mahasiswa/Alumni, termasuk untuk keperluan magang dan keperluan lainnya. Siapkan KRS periode aktif serta data dukung alumni berupa surat pernyataan magang dan scan ijazah.',
                 'purpose_label' => 'Keperluan Surat Rekomendasi',
                 'file_fields' => [
-                    'registration_proof' => 'Data Dukung - Bukti Registrasi',
+                    'alumni_supporting_data' => 'DATA DUKUNG ALUMNI - SURAT PERNYATAAN MAGANG DAN SCAN IJAZAH',
                     'active_krs' => 'Data Dukung - KRS Periode Aktif',
                 ],
             ],

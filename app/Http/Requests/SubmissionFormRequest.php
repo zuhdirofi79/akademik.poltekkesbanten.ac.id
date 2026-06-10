@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\ServiceType;
 use App\Support\ServiceFormConfig;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -10,6 +11,15 @@ class SubmissionFormRequest extends FormRequest
 {
     public function authorize(): bool
     {
+        if ($this->route('slug')) {
+            $slug = ServiceFormConfig::resolveSlug($this->route('slug'));
+            $serviceType = ServiceType::where('slug', $slug)->first();
+
+            if ($serviceType && ! $serviceType->is_active) {
+                abort(410, 'Layanan ini tidak tersedia.');
+            }
+        }
+
         return true;
     }
 
@@ -56,8 +66,24 @@ class SubmissionFormRequest extends FormRequest
             $rules['semester'] = ['required', 'string', 'max:50'];
         }
 
-        if (in_array($slug, ServiceFormConfig::aktifKuliahPatternSlugs(), true)) {
-            $rules['registration_proof'] = ['required', ...$fileRule];
+        if ($slug === 'surat-keterangan-aktif-kuliah') {
+            $rules['active_krs'] = ['required', ...$fileRule];
+            $rules['purpose'] = ['required', 'string', 'max:2000'];
+        }
+
+        if ($slug === ServiceFormConfig::berkelakuanBaikSlug()) {
+            $rules['active_krs'] = ['required', ...$fileRule];
+            $rules['purpose'] = ['required', 'string', 'max:2000'];
+        }
+
+        if ($slug === ServiceFormConfig::rekomendasiSlug()) {
+            $rules['alumni_supporting_data'] = ['required', ...$fileRule];
+            $rules['active_krs'] = ['required', ...$fileRule];
+            $rules['purpose'] = ['required', 'string', 'max:2000'];
+        }
+
+        if ($slug === ServiceFormConfig::beasiswaSlug()) {
+            $rules['gpa_score'] = ['required', 'numeric', 'min:0', 'max:4'];
             $rules['active_krs'] = ['required', ...$fileRule];
             $rules['purpose'] = ['required', 'string', 'max:2000'];
         }
@@ -70,7 +96,14 @@ class SubmissionFormRequest extends FormRequest
         if ($slug === 'surat-cuti-mahasiswa') {
             $rules['leave_registration_proof'] = ['required', ...$fileRule];
             $rules['leave_request_letter'] = ['required', ...$fileRule];
+            $rules['statement_letter'] = ['required', ...$fileRule];
             $rules['leave_reason'] = ['required', 'string', 'max:2000'];
+        }
+
+        if ($slug === 'surat-keluar-mahasiswa') {
+            $rules['khs_active_proof'] = ['required', ...$fileRule];
+            $rules['statement_letter'] = ['required', ...$fileRule];
+            $rules['exit_reason'] = ['required', 'string', 'max:2000'];
         }
 
         if ($slug === 'surat-keterangan-verifikasi-ijazah-alumni') {
@@ -109,11 +142,16 @@ class SubmissionFormRequest extends FormRequest
             'data_confirmed.accepted' => 'Anda harus menyetujui bahwa data yang diisi benar.',
             'nik.digits' => 'NIK harus berupa 16 digit angka.',
             'supporting_data.required' => 'File data dukung wajib diunggah.',
-            'registration_proof.required' => 'File bukti registrasi wajib diunggah.',
-            'active_krs.required' => 'File KRS wajib diunggah.',
+            'alumni_supporting_data.required' => 'DATA DUKUNG ALUMNI - SURAT PERNYATAAN MAGANG DAN SCAN IJAZAH wajib diunggah.',
+            'active_krs.required' => 'Data Dukung - KRS Periode Aktif wajib diunggah.',
             'student_registration_proof.required' => 'File bukti registrasi mahasiswa wajib diunggah.',
             'leave_registration_proof.required' => 'File bukti registrasi cuti wajib diunggah.',
             'leave_request_letter.required' => 'File surat permohonan cuti wajib diunggah.',
+            'statement_letter.required' => 'Data Dukung - Surat Pernyataan Tertulis Bermaterai wajib diunggah.',
+            'khs_active_proof.required' => 'Data Dukung - Bukti KHS Aktif wajib diunggah.',
+            'gpa_score.required' => 'IPS/IPK wajib diisi.',
+            'gpa_score.numeric' => 'IPS/IPK harus berupa angka.',
+            'gpa_score.max' => 'IPS/IPK maksimal 4.00.',
             'diploma.required' => 'File ijazah wajib diunggah.',
             '*.mimes' => 'File harus berformat PDF, JPG, JPEG, atau PNG.',
             '*.max' => 'Ukuran file maksimal 5 MB.',

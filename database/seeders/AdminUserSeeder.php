@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Support\RolePriority;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 class AdminUserSeeder extends Seeder
@@ -17,10 +18,13 @@ class AdminUserSeeder extends Seeder
         $sources = [
             ['email' => env('SUPERADMIN_EMAIL'), 'password' => env('SUPERADMIN_PASSWORD'), 'role' => 'superadmin', 'label' => 'SUPERADMIN_EMAIL'],
             ['email' => env('SUPERADMIN_1_EMAIL'), 'password' => env('SUPERADMIN_1_PASSWORD'), 'role' => 'superadmin', 'label' => 'SUPERADMIN_1_EMAIL'],
+            ['email' => env('SUPERADMIN_2_EMAIL'), 'password' => env('SUPERADMIN_2_PASSWORD'), 'role' => 'superadmin', 'label' => 'SUPERADMIN_2_EMAIL'],
+            ['email' => env('SUPERADMIN_3_EMAIL'), 'password' => env('SUPERADMIN_3_PASSWORD'), 'role' => 'superadmin', 'label' => 'SUPERADMIN_3_EMAIL'],
             ['email' => env('DEFAULT_ADMIN_EMAIL'), 'password' => env('DEFAULT_ADMIN_PASSWORD'), 'role' => 'admin', 'label' => 'DEFAULT_ADMIN_EMAIL'],
         ];
 
         $candidates = [];
+        $duplicateNotes = [];
 
         foreach ($sources as $source) {
             $email = strtolower(trim((string) $source['email']));
@@ -37,6 +41,7 @@ class AdminUserSeeder extends Seeder
                     'email' => $email,
                     'password' => $password,
                     'role' => $source['role'],
+                    'labels' => [$source['label']],
                 ];
 
                 continue;
@@ -45,7 +50,14 @@ class AdminUserSeeder extends Seeder
             $existing = $candidates[$email];
             $higherRole = RolePriority::highest($source['role'], $existing['role']);
 
+            if ($existing['role'] === 'superadmin' || $higherRole === 'superadmin') {
+                $duplicateNotes[] = "{$email} ({$source['label']} duplikat, dipertahankan sebagai superadmin)";
+            } else {
+                $duplicateNotes[] = "{$email} ({$source['label']} duplikat, digabung ke akun yang sama)";
+            }
+
             $candidates[$email]['role'] = $higherRole;
+            $candidates[$email]['labels'][] = $source['label'];
 
             if (RolePriority::isHigher($source['role'], $existing['role'])) {
                 $candidates[$email]['password'] = $password;
@@ -56,8 +68,11 @@ class AdminUserSeeder extends Seeder
             throw new RuntimeException('Seeder gagal: tidak ada konfigurasi admin/superadmin yang valid di .env.');
         }
 
+        $processedEmails = [];
+
         foreach ($candidates as $candidate) {
             $this->upsertUser($candidate, $forceReset);
+            $processedEmails[] = $candidate['email'];
         }
 
         $activeSuperadmins = User::where('role', 'superadmin')->where('is_active', true)->count();
@@ -66,34 +81,39 @@ class AdminUserSeeder extends Seeder
             throw new RuntimeException('Seeder gagal: minimal harus ada satu superadmin aktif.');
         }
 
-        $this->command?->info('AdminUserSeeder selesai. Total akun unik: '.count($candidates).", superadmin aktif: {$activeSuperadmins}.");
+        $this->command?->info('AdminUserSeeder selesai.');
+        $this->command?->info('Total akun unik diproses: '.count($candidates));
+        $this->command?->info("Total superadmin aktif: {$activeSuperadmins}");
+        $this->command?->info('Email dibuat/diupdate: '.implode(', ', $processedEmails));
+
+        foreach ($duplicateNotes as $note) {
+            $this->command?->line("  Duplikat: {$note}");
+        }
     }
 
     private function upsertUser(array $candidate, bool $forceReset): void
     {
-        $existing = User::where('email', $candidate['email'])->first();
+        $user = User::firstOrNew([
+            'email' => $candidate['email'],
+        ]);
 
-        $attributes = [
-            'name' => $this->nameFromEmail($candidate['email']),
-            'role' => $existing
-                ? RolePriority::highest($candidate['role'], $existing->role)
-                : $candidate['role'],
-            'is_active' => true,
-        ];
+        $isNew = ! $user->exists;
 
-        $shouldSetPassword = ! $existing || $forceReset;
+        $user->name = $this->nameFromEmail($candidate['email']);
+        $user->role = $isNew
+            ? $candidate['role']
+            : RolePriority::highest($candidate['role'], (string) $user->role);
+        $user->is_active = true;
 
-        if ($shouldSetPassword) {
-            $attributes['password'] = Hash::make($candidate['password']);
-            $attributes['must_change_password'] = true;
-        } elseif ($existing && RolePriority::isHigher($candidate['role'], $existing->role)) {
-            $attributes['role'] = $candidate['role'];
+        if ($isNew || $forceReset) {
+            $user->password = Hash::make($candidate['password']);
+
+            if (Schema::hasColumn($user->getTable(), 'must_change_password')) {
+                $user->must_change_password = true;
+            }
         }
 
-        User::updateOrCreate(
-            ['email' => $candidate['email']],
-            $attributes
-        );
+        $user->save();
     }
 
     private function nameFromEmail(string $email): string
