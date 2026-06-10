@@ -113,7 +113,9 @@ class ServiceFormConfig
                 'card_title' => 'Usulan Surat Cuti Mahasiswa',
                 'submit_label' => 'Ajukan Usulan Surat Cuti Mahasiswa',
                 'info_title' => 'Informasi Penting',
-                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Cuti Mahasiswa. Siapkan bukti registrasi cuti, surat permohonan cuti, dan surat pernyataan tertulis bermaterai.',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Cuti Mahasiswa. Siapkan bukti registrasi cuti, surat permohonan cuti, dan surat pernyataan tertulis bermaterai.'
+                    . "\n\n"
+                    . 'Setelah mengisi data pengajuan, mohon dapat melakukan konfirmasi ke akademik jurusan untuk ditindaklanjuti dalam pembuatan Surat Keputusan.',
                 'file_fields' => [
                     'leave_registration_proof' => 'Data Dukung - Bukti Registrasi Cuti',
                     'leave_request_letter' => 'Data Dukung - Surat Permohonan Cuti',
@@ -126,7 +128,9 @@ class ServiceFormConfig
                 'card_title' => 'Usulan Surat Keluar Mahasiswa',
                 'submit_label' => 'Ajukan Usulan Surat Keluar Mahasiswa',
                 'info_title' => 'Informasi Penting',
-                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keluar Mahasiswa. Siapkan Bukti KHS Aktif dan Surat Pernyataan Tertulis Bermaterai.',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keluar Mahasiswa. Siapkan Bukti KHS Aktif dan Surat Pernyataan Tertulis Bermaterai.'
+                    . "\n\n"
+                    . 'Setelah mengisi data pengajuan, mohon dapat melakukan konfirmasi ke akademik jurusan untuk ditindaklanjuti dalam pembuatan Surat Keputusan.',
                 'file_fields' => [
                     'khs_active_proof' => 'Data Dukung - Bukti KHS Aktif',
                     'statement_letter' => 'Data Dukung - Surat Pernyataan Tertulis Bermaterai',

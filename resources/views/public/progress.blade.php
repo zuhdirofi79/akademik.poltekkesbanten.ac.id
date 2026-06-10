@@ -6,6 +6,8 @@
 <div class="page-title-bar">Progres Layanan</div>
 
 <section class="container form-layout">
+    @include('partials.service-reminder-progress')
+
     <div class="form-card" style="grid-column: 1 / -1;">
         <div class="form-card-header">Cek Progres Pengajuan</div>
         <div class="form-card-body" style="grid-template-columns: 1fr 1.2fr;">

@@ -16,6 +16,8 @@
     </div>
 </section>
 
+@include('partials.service-reminder-beranda')
+
 <section class="home-intro-section">
     <div class="container">
         <div class="home-intro-grid">

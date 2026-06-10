@@ -22,9 +22,7 @@
             </table>
 
             <div class="alert alert-info">
-                <strong>Penting:</strong> Simpan nomor tiket dan token progres Anda. Gunakan keduanya untuk mengecek progres di halaman
-                <a href="{{ route('progress.index') }}" style="color:#1e40af;font-weight:600;">Progres Layanan</a>.
-                Informasi juga telah dikirim ke email Anda.
+                Pengajuan berhasil dikirim. Simpan nomor tiket Anda. Silakan cek Progres Layanan secara berkala dan periksa email yang digunakan saat pengajuan. File hasil layanan akan dikirim melalui email setelah pengajuan selesai diproses.
             </div>
 
             <a href="{{ route('progress.index') }}" class="btn-sm btn-teal">Cek Progres Layanan</a>

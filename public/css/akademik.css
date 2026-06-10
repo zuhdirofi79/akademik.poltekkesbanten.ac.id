@@ -170,6 +170,97 @@ a { color: inherit; text-decoration: none; }
     gap: 0.5rem;
 }
 
+.service-reminder-section {
+    padding: 1.5rem 0 0;
+}
+
+.service-reminder-banner {
+    background: linear-gradient(135deg, #e0f7fa 0%, #f0f9ff 100%);
+    border: 1px solid #7dd3fc;
+    border-left: 4px solid var(--primary);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.service-reminder-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.25rem;
+    color: #0e7490;
+}
+
+.service-reminder-text,
+.service-reminder-note {
+    margin: 0 0 0.75rem;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.service-reminder-note {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.service-reminder-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.service-reminder-email {
+    color: #0369a1;
+    font-weight: 600;
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+.service-reminder-email:hover {
+    text-decoration: underline;
+}
+
+.service-reminder-alert {
+    grid-column: 1 / -1;
+    margin-bottom: 1.25rem;
+}
+
+.service-reminder-alert-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+}
+
+.service-reminder-alert p {
+    margin: 0 0 0.75rem;
+    line-height: 1.7;
+}
+
+.service-reminder-alert p:last-of-type {
+    margin-bottom: 1rem;
+}
+
+.service-reminder-contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.service-reminder-contact-label {
+    margin: 0;
+    font-weight: 600;
+}
+
+.service-reminder-email-link {
+    color: #1d4ed8;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+.service-reminder-email-link:hover {
+    text-decoration: underline;
+}
+
 .admin-instruction {
     margin: 0;
     color: #374151;
@@ -721,6 +812,28 @@ a { color: inherit; text-decoration: none; }
 
     .service-highlight-card {
         padding: 28px;
+    }
+
+    .service-reminder-banner {
+        padding: 1rem 1.1rem;
+    }
+
+    .service-reminder-title {
+        font-size: 1.1rem;
+    }
+
+    .service-reminder-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .service-reminder-actions .btn-sm {
+        text-align: center;
+    }
+
+    .service-reminder-contact {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .campus-image-card,

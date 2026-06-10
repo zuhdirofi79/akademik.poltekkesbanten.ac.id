@@ -17,7 +17,27 @@
         <div class="form-card-body">
             <aside class="form-sidebar">
                 <h3>{{ $config['info_title'] }}</h3>
-                <p>{{ $config['info_text'] }}</p>
+                @if(in_array($slug, ['surat-cuti-mahasiswa', 'surat-keluar-mahasiswa']))
+                    @php
+                        $infoParts = explode("\n\n", $config['info_text'], 2);
+                    @endphp
+                    <p>{{ $infoParts[0] }}</p>
+                    @if(isset($infoParts[1]))
+                        <p>{{ trim($infoParts[1]) }}</p>
+                    @endif
+                    <div class="student-help-contact" style="margin-top:1rem;font-size:0.9rem;">
+                        <p style="margin-bottom:0.5rem;"><strong>Kontak bantuan mahasiswa:</strong></p>
+                        <p style="margin-bottom:0.5rem;">
+                            Email Akademik:
+                            <a href="mailto:{{ config('akademik.admin_contact.email') }}">{{ config('akademik.admin_contact.email') }}</a>
+                        </p>
+                        <p style="margin-bottom:0;">
+                            <a href="{{ config('akademik.admin_contact.whatsapp_url') }}" target="_blank" rel="noopener noreferrer">Hubungi via WhatsApp</a>
+                        </p>
+                    </div>
+                @else
+                    <p>{{ $config['info_text'] }}</p>
+                @endif
 
                 <div class="progress-box">
                     <strong>Progress Layanan:</strong>
