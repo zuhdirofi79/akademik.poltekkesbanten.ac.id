@@ -9,7 +9,7 @@
 <body class="admin-body">
     <div class="admin-shell">
         <aside class="admin-sidebar">
-            <div class="admin-sidebar-brand">PolkesBan Admin</div>
+            <div class="admin-sidebar-brand">Polkesten Admin</div>
             <p class="admin-sidebar-user">{{ auth()->user()->name }}<br><small>{{ ucfirst(auth()->user()->role) }}</small></p>
             <nav class="admin-sidebar-nav">
                 <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>

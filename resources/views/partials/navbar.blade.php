@@ -2,7 +2,7 @@
     <div class="container site-header-inner">
         <a href="{{ route('beranda') }}" class="site-brand">
             <img src="{{ asset('src/img/logo.png') }}" alt="Logo Poltekkes Kemenkes Banten" class="site-brand-logo">
-            <span class="site-brand-text">Layanan Akademik PolkesBan</span>
+            <span class="site-brand-text">Layanan Akademik Poltekkes Kemenkes Banten</span>
         </a>
 
         <nav class="site-nav">
@@ -22,7 +22,7 @@
 
             <a href="{{ route('progress.index') }}" class="site-nav-link {{ request()->routeIs('progress.*') ? 'active' : '' }}">Progres Layanan</a>
             <a href="{{ route('about') }}" class="site-nav-link {{ request()->routeIs('about', 'tentang') ? 'active' : '' }}">Tentang</a>
-            <a href="https://poltekkesbanten.ac.id" target="_blank" rel="noopener" class="site-nav-button">POLKESBAN</a>
+            <a href="https://poltekkesbanten.ac.id" target="_blank" rel="noopener" class="site-nav-button">POLTEKKES KEMENKES BANTEN</a>
             <a href="{{ route('admin.login') }}" class="site-admin-login">Login Admin</a>
         </nav>
     </div>

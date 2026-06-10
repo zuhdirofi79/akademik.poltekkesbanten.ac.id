@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="subject">Subject</label>
-            <input type="text" name="subject" id="subject" class="form-control" value="{{ old('subject', 'Test Email - Layanan Akademik PolkesBan') }}" required>
+            <input type="text" name="subject" id="subject" class="form-control" value="{{ old('subject', 'Test Email - Layanan Akademik Poltekkes Kemenkes Banten') }}" required>
         </div>
         <div class="form-group">
             <label for="message">Pesan</label>
