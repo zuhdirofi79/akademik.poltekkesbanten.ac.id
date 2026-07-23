@@ -8,6 +8,7 @@ use App\Enums\UploadedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Submission extends Model
 {
@@ -124,6 +125,39 @@ class Submission extends Model
             SubmissionStatus::Completed->value,
             SubmissionStatus::EmailSent->value,
         ], true) && $this->hasFinalFiles();
+    }
+
+    public function satisfactionSurveys(): HasMany
+    {
+        return $this->hasMany(AcademicSatisfactionSurvey::class);
+    }
+
+    public function satisfactionSurvey(): HasOne
+    {
+        return $this->hasOne(AcademicSatisfactionSurvey::class)->latestOfMany();
+    }
+
+    public function hasSatisfactionSurvey(): bool
+    {
+        return AcademicSatisfactionSurvey::query()
+            ->where(function ($query) {
+                $query->where('submission_id', $this->id);
+
+                if (filled($this->ticket_number)) {
+                    $query->orWhere('ticket_number', $this->ticket_number);
+                }
+            })
+            ->exists();
+    }
+
+    public function requiresSatisfactionSurveyBeforeDownload(): bool
+    {
+        return $this->canDownloadResults() && ! $this->hasSatisfactionSurvey();
+    }
+
+    public function canPublicDownloadFinal(): bool
+    {
+        return $this->canDownloadResults() && $this->hasSatisfactionSurvey();
     }
 
     public function requiresSkVerification(): bool

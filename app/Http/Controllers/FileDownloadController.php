@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FileCategory;
 use App\Models\Submission;
 use App\Models\SubmissionFile;
 use App\Services\AdminActivityLogger;
@@ -33,9 +34,30 @@ class FileDownloadController extends Controller
             return $this->fileStorage->downloadResponse($file);
         }
 
+        $isFinalResult = $file->file_category === FileCategory::FinalResult->value
+            || $file->uploaded_by === 'admin';
+
+        if ($isFinalResult && $submission->requiresSatisfactionSurveyBeforeDownload()) {
+            return redirect()
+                ->route('survey.create', ['ticket' => $submission->ticket_number])
+                ->with(
+                    'warning',
+                    'Silakan isi Survei Kepuasan Layanan Akademik terlebih dahulu sebelum mengunduh file hasil layanan.'
+                );
+        }
+
         if ($request->hasValidSignature()) {
-            if (! $submission->canDownloadResults() || $file->file_category !== 'final_result') {
+            if (! $submission->canDownloadResults() || $file->file_category !== FileCategory::FinalResult->value) {
                 abort(403, 'File belum tersedia untuk diunduh.');
+            }
+
+            if (! $submission->hasSatisfactionSurvey()) {
+                return redirect()
+                    ->route('survey.create', ['ticket' => $submission->ticket_number])
+                    ->with(
+                        'warning',
+                        'Silakan isi Survei Kepuasan Layanan Akademik terlebih dahulu sebelum mengunduh file hasil layanan.'
+                    );
             }
 
             return $this->fileStorage->downloadResponse($file);
@@ -48,6 +70,15 @@ class FileDownloadController extends Controller
 
         if ($file->uploaded_by === 'admin' && ! $submission->canDownloadResults()) {
             abort(403, 'File hasil belum tersedia.');
+        }
+
+        if ($isFinalResult && ! $submission->hasSatisfactionSurvey()) {
+            return redirect()
+                ->route('survey.create', ['ticket' => $submission->ticket_number])
+                ->with(
+                    'warning',
+                    'Silakan isi Survei Kepuasan Layanan Akademik terlebih dahulu sebelum mengunduh file hasil layanan.'
+                );
         }
 
         return $this->fileStorage->downloadResponse($file);

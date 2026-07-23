@@ -46,6 +46,7 @@ class SubmissionCompletedMail extends Mailable
             with: [
                 'submission' => $this->submission->load('serviceType'),
                 'progressUrl' => route('progress.index'),
+                'surveyUrl' => route('survey.create', ['ticket' => $this->submission->ticket_number]),
                 'downloadLinks' => $downloadLinks,
             ],
         );

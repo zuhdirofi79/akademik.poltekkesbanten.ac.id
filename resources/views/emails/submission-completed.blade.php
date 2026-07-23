@@ -3,23 +3,23 @@
 
 Halo **{{ $submission->full_name }}**,
 
-Pengajuan **{{ $submission->serviceType->name }}** dengan nomor tiket **{{ $submission->ticket_number }}** sudah selesai.
+Pengajuan **{{ $submission->serviceType->name }}** dengan nomor tiket **{{ $submission->ticket_number }}** sudah selesai diproses.
 
-Silakan unduh file hasil melalui link berikut:
+Sebelum mengunduh file hasil layanan melalui sistem, mohon isi **Survei Kepuasan Layanan Akademik** terlebih dahulu.
+
+<x-mail::button :url="$surveyUrl">
+Isi Survei Kepuasan
+</x-mail::button>
+
+Setelah survei diisi, Anda dapat mengunduh file hasil melalui halaman Progres Layanan menggunakan NIM/email dan nomor tiket/token Anda.
 
 @foreach($downloadLinks as $link)
-- [{{ $link['name'] }}]({{ $link['url'] }})
+- Link unduh (aktif setelah survei diisi): [{{ $link['name'] }}]({{ $link['url'] }})
 @endforeach
-
-Anda juga dapat mengunduh file melalui halaman progres layanan.
 
 <x-mail::button :url="$progressUrl">
 Cek Progres Layanan
 </x-mail::button>
-
-@if($submission->canDownloadResults())
-File hasil juga dapat diunduh melalui halaman progres layanan menggunakan nomor tiket dan token progres Anda.
-@endif
 
 ---
 

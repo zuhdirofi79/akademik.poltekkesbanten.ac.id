@@ -5,6 +5,8 @@
 @section('content')
 @php
     $oldLevel = old('satisfaction_level');
+    $linkedSubmission = $linkedSubmission ?? null;
+    $prefill = $prefill ?? [];
 @endphp
 
 <div class="page-title-bar">Survei Kepuasan Layanan Akademik</div>
@@ -16,6 +18,18 @@
             <p style="margin-top:0;">
                 Bantu kami meningkatkan kualitas layanan akademik dengan mengisi survei kepuasan layanan.
             </p>
+
+            @if(session('warning'))
+                <div class="alert alert-error">{{ session('warning') }}</div>
+            @endif
+
+            @if($linkedSubmission)
+                <div class="alert alert-info">
+                    Survei untuk pengajuan <strong>{{ $linkedSubmission->ticket_number }}</strong>
+                    — {{ $linkedSubmission->serviceType->name ?? 'Layanan Akademik' }}.
+                    Setelah survei terkirim, Anda dapat mengunduh file hasil layanan.
+                </div>
+            @endif
 
             @if($errors->any())
                 <div class="alert alert-error">
@@ -29,6 +43,7 @@
 
             <form method="POST" action="{{ route('survey.store') }}" id="survey-form">
                 @csrf
+                <input type="hidden" name="submission_id" value="{{ old('submission_id', $prefill['submission_id'] ?? '') }}">
 
                 <div class="form-group full">
                     <label>Apakah Anda Puas dengan Layanan Kami?</label>
@@ -49,7 +64,7 @@
 
                 <div class="form-group full">
                     <label for="service_type_id">Pilih Jenis Layanan yang Anda nilai</label>
-                    <select name="service_type_id" id="service_type_id" class="form-select">
+                    <select name="service_type_id" id="service_type_id" class="form-select" @disabled($linkedSubmission)>
                         <option value="">-- Pilih Layanan (opsional) --</option>
                         @foreach($serviceTypes as $type)
                             <option value="{{ $type->id }}" @selected(old('service_type_id', $prefill['service_type_id'] ?? null) == $type->id)>
@@ -57,6 +72,10 @@
                             </option>
                         @endforeach
                     </select>
+                    @if($linkedSubmission)
+                        <input type="hidden" name="service_type_id" value="{{ $linkedSubmission->service_type_id }}">
+                        <small>Jenis layanan diambil otomatis dari nomor tiket pengajuan Anda.</small>
+                    @endif
                 </div>
 
                 <div class="form-group full">
@@ -75,15 +94,15 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="respondent_name">Nama Responden <span style="font-weight:normal;color:#6b7280;">(opsional)</span></label>
-                        <input type="text" name="respondent_name" id="respondent_name" class="form-control" value="{{ old('respondent_name') }}">
+                        <input type="text" name="respondent_name" id="respondent_name" class="form-control" value="{{ old('respondent_name', $prefill['respondent_name'] ?? '') }}">
                     </div>
                     <div class="form-group">
                         <label for="respondent_email">Email Responden <span style="font-weight:normal;color:#6b7280;">(opsional)</span></label>
-                        <input type="email" name="respondent_email" id="respondent_email" class="form-control" value="{{ old('respondent_email') }}">
+                        <input type="email" name="respondent_email" id="respondent_email" class="form-control" value="{{ old('respondent_email', $prefill['respondent_email'] ?? '') }}">
                     </div>
                     <div class="form-group full">
-                        <label for="ticket_number">Nomor Tiket <span style="font-weight:normal;color:#6b7280;">(opsional)</span></label>
-                        <input type="text" name="ticket_number" id="ticket_number" class="form-control" value="{{ old('ticket_number', $prefill['ticket_number'] ?? '') }}">
+                        <label for="ticket_number">Nomor Tiket @if(! $linkedSubmission)<span style="font-weight:normal;color:#6b7280;">(opsional)</span>@endif</label>
+                        <input type="text" name="ticket_number" id="ticket_number" class="form-control" value="{{ old('ticket_number', $prefill['ticket_number'] ?? '') }}" @readonly($linkedSubmission)>
                     </div>
                 </div>
 

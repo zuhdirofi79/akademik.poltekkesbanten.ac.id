@@ -14,6 +14,11 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         </div>
     @endif
+    @if(session('warning'))
+        <div class="container" style="padding-top:1rem;">
+            <div class="alert alert-error">{{ session('warning') }}</div>
+        </div>
+    @endif
     @if(session('error'))
         <div class="container" style="padding-top:1rem;">
             <div class="alert alert-error">{{ session('error') }}</div>

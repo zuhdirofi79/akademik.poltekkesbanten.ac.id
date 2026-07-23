@@ -20,6 +20,7 @@ class StoreSatisfactionSurveyRequest extends FormRequest
 
         return [
             'satisfaction_level' => ['required', Rule::in(['puas', 'cukup_puas', 'kurang_puas'])],
+            'submission_id' => ['nullable', 'exists:submissions,id'],
             'service_type_id' => ['nullable', 'exists:service_types,id'],
             'reason' => [
                 'nullable',

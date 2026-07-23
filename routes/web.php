@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\SatisfactionSurveyController as AdminSatisfactionSurveyController;
+use App\Http\Controllers\Admin\SurveyDashboardController;
 use App\Http\Controllers\Admin\StudyProgramController;
 use App\Http\Controllers\Admin\SubmissionController;
 use App\Http\Controllers\Admin\TestEmailController;
@@ -66,6 +67,7 @@ Route::get('/progres-layanan', [ProgressController::class, 'index'])->name('prog
 Route::post('/progres-layanan', [ProgressController::class, 'check'])
     ->name('progress.check')
     ->middleware('throttle:10,1');
+Route::get('/progres-layanan/hasil', [ProgressController::class, 'result'])->name('progress.result');
 
 Route::get('/survei-kepuasan', [SatisfactionSurveyController::class, 'create'])->name('survey.create');
 Route::post('/survei-kepuasan', [SatisfactionSurveyController::class, 'store'])
@@ -103,7 +105,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/submissions/{submission}/send-email', [SubmissionController::class, 'sendEmail'])->name('submissions.send-email');
 
             Route::get('/surveys', [AdminSatisfactionSurveyController::class, 'index'])->name('surveys.index');
-            Route::get('/surveys/export', [AdminSatisfactionSurveyController::class, 'export'])->name('surveys.export');
+            Route::get('/surveys/dashboard', [SurveyDashboardController::class, 'index'])->name('surveys.dashboard');
+            Route::get('/surveys/export', [SurveyDashboardController::class, 'export'])->name('surveys.export');
+            Route::get('/surveys/print', [SurveyDashboardController::class, 'print'])->name('surveys.print');
 
             Route::middleware('role:superadmin')->group(function () {
                 Route::resource('study-programs', StudyProgramController::class)->except(['show']);

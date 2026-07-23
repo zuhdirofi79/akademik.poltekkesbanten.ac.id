@@ -1,6 +1,14 @@
 <?php
 
 $adminContactEmail = env('ADMIN_CONTACT_EMAIL', 'adak.direktorat@poltekesbanten.ac.id');
+
+// Kontak publik lama (bukan akun login) — paksa diganti ke email ADAK.
+if (in_array(strtolower((string) $adminContactEmail), [
+    'kuntum.ekawati@poltekkesbanten.ac.id',
+], true)) {
+    $adminContactEmail = 'adak.direktorat@poltekesbanten.ac.id';
+}
+
 $adminContactWhatsappUrl = env(
     'ADMIN_CONTACT_WHATSAPP_URL',
     'https://api.whatsapp.com/send/?phone=6282117170875&text&type=phone_number&app_absent=0'

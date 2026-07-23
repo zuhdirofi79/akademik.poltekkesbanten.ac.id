@@ -3,6 +3,12 @@
 @section('title', 'Progres Layanan - Layanan Akademik Poltekkes Kemenkes Banten')
 
 @section('content')
+@php
+    $hasSurvey = $hasSurvey ?? ($submission?->hasSatisfactionSurvey() ?? false);
+    $requiresSurvey = $requiresSurvey ?? ($submission?->requiresSatisfactionSurveyBeforeDownload() ?? false);
+    $canPublicDownload = $canPublicDownload ?? ($submission?->canPublicDownloadFinal() ?? false);
+@endphp
+
 <div class="page-title-bar">Progres Layanan</div>
 
 <section class="container form-layout">
@@ -15,6 +21,7 @@
                 <h3>Informasi Progres Layanan</h3>
                 <p>Masukkan NIM atau email aktif beserta nomor tiket atau token progres yang Anda terima setelah pengajuan.</p>
                 <p>Simpan nomor tiket dan token dengan aman. Jangan bagikan kepada pihak yang tidak berwenang.</p>
+                <p>Jika pengajuan sudah selesai, Anda wajib mengisi Survei Kepuasan Layanan Akademik sebelum mengunduh file hasil.</p>
 
                 @if(isset($serviceStats) && $serviceStats->isNotEmpty())
                     <div class="progress-box" style="margin-top:1.5rem;">
@@ -34,6 +41,12 @@
             <div class="form-main">
                 @if(session('error'))
                     <div class="alert alert-error">{{ session('error') }}</div>
+                @endif
+                @if(session('warning'))
+                    <div class="alert alert-error">{{ session('warning') }}</div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
 
                 <form method="POST" action="{{ route('progress.check') }}">
@@ -61,14 +74,33 @@
                         <tr><th>Program Studi</th><td>{{ $submission->studyProgram->name }}</td></tr>
                         <tr><th>Status</th><td><span class="status-badge">{{ $submission->status }}</span></td></tr>
                         <tr><th>Tanggal Pengajuan</th><td>{{ $submission->created_at->format('d/m/Y H:i') }}</td></tr>
+                        @if($submission->canDownloadResults())
+                            <tr>
+                                <th>Survei Kepuasan</th>
+                                <td>
+                                    @if($hasSurvey)
+                                        <span class="status-badge" style="background:#16a34a;color:#fff;">Survei Kepuasan Sudah Diisi</span>
+                                    @else
+                                        <span class="status-badge" style="background:#ca8a04;color:#111;">Survei Kepuasan Belum Diisi</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endif
                         @if($submission->admin_note)
                             <tr><th>Catatan Admin</th><td>{{ $submission->admin_note }}</td></tr>
                         @endif
                     </table>
 
-                    @if($submission->canDownloadResults())
+                    @if($requiresSurvey)
+                        <div class="alert alert-info">
+                            Pengajuan Anda sudah selesai diproses. Sebelum mengunduh file hasil layanan, mohon isi Survei Kepuasan Layanan Akademik terlebih dahulu.
+                        </div>
+                        <a href="{{ route('survey.create', ['ticket' => $submission->ticket_number]) }}" class="btn-primary">
+                            Isi Survei Kepuasan Terlebih Dahulu
+                        </a>
+                    @elseif($canPublicDownload)
                         <div class="alert alert-success">
-                            File hasil layanan sudah tersedia. Anda juga akan menerima file melalui email jika status sudah selesai.
+                            File hasil layanan sudah tersedia. Survei kepuasan telah diisi. Silakan unduh file hasil layanan Anda.
                         </div>
                         <h4>Unduh File Final</h4>
                         <ul class="download-list">

@@ -22,7 +22,7 @@
             </table>
 
             <div class="alert alert-info">
-                Pengajuan berhasil dikirim. Simpan nomor tiket Anda. Silakan cek Progres Layanan secara berkala dan periksa email yang digunakan saat pengajuan. File hasil layanan akan dikirim melalui email setelah pengajuan selesai diproses.
+                Simpan nomor tiket pengajuan Anda. Silakan cek Progres Layanan secara berkala. Jika pengajuan sudah selesai diproses, Anda akan diminta mengisi Survei Kepuasan Layanan Akademik sebelum mengunduh file hasil layanan.
             </div>
 
             <a href="{{ route('progress.index') }}" class="btn-sm btn-teal">Cek Progres Layanan</a>

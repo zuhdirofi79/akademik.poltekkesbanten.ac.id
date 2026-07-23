@@ -56,6 +56,7 @@ class SubmissionController extends Controller
             'statusHistories.changedByUser',
             'jurusanVerifiedBy',
             'centralVerifiedBy',
+            'satisfactionSurvey',
         ]);
 
         $firstFinalFile = $submission->finalFiles()->first();

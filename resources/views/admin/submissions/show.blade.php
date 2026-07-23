@@ -57,11 +57,36 @@
         @if($submission->previous_status)<tr><th>Status Sebelumnya</th><td>{{ $submission->previous_status }}</td></tr>@endif
         @if($submission->reactivation_reason)<tr><th>Alasan Pengaktifan Kembali</th><td>{{ $submission->reactivation_reason }}</td></tr>@endif
         <tr><th>Keterangan Tambahan</th><td>{{ $submission->additional_note }}</td></tr>
+        <tr>
+            <th>Survei Kepuasan</th>
+            <td>
+                @if($submission->hasSatisfactionSurvey())
+                    <span class="status-badge" style="background:#16a34a;color:#fff;">Sudah Diisi</span>
+                @else
+                    <span class="status-badge" style="background:#ca8a04;color:#111;">Belum Diisi</span>
+                @endif
+            </td>
+        </tr>
         <tr><th>Token Progres</th><td style="word-break:break-all;">{{ $submission->progress_token }}</td></tr>
         <tr><th>Tanggal Pengajuan</th><td>{{ $submission->created_at->format('d/m/Y H:i') }}</td></tr>
         @if($submission->admin_note)<tr><th>Catatan Admin</th><td>{{ $submission->admin_note }}</td></tr>@endif
     </table>
 </div>
+
+@php
+    $survey = $submission->satisfactionSurvey;
+@endphp
+@if($survey)
+<div class="admin-card">
+    <h3>Hasil Survei Kepuasan</h3>
+    <table class="table">
+        <tr><th>Tingkat Kepuasan</th><td><span class="{{ $survey->satisfactionBadgeClass() }}">{{ $survey->satisfactionLabel() }}</span></td></tr>
+        <tr><th>Alasan</th><td>{{ $survey->reason ?: '-' }}</td></tr>
+        <tr><th>Saran/Masukan</th><td style="white-space:pre-wrap;">{{ $survey->feedback ?: '-' }}</td></tr>
+        <tr><th>Tanggal Survei</th><td>{{ $survey->created_at->format('d/m/Y H:i') }}</td></tr>
+    </table>
+</div>
+@endif
 
 <div class="admin-card">
     <h3>File Pendukung Mahasiswa</h3>
