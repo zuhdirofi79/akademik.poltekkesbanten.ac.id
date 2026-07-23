@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Models\StudyProgram;
 use App\Models\User;
 use App\Services\AdminActivityLogger;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.users.index', [
-            'users' => User::whereIn('role', ['admin', 'superadmin'])
+            'users' => User::whereIn('role', ['admin', 'superadmin', 'admin_jurusan'])
+                ->with('studyProgram')
                 ->orderBy('name')
                 ->paginate(20),
         ]);
@@ -25,7 +27,10 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.users.form', ['user' => new User()]);
+        return view('admin.users.form', [
+            'user' => new User(),
+            'studyPrograms' => StudyProgram::orderBy('name')->get(),
+        ]);
     }
 
     public function store(StoreUserRequest $request)
@@ -38,6 +43,9 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'role' => $request->input('role'),
+            'study_program_id' => $request->input('role') === 'admin_jurusan'
+                ? $request->input('study_program_id')
+                : null,
             'password' => $plainPassword,
             'must_change_password' => true,
             'is_active' => true,
@@ -58,14 +66,24 @@ class UserController extends Controller
     {
         abort_unless($user->isStaff(), 404);
 
-        return view('admin.users.form', compact('user'));
+        return view('admin.users.form', [
+            'user' => $user,
+            'studyPrograms' => StudyProgram::orderBy('name')->get(),
+        ]);
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
         abort_unless($user->isStaff(), 404);
 
-        $user->update($request->only('name', 'email', 'role'));
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'role' => $request->input('role'),
+            'study_program_id' => $request->input('role') === 'admin_jurusan'
+                ? $request->input('study_program_id')
+                : null,
+        ]);
 
         $this->activityLogger->log(
             'update_admin',

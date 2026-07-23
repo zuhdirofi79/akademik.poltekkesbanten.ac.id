@@ -34,9 +34,21 @@ class Submission extends Model
         'graduation_year',
         'alumni_letter_type',
         'certificate_number',
+        'activity_name',
+        'activity_date',
+        'activity_location',
+        'participant_list',
+        'previous_status',
+        'reactivation_reason',
         'additional_note',
         'status',
         'admin_note',
+        'jurusan_verified_at',
+        'jurusan_verified_by',
+        'jurusan_verification_note',
+        'central_verified_at',
+        'central_verified_by',
+        'central_verification_note',
         'ready_to_send_email',
         'email_sent_at',
         'email_error',
@@ -47,8 +59,11 @@ class Submission extends Model
     {
         return [
             'gpa_score' => 'decimal:2',
+            'activity_date' => 'date',
             'ready_to_send_email' => 'boolean',
             'email_sent_at' => 'datetime',
+            'jurusan_verified_at' => 'datetime',
+            'central_verified_at' => 'datetime',
             'data_confirmed' => 'boolean',
         ];
     }
@@ -71,6 +86,16 @@ class Submission extends Model
     public function statusHistories(): HasMany
     {
         return $this->hasMany(StatusHistory::class);
+    }
+
+    public function jurusanVerifiedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'jurusan_verified_by');
+    }
+
+    public function centralVerifiedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'central_verified_by');
     }
 
     public function applicantFiles(): HasMany
@@ -99,5 +124,13 @@ class Submission extends Model
             SubmissionStatus::Completed->value,
             SubmissionStatus::EmailSent->value,
         ], true) && $this->hasFinalFiles();
+    }
+
+    public function requiresSkVerification(): bool
+    {
+        return in_array($this->serviceType?->slug, [
+            'surat-cuti-mahasiswa',
+            'surat-keluar-mahasiswa',
+        ], true);
     }
 }

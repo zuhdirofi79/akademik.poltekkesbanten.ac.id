@@ -17,7 +17,13 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
-            'role' => ['required', Rule::in(['admin', 'superadmin'])],
+            'role' => ['required', Rule::in(['admin', 'superadmin', 'admin_jurusan'])],
+            'study_program_id' => [
+                Rule::requiredIf(fn () => $this->input('role') === 'admin_jurusan'),
+                'nullable',
+                'integer',
+                'exists:study_programs,id',
+            ],
             'password' => ['nullable', 'string', 'min:8'],
         ];
     }

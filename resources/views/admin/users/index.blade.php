@@ -15,6 +15,7 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>Program Studi</th>
                 <th>Status</th>
                 <th>Wajib Ganti Password</th>
                 <th>Aksi</th>
@@ -25,7 +26,8 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ ucfirst($user->role) }}</td>
+                    <td>{{ $user->roleLabel() }}</td>
+                    <td>{{ $user->studyProgram?->name ?? '-' }}</td>
                     <td>{{ $user->is_active ? 'Aktif' : 'Nonaktif' }}</td>
                     <td>{{ $user->must_change_password ? 'Ya' : 'Tidak' }}</td>
                     <td style="white-space:nowrap;">

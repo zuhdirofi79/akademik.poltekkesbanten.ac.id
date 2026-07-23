@@ -17,7 +17,7 @@
         <tr><th>Status</th><td>{{ $submission->status }}</td></tr>
         <tr><th>NIM</th><td>{{ $submission->nim }}</td></tr>
         <tr><th>Nama</th><td>{{ $submission->full_name }}</td></tr>
-        <tr><th>NIK</th><td>{{ $submission->nik }}</td></tr>
+        <tr><th>NIK</th><td>{{ $submission->nik ?: '-' }}</td></tr>
         <tr><th>Program Studi</th><td>{{ $submission->studyProgram->name }}</td></tr>
         <tr><th>Email</th><td>{{ $submission->email }}</td></tr>
         <tr><th>WhatsApp</th><td>{{ $submission->whatsapp }}</td></tr>
@@ -45,6 +45,17 @@
         @if($submission->graduation_year)<tr><th>Tahun Keluar</th><td>{{ $submission->graduation_year }}</td></tr>@endif
         @if($submission->alumni_letter_type)<tr><th>Jenis Surat Alumni (Legacy)</th><td>{{ $submission->alumni_letter_type }}</td></tr>@endif
         @if($submission->certificate_number)<tr><th>Nomor Ijazah</th><td>{{ $submission->certificate_number }}</td></tr>@endif
+        @if($submission->activity_name)<tr><th>Nama Kegiatan</th><td>{{ $submission->activity_name }}</td></tr>@endif
+        @if($submission->activity_date)<tr><th>Tanggal Kegiatan</th><td>{{ $submission->activity_date->format('d/m/Y') }}</td></tr>@endif
+        @if($submission->activity_location)<tr><th>Lokasi Kegiatan</th><td>{{ $submission->activity_location }}</td></tr>@endif
+        @if($submission->participant_list)
+            <tr>
+                <th>Daftar Mahasiswa Peserta</th>
+                <td style="white-space:pre-wrap;">{{ $submission->participant_list }}</td>
+            </tr>
+        @endif
+        @if($submission->previous_status)<tr><th>Status Sebelumnya</th><td>{{ $submission->previous_status }}</td></tr>@endif
+        @if($submission->reactivation_reason)<tr><th>Alasan Pengaktifan Kembali</th><td>{{ $submission->reactivation_reason }}</td></tr>@endif
         <tr><th>Keterangan Tambahan</th><td>{{ $submission->additional_note }}</td></tr>
         <tr><th>Token Progres</th><td style="word-break:break-all;">{{ $submission->progress_token }}</td></tr>
         <tr><th>Tanggal Pengajuan</th><td>{{ $submission->created_at->format('d/m/Y H:i') }}</td></tr>
@@ -66,6 +77,62 @@
         @endforelse
     </ul>
 </div>
+
+@if($submission->requiresSkVerification())
+<div class="admin-card">
+    <h3>Verifikasi Pengajuan SK</h3>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;">
+        <div style="border:1px solid #e5e7eb;border-radius:8px;padding:1rem;">
+            <h4 style="margin-top:0;">Admin ADAK Jurusan</h4>
+            <p>
+                Status:
+                <strong>{{ $submission->jurusan_verified_at ? 'Sudah Diverifikasi' : 'Belum Diverifikasi' }}</strong>
+            </p>
+            <p>Verifikator: {{ $submission->jurusanVerifiedBy->name ?? '-' }}</p>
+            <p>Waktu verifikasi: {{ $submission->jurusan_verified_at?->format('d/m/Y H:i') ?? '-' }}</p>
+            <p>Catatan: {{ $submission->jurusan_verification_note ?: '-' }}</p>
+
+            @if($canVerifyJurusan)
+                <form method="POST" action="{{ route('admin.submissions.verify-jurusan', $submission) }}" style="margin-top:1rem;">
+                    @csrf
+                    <div class="form-group">
+                        <label for="jurusan_verification_note">Catatan Verifikasi</label>
+                        <textarea name="jurusan_verification_note" id="jurusan_verification_note" class="form-control" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="btn-sm btn-teal">Verifikasi ADAK Jurusan</button>
+                </form>
+            @endif
+        </div>
+
+        <div style="border:1px solid #e5e7eb;border-radius:8px;padding:1rem;">
+            <h4 style="margin-top:0;">Admin Pusat (TL SK)</h4>
+            <p>
+                Status:
+                <strong>{{ $submission->central_verified_at ? 'Sudah Diverifikasi' : 'Belum Diverifikasi' }}</strong>
+            </p>
+            <p>Verifikator: {{ $submission->centralVerifiedBy->name ?? '-' }}</p>
+            <p>Waktu verifikasi: {{ $submission->central_verified_at?->format('d/m/Y H:i') ?? '-' }}</p>
+            <p>Catatan: {{ $submission->central_verification_note ?: '-' }}</p>
+
+            @if(! $submission->jurusan_verified_at)
+                <div class="alert alert-info" style="margin-top:1rem;">
+                    Pengajuan harus diverifikasi ADAK Jurusan terlebih dahulu.
+                </div>
+            @elseif($canVerifyCentral)
+                <form method="POST" action="{{ route('admin.submissions.verify-central', $submission) }}" style="margin-top:1rem;">
+                    @csrf
+                    <div class="form-group">
+                        <label for="central_verification_note">Catatan Verifikasi</label>
+                        <textarea name="central_verification_note" id="central_verification_note" class="form-control" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="btn-sm btn-blue">Verifikasi Admin Pusat untuk TL SK</button>
+                </form>
+            @endif
+        </div>
+    </div>
+</div>
+@endif
 
 <div class="admin-card">
     <h3>Alur Offline (Microsoft Word)</h3>

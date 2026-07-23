@@ -30,7 +30,7 @@ class SubmissionService
                 'study_program_id' => $data['study_program_id'],
                 'nim' => $data['nim'],
                 'full_name' => $data['full_name'],
-                'nik' => $data['nik'],
+                'nik' => $data['nik'] ?? null,
                 'email' => $data['email'],
                 'whatsapp' => $this->whatsAppNormalizer->normalize($data['whatsapp']),
                 'semester' => $data['semester'] ?? null,
@@ -46,6 +46,12 @@ class SubmissionService
                 'graduation_year' => $data['graduation_year'] ?? null,
                 'alumni_letter_type' => $data['alumni_letter_type'] ?? null,
                 'certificate_number' => $data['certificate_number'] ?? null,
+                'activity_name' => $data['activity_name'] ?? null,
+                'activity_date' => $data['activity_date'] ?? null,
+                'activity_location' => $data['activity_location'] ?? null,
+                'participant_list' => $data['participant_list'] ?? null,
+                'previous_status' => $data['previous_status'] ?? null,
+                'reactivation_reason' => $data['reactivation_reason'] ?? null,
                 'additional_note' => filled($data['additional_note'] ?? null)
                     ? $data['additional_note']
                     : '-',

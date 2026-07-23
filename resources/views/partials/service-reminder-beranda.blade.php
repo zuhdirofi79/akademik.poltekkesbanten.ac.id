@@ -14,6 +14,7 @@
             </p>
             <div class="service-reminder-actions">
                 <a href="{{ route('progress.index') }}" class="btn-sm btn-teal">Cek Progres Layanan</a>
+                <a href="{{ route('survey.create') }}" class="btn-sm btn-blue">Isi Survei Kepuasan</a>
                 <a href="{{ $adminWhatsappUrl }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">Hubungi Admin</a>
                 <a href="mailto:{{ $adminEmail }}" class="service-reminder-email">{{ $adminEmail }}</a>
             </div>

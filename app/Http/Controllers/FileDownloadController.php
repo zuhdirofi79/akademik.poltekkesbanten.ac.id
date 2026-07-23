@@ -20,6 +20,8 @@ class FileDownloadController extends Controller
         abort_if($file->submission_id !== $submission->id, 404);
 
         if ($request->user()?->isStaff()) {
+            abort_unless($request->user()->canAccessSubmission($submission), 403);
+
             if ($file->uploaded_by === 'applicant') {
                 $this->activityLogger->log(
                     'download_supporting_file',

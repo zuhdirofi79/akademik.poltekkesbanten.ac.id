@@ -11,8 +11,11 @@ class DashboardController extends Controller
 
     public function index()
     {
+        $user = auth()->user();
+        $studyProgramId = $user->isAdminJurusan() ? $user->study_program_id : null;
+
         return view('admin.dashboard', [
-            'stats' => $this->progressStats->dashboardStats(),
+            'stats' => $this->progressStats->dashboardStats($studyProgramId),
         ]);
     }
 }

@@ -10,16 +10,19 @@
     <div class="admin-shell">
         <aside class="admin-sidebar">
             <div class="admin-sidebar-brand">Polkesten Admin</div>
-            <p class="admin-sidebar-user">{{ auth()->user()->name }}<br><small>{{ ucfirst(auth()->user()->role) }}</small></p>
+            <p class="admin-sidebar-user">{{ auth()->user()->name }}<br><small>{{ auth()->user()->roleLabel() }}</small></p>
             <nav class="admin-sidebar-nav">
                 <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
                 <a href="{{ route('admin.submissions.index') }}" class="{{ request()->routeIs('admin.submissions.*') ? 'active' : '' }}">Pengajuan Layanan</a>
+                <a href="{{ route('admin.surveys.index') }}" class="{{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">Survei Kepuasan</a>
                 @if(auth()->user()->isSuperAdmin())
                     <a href="{{ route('admin.study-programs.index') }}" class="{{ request()->routeIs('admin.study-programs.*') ? 'active' : '' }}">Program Studi</a>
                     <a href="{{ route('admin.email-templates.index') }}" class="{{ request()->routeIs('admin.email-templates.*') ? 'active' : '' }}">Template Email</a>
                     <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">Manajemen Admin</a>
                     <a href="{{ route('admin.test-email.index') }}" class="{{ request()->routeIs('admin.test-email.*') ? 'active' : '' }}">Test Email</a>
                     <a href="{{ route('admin.activity-logs.index') }}" class="{{ request()->routeIs('admin.activity-logs.*') ? 'active' : '' }}">Log Aktivitas</a>
+                @elseif(auth()->user()->isAdminJurusan())
+                    <a href="{{ route('admin.dashboard') }}#layanan-aktif">Daftar Layanan Aktif</a>
                 @endif
                 <a href="{{ route('admin.change-password.show') }}" class="{{ request()->routeIs('admin.change-password.*') ? 'active' : '' }}">Ganti Password</a>
                 <a href="{{ route('beranda') }}" target="_blank">Lihat Website</a>

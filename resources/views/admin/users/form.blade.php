@@ -27,8 +27,22 @@
             <select name="role" id="role" class="form-select" required>
                 <option value="admin" @selected(old('role', $user->role) === 'admin')>Admin</option>
                 <option value="superadmin" @selected(old('role', $user->role) === 'superadmin')>Superadmin</option>
+                <option value="admin_jurusan" @selected(old('role', $user->role) === 'admin_jurusan')>Admin Jurusan</option>
             </select>
             @error('role')<small style="color:#dc2626;">{{ $message }}</small>@enderror
+        </div>
+
+        <div class="form-group" id="study-program-group" style="{{ old('role', $user->role) === 'admin_jurusan' ? '' : 'display:none;' }}">
+            <label for="study_program_id">Program Studi / Jurusan</label>
+            <select name="study_program_id" id="study_program_id" class="form-select">
+                <option value="">-- Pilih Program Studi --</option>
+                @foreach($studyPrograms as $program)
+                    <option value="{{ $program->id }}" @selected((string) old('study_program_id', $user->study_program_id) === (string) $program->id)>
+                        {{ $program->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('study_program_id')<small style="color:#dc2626;">{{ $message }}</small>@enderror
         </div>
 
         @if(!$user->exists)
@@ -44,4 +58,24 @@
         <a href="{{ route('admin.users.index') }}" class="btn-sm btn-gray">Batal</a>
     </form>
 </div>
+
+<script>
+    (function () {
+        const roleSelect = document.getElementById('role');
+        const studyProgramGroup = document.getElementById('study-program-group');
+        const studyProgramSelect = document.getElementById('study_program_id');
+
+        function toggleStudyProgram() {
+            const show = roleSelect.value === 'admin_jurusan';
+            studyProgramGroup.style.display = show ? '' : 'none';
+            studyProgramSelect.required = show;
+            if (!show) {
+                studyProgramSelect.value = '';
+            }
+        }
+
+        roleSelect.addEventListener('change', toggleStudyProgram);
+        toggleStudyProgram();
+    })();
+</script>
 @endsection

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmailTemplateController;
+use App\Http\Controllers\Admin\SatisfactionSurveyController as AdminSatisfactionSurveyController;
 use App\Http\Controllers\Admin\StudyProgramController;
 use App\Http\Controllers\Admin\SubmissionController;
 use App\Http\Controllers\Admin\TestEmailController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\SatisfactionSurveyController;
 use App\Http\Controllers\ServiceFormController;
 use App\Support\ServiceFormConfig;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +41,9 @@ $serviceRoutes = [
     'surat-keterangan-verifikasi-ijazah-alumni',
     'surat-rekomendasi',
     'siakad',
+    'surat-tugas-mahasiswa',
+    'nota-dinas-dispen-kegiatan-mahasiswa',
+    'pengaktifan-kembali-mahasiswa',
 ];
 
 foreach ($serviceRoutes as $slug) {
@@ -62,6 +67,11 @@ Route::post('/progres-layanan', [ProgressController::class, 'check'])
     ->name('progress.check')
     ->middleware('throttle:10,1');
 
+Route::get('/survei-kepuasan', [SatisfactionSurveyController::class, 'create'])->name('survey.create');
+Route::post('/survei-kepuasan', [SatisfactionSurveyController::class, 'store'])
+    ->name('survey.store')
+    ->middleware('throttle:10,1');
+
 Route::get('/download/{submission}/{file}', [FileDownloadController::class, 'download'])
     ->name('download.file');
 Route::get('/download-signed/{submission}/{file}', [FileDownloadController::class, 'download'])
@@ -74,7 +84,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('login.submit')
         ->middleware('throttle:5,1');
 
-    Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
+    Route::middleware(['auth', 'role:admin,superadmin,admin_jurusan'])->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::get('/change-password', [ChangePasswordController::class, 'show'])->name('change-password.show');
@@ -87,8 +97,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/submissions/export', [SubmissionController::class, 'export'])->name('submissions.export');
             Route::get('/submissions/{submission}', [SubmissionController::class, 'show'])->name('submissions.show');
             Route::patch('/submissions/{submission}/status', [SubmissionController::class, 'updateStatus'])->name('submissions.status');
+            Route::post('/submissions/{submission}/verify-jurusan', [SubmissionController::class, 'verifyJurusan'])->name('submissions.verify-jurusan');
+            Route::post('/submissions/{submission}/verify-central', [SubmissionController::class, 'verifyCentral'])->name('submissions.verify-central');
             Route::post('/submissions/{submission}/final-files', [SubmissionController::class, 'uploadFinalFile'])->name('submissions.upload-final');
             Route::post('/submissions/{submission}/send-email', [SubmissionController::class, 'sendEmail'])->name('submissions.send-email');
+
+            Route::get('/surveys', [AdminSatisfactionSurveyController::class, 'index'])->name('surveys.index');
+            Route::get('/surveys/export', [AdminSatisfactionSurveyController::class, 'export'])->name('surveys.export');
 
             Route::middleware('role:superadmin')->group(function () {
                 Route::resource('study-programs', StudyProgramController::class)->except(['show']);

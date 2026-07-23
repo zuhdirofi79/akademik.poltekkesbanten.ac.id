@@ -40,11 +40,15 @@ class SubmissionFormRequest extends FormRequest
         abort_if(! $config, 404);
 
         $fileRule = ['file', 'mimes:pdf,jpg,jpeg,png', 'max:5120'];
+        $isActivityGroup = in_array($slug, ServiceFormConfig::activityGroupSlugs(), true);
+        $isReactivation = $slug === ServiceFormConfig::reactivationSlug();
 
         $rules = [
             'nim' => ['required', 'string', 'max:50'],
             'full_name' => ['required', 'string', 'max:255'],
-            'nik' => ['required', 'digits:16'],
+            'nik' => $isActivityGroup || $isReactivation
+                ? ['nullable', 'digits:16']
+                : ['required', 'digits:16'],
             'study_program_id' => ['required', 'exists:study_programs,id'],
             'email' => ['required', 'email', 'max:255'],
             'whatsapp' => ['required', 'string', 'max:20'],
@@ -120,6 +124,29 @@ class SubmissionFormRequest extends FormRequest
             $rules['optional_supporting_data'] = ['nullable', ...$fileRule];
         }
 
+        if ($isActivityGroup) {
+            $rules['activity_name'] = ['required', 'string', 'max:255'];
+            $rules['activity_date'] = ['nullable', 'date'];
+            $rules['activity_location'] = ['nullable', 'string', 'max:255'];
+            $rules['participant_list'] = ['required', 'string', 'max:10000'];
+        }
+
+        if ($slug === 'surat-tugas-mahasiswa') {
+            $rules['proposal_or_invitation'] = ['required', ...$fileRule];
+        }
+
+        if ($slug === 'nota-dinas-dispen-kegiatan-mahasiswa') {
+            $rules['invitation_or_proposal'] = ['required', ...$fileRule];
+        }
+
+        if ($isReactivation) {
+            $rules['semester'] = ['nullable', 'string', 'max:50'];
+            $rules['previous_status'] = ['required', 'string', Rule::in($config['previous_status_options'] ?? ['Cuti', 'Keluar'])];
+            $rules['reactivation_reason'] = ['nullable', 'string', 'max:2000'];
+            $rules['reactivation_registration_proof'] = ['required', ...$fileRule];
+            $rules['reactivation_statement_letter'] = ['required', ...$fileRule];
+        }
+
         return $rules;
     }
 
@@ -153,6 +180,13 @@ class SubmissionFormRequest extends FormRequest
             'gpa_score.numeric' => 'IPS/IPK harus berupa angka.',
             'gpa_score.max' => 'IPS/IPK maksimal 4.00.',
             'diploma.required' => 'File ijazah wajib diunggah.',
+            'proposal_or_invitation.required' => 'Data Dukung - Proposal atau Surat Undangan wajib diunggah.',
+            'invitation_or_proposal.required' => 'Data Dukung - Bukti Undangan / Proposal wajib diunggah.',
+            'reactivation_registration_proof.required' => 'Data Dukung - Bukti Registrasi Cuti ke Akademik Jurusan wajib diunggah.',
+            'reactivation_statement_letter.required' => 'Data Dukung - Surat Pernyataan Bermaterai Aktif Kembali wajib diunggah.',
+            'participant_list.required' => 'Daftar mahasiswa yang mengikuti kegiatan wajib diisi.',
+            'activity_name.required' => 'Nama kegiatan wajib diisi.',
+            'previous_status.required' => 'Status sebelumnya wajib dipilih.',
             '*.mimes' => 'File harus berformat PDF, JPG, JPEG, atau PNG.',
             '*.max' => 'Ukuran file maksimal 5 MB.',
         ];

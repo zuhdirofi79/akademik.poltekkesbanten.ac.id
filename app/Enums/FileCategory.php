@@ -16,6 +16,10 @@ enum FileCategory: string
     case AdditionalSupportingData = 'additional_supporting_data';
     case AlumniSupportingData = 'alumni_supporting_data';
     case OptionalSupportingData = 'optional_supporting_data';
+    case ProposalOrInvitation = 'proposal_or_invitation';
+    case InvitationOrProposal = 'invitation_or_proposal';
+    case ReactivationRegistrationProof = 'reactivation_registration_proof';
+    case ReactivationStatementLetter = 'reactivation_statement_letter';
     case FinalResult = 'final_result';
 
     case SupportingGeneral = 'supporting_general';
@@ -42,6 +46,10 @@ enum FileCategory: string
             self::AdditionalSupportingData => 'Data Dukung Tambahan',
             self::AlumniSupportingData => 'Surat Pernyataan Magang dan Scan Ijazah',
             self::OptionalSupportingData => 'Data Dukung (Opsional)',
+            self::ProposalOrInvitation => 'Proposal atau Surat Undangan',
+            self::InvitationOrProposal => 'Bukti Undangan / Proposal',
+            self::ReactivationRegistrationProof => 'Bukti Registrasi Cuti ke Akademik Jurusan',
+            self::ReactivationStatementLetter => 'Surat Pernyataan Bermaterai Aktif Kembali',
             self::FinalResult => 'File Hasil',
         };
     }

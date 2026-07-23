@@ -5,8 +5,9 @@ namespace App\Support;
 class RolePriority
 {
     private const PRIORITIES = [
-        'admin' => 1,
-        'superadmin' => 2,
+        'admin_jurusan' => 1,
+        'admin' => 2,
+        'superadmin' => 3,
     ];
 
     public static function value(string $role): int

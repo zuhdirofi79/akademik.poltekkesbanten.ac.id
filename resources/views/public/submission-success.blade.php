@@ -26,7 +26,12 @@
             </div>
 
             <a href="{{ route('progress.index') }}" class="btn-sm btn-teal">Cek Progres Layanan</a>
+            <a href="{{ route('survey.create', ['ticket' => $submission->ticket_number]) }}" class="btn-sm btn-green" style="margin-left:0.5rem;">Isi Survei Kepuasan</a>
             <a href="{{ route('beranda') }}" class="btn-sm btn-gray" style="margin-left:0.5rem;">Kembali ke Beranda</a>
+
+            <div style="margin-top:1.5rem;">
+                <p>Bantu kami meningkatkan kualitas layanan akademik dengan mengisi survei kepuasan layanan.</p>
+            </div>
 
             <div style="margin-top:2rem;">
                 @include('partials.admin-contact-support')

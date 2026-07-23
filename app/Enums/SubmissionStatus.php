@@ -6,6 +6,8 @@ enum SubmissionStatus: string
 {
     case Submitted = 'Diajukan';
     case Processing = 'Diproses';
+    case JurusanVerified = 'Diverifikasi ADAK Jurusan';
+    case CentralVerified = 'Diverifikasi Admin Pusat / Proses SK';
     case NeedsRevision = 'Butuh Revisi';
     case Rejected = 'Ditolak';
     case Approved = 'Disetujui';

@@ -82,6 +82,30 @@ class ServiceTypeSeeder extends Seeder
                 'is_active' => true,
                 'sort_order' => 9,
             ],
+            [
+                'code' => 'SURAT_TUGAS_MAHASISWA',
+                'name' => 'Pengajuan Surat Tugas Mahasiswa',
+                'slug' => 'surat-tugas-mahasiswa',
+                'description' => 'Untuk pengajuan Surat Tugas Mahasiswa bagi mahasiswa yang mengikuti kegiatan.',
+                'is_active' => true,
+                'sort_order' => 10,
+            ],
+            [
+                'code' => 'NOTA_DINAS_DISPEN',
+                'name' => 'Pengajuan Nota Dinas Dispen Kegiatan Mahasiswa',
+                'slug' => 'nota-dinas-dispen-kegiatan-mahasiswa',
+                'description' => 'Untuk pengajuan Nota Dinas Dispensasi kegiatan mahasiswa.',
+                'is_active' => true,
+                'sort_order' => 11,
+            ],
+            [
+                'code' => 'PENGAKTIFAN_KEMBALI',
+                'name' => 'Pengajuan Pengaktifan Kembali Mahasiswa Cuti/Keluar',
+                'slug' => 'pengaktifan-kembali-mahasiswa',
+                'description' => 'Untuk pengajuan pengaktifan kembali mahasiswa yang sebelumnya cuti atau keluar.',
+                'is_active' => true,
+                'sort_order' => 12,
+            ],
         ];
 
         foreach ($services as $service) {

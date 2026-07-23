@@ -1,6 +1,6 @@
 <?php
 
-$adminContactEmail = env('ADMIN_CONTACT_EMAIL', 'kuntum.ekawati@poltekkesbanten.ac.id');
+$adminContactEmail = env('ADMIN_CONTACT_EMAIL', 'adak.direktorat@poltekesbanten.ac.id');
 $adminContactWhatsappUrl = env(
     'ADMIN_CONTACT_WHATSAPP_URL',
     'https://api.whatsapp.com/send/?phone=6282117170875&text&type=phone_number&app_absent=0'

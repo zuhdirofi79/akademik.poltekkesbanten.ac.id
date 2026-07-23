@@ -18,5 +18,6 @@
         <a href="{{ $adminWhatsappUrl }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">
             Hubungi Admin via WhatsApp
         </a>
+        <a href="{{ route('survey.create') }}" class="btn-sm btn-teal">Isi Survei Kepuasan</a>
     </div>
 </div>

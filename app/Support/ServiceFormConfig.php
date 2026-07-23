@@ -45,6 +45,27 @@ class ServiceFormConfig
         ];
     }
 
+    public static function activityGroupSlugs(): array
+    {
+        return [
+            'surat-tugas-mahasiswa',
+            'nota-dinas-dispen-kegiatan-mahasiswa',
+        ];
+    }
+
+    public static function skVerificationSlugs(): array
+    {
+        return [
+            'surat-cuti-mahasiswa',
+            'surat-keluar-mahasiswa',
+        ];
+    }
+
+    public static function reactivationSlug(): string
+    {
+        return 'pengaktifan-kembali-mahasiswa';
+    }
+
     public static function rekomendasiSlug(): string
     {
         return 'surat-rekomendasi';
@@ -62,6 +83,8 @@ class ServiceFormConfig
 
     public static function all(): array
     {
+        $adminEmail = config('akademik.admin_contact_email', 'adak.direktorat@poltekesbanten.ac.id');
+
         return [
             'perubahan-data-mahasiswa-aktif' => [
                 'slug' => 'perubahan-data-mahasiswa-aktif',
@@ -93,6 +116,9 @@ class ServiceFormConfig
                 'purpose_label' => 'Keperluan Surat',
                 'file_fields' => [
                     'active_krs' => 'Data Dukung - KRS Periode Aktif',
+                ],
+                'file_help' => [
+                    'active_krs' => 'KRS periode aktif diunduh terlebih dahulu dari SIAKAD, kemudian diunggah pada form ini.',
                 ],
             ],
             'surat-keterangan-registrasi' => [
@@ -166,7 +192,13 @@ class ServiceFormConfig
                 'card_title' => 'Usulan Surat Keterangan Verifikasi Ijazah Alumni',
                 'submit_label' => 'Ajukan Usulan Surat Keterangan Verifikasi Ijazah Alumni',
                 'info_title' => 'Informasi Penting',
-                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Keterangan Verifikasi Ijazah Alumni. Siapkan ijazah dan data pendukung alumni.',
+                'info_text' => 'SURAT VERIFIKASI IJAZAH ALUMNI'
+                    . "\n\n"
+                    . 'Layanan ini digunakan untuk pengajuan Surat Keterangan Verifikasi Ijazah Alumni. Siapkan ijazah dan data pendukung alumni.'
+                    . "\n\n"
+                    . 'Untuk alumni, pengajuan surat verifikasi ijazah dari perusahaan atau rumah sakit dapat dikirimkan melalui email admin akademik: '
+                    . $adminEmail
+                    . '.',
                 'purpose_label' => 'Keperluan Verifikasi',
                 'file_fields' => [
                     'diploma' => 'Data Dukung - Ijazah',
@@ -205,6 +237,44 @@ class ServiceFormConfig
                 'additional_note_placeholder' => 'Keterangan lainnya hanya untuk cetak KRS periode lampau, misalnya cetak KRS periode 2025/2026 Genap. Untuk kendala lainnya silakan isi (-).',
                 'file_fields' => [
                     'optional_supporting_data' => 'Data Dukung (opsional)',
+                ],
+            ],
+            'surat-tugas-mahasiswa' => [
+                'slug' => 'surat-tugas-mahasiswa',
+                'title' => 'Usulan Pengajuan Surat Tugas Mahasiswa',
+                'card_title' => 'Usulan Pengajuan Surat Tugas Mahasiswa',
+                'submit_label' => 'Ajukan Surat Tugas Mahasiswa',
+                'info_title' => 'Informasi Penting',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Surat Tugas Mahasiswa bagi mahasiswa yang mengikuti kegiatan. Pengajuan dikoordinasikan oleh satu orang perwakilan. Siapkan proposal atau surat undangan kegiatan sebagai data dukung.',
+                'file_fields' => [
+                    'proposal_or_invitation' => 'Data Dukung - Proposal atau Surat Undangan',
+                ],
+            ],
+            'nota-dinas-dispen-kegiatan-mahasiswa' => [
+                'slug' => 'nota-dinas-dispen-kegiatan-mahasiswa',
+                'title' => 'Usulan Pengajuan Nota Dinas Dispen Kegiatan Mahasiswa',
+                'card_title' => 'Usulan Pengajuan Nota Dinas Dispen Kegiatan Mahasiswa',
+                'submit_label' => 'Ajukan Nota Dinas Dispen Kegiatan Mahasiswa',
+                'info_title' => 'Informasi Penting',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan Nota Dinas Dispensasi Kegiatan Mahasiswa. Pengajuan dikoordinasikan oleh satu orang perwakilan. Siapkan bukti undangan atau proposal kegiatan sebagai data dukung.',
+                'file_fields' => [
+                    'invitation_or_proposal' => 'Data Dukung - Bukti Undangan / Proposal',
+                ],
+            ],
+            'pengaktifan-kembali-mahasiswa' => [
+                'slug' => 'pengaktifan-kembali-mahasiswa',
+                'title' => 'Usulan Pengajuan Pengaktifan Kembali Mahasiswa Cuti/Keluar',
+                'card_title' => 'Usulan Pengajuan Pengaktifan Kembali Mahasiswa Cuti/Keluar',
+                'submit_label' => 'Ajukan Pengaktifan Kembali Mahasiswa',
+                'info_title' => 'Informasi Penting',
+                'info_text' => 'Layanan ini digunakan untuk pengajuan pengaktifan kembali mahasiswa yang sebelumnya cuti atau keluar. Siapkan bukti registrasi cuti ke akademik jurusan dan surat pernyataan bermaterai bahwa mahasiswa aktif kembali.',
+                'previous_status_options' => [
+                    'Cuti',
+                    'Keluar',
+                ],
+                'file_fields' => [
+                    'reactivation_registration_proof' => 'Data Dukung - Bukti Registrasi Cuti ke Akademik Jurusan',
+                    'reactivation_statement_letter' => 'Data Dukung - Surat Pernyataan Bermaterai Aktif Kembali',
                 ],
             ],
         ];

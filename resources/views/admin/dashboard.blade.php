@@ -32,8 +32,8 @@
     </div>
 </div>
 
-<div class="admin-card">
-    <h3>Statistik per Jenis Layanan</h3>
+<div class="admin-card" id="layanan-aktif">
+    <h3>Daftar Layanan Aktif</h3>
     <table class="table">
         <thead>
             <tr>

@@ -7,6 +7,11 @@
     $slug = $config['slug'];
     $semesterSlugs = \App\Support\ServiceFormConfig::semesterSlugs();
     $rekomendasiSlug = \App\Support\ServiceFormConfig::rekomendasiSlug();
+    $activityGroupSlugs = \App\Support\ServiceFormConfig::activityGroupSlugs();
+    $reactivationSlug = \App\Support\ServiceFormConfig::reactivationSlug();
+    $isActivityGroup = in_array($slug, $activityGroupSlugs, true);
+    $isReactivation = $slug === $reactivationSlug;
+    $isAlumniVerifikasi = $slug === 'surat-keterangan-verifikasi-ijazah-alumni';
 @endphp
 
 <div class="page-title-bar">{{ $config['title'] }}</div>
@@ -35,6 +40,22 @@
                             <a href="{{ config('akademik.admin_contact.whatsapp_url') }}" target="_blank" rel="noopener noreferrer">Hubungi via WhatsApp</a>
                         </p>
                     </div>
+                @elseif($isAlumniVerifikasi)
+                    @php
+                        $infoParts = preg_split("/\n\n+/", $config['info_text']) ?: [];
+                        $adminEmail = config('akademik.admin_contact_email');
+                    @endphp
+                    @foreach($infoParts as $index => $part)
+                        @if($index === 0)
+                            <p style="font-weight:700;letter-spacing:0.02em;color:#0f766e;">{{ trim($part) }}</p>
+                        @else
+                            <p>{!! nl2br(e(trim($part))) !!}</p>
+                        @endif
+                    @endforeach
+                    <p style="margin-top:0.75rem;">
+                        Email admin akademik:
+                        <a href="mailto:{{ $adminEmail }}"><strong>{{ $adminEmail }}</strong></a>
+                    </p>
                 @else
                     <p>{{ $config['info_text'] }}</p>
                 @endif
@@ -67,18 +88,29 @@
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="nim">NIM</label>
+                            <label for="nim">
+                                @if($isActivityGroup)
+                                    NIM Perwakilan
+                                @else
+                                    NIM
+                                @endif
+                            </label>
                             <input type="text" name="nim" id="nim" class="form-control" value="{{ old('nim') }}" required>
                         </div>
-                        <div class="form-group">
-                            <label for="nik">NIK</label>
-                            <input type="text" name="nik" id="nik" class="form-control" value="{{ old('nik') }}" maxlength="16" required>
-                        </div>
+
+                        @unless($isActivityGroup)
+                            <div class="form-group">
+                                <label for="nik">NIK @if($isReactivation)<span style="font-weight:normal;color:#6b7280;">(opsional)</span>@endif</label>
+                                <input type="text" name="nik" id="nik" class="form-control" value="{{ old('nik') }}" maxlength="16" @required(! $isReactivation)>
+                            </div>
+                        @endunless
 
                         <div class="form-group full">
                             <label for="full_name">
-                                @if($slug === 'surat-keterangan-verifikasi-ijazah-alumni')
+                                @if($isAlumniVerifikasi)
                                     Nama Lengkap Alumni
+                                @elseif($isActivityGroup)
+                                    Nama Lengkap Perwakilan
                                 @else
                                     Nama Lengkap
                                 @endif
@@ -87,7 +119,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="study_program_id">Program Studi</label>
+                            <label for="study_program_id">
+                                @if($isActivityGroup)
+                                    Program Studi Perwakilan
+                                @else
+                                    Program Studi
+                                @endif
+                            </label>
                             <select name="study_program_id" id="study_program_id" class="form-select" required>
                                 <option value="">-- Pilih Prodi --</option>
                                 @foreach($studyPrograms as $program)
@@ -98,10 +136,14 @@
 
                         <div class="form-group">
                             <label for="email">
-                                @if($slug === 'surat-keterangan-verifikasi-ijazah-alumni')
+                                @if($isAlumniVerifikasi)
                                     Email Aktif
                                 @elseif($slug === 'surat-rekomendasi')
                                     Email Mahasiswa/Alumni
+                                @elseif($isActivityGroup)
+                                    Email Perwakilan
+                                @elseif($isReactivation)
+                                    Email Mahasiswa Aktif
                                 @else
                                     Email Mahasiswa
                                 @endif
@@ -110,7 +152,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="whatsapp">Nomor WhatsApp</label>
+                            <label for="whatsapp">
+                                @if($isActivityGroup)
+                                    Nomor WhatsApp Perwakilan
+                                @else
+                                    Nomor WhatsApp
+                                @endif
+                            </label>
                             <input type="text" name="whatsapp" id="whatsapp" class="form-control" value="{{ old('whatsapp') }}" placeholder="08xxxxxxxxxx" required>
                         </div>
 
@@ -149,6 +197,7 @@
                             <div class="form-group full">
                                 <label for="active_krs">Data Dukung - KRS Periode Aktif</label>
                                 <input type="file" name="active_krs" id="active_krs" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                                <small>{{ $config['file_help']['active_krs'] ?? 'KRS periode aktif diunduh terlebih dahulu dari SIAKAD, kemudian diunggah pada form ini.' }}</small>
                             </div>
                             <div class="form-group full">
                                 <label for="purpose">{{ $config['purpose_label'] ?? 'Keperluan Surat' }}</label>
@@ -245,7 +294,7 @@
                             </div>
                         @endif
 
-                        @if($slug === 'surat-keterangan-verifikasi-ijazah-alumni')
+                        @if($isAlumniVerifikasi)
                             <div class="form-group">
                                 <label for="entry_year">Tahun Masuk</label>
                                 <input type="text" name="entry_year" id="entry_year" class="form-control" value="{{ old('entry_year') }}" required>
@@ -285,6 +334,65 @@
                             <div class="form-group full">
                                 <label for="optional_supporting_data">Data Dukung (opsional)</label>
                                 <input type="file" name="optional_supporting_data" id="optional_supporting_data" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                            </div>
+                        @endif
+
+                        @if($isActivityGroup)
+                            <div class="form-group full">
+                                <label for="activity_name">Nama Kegiatan</label>
+                                <input type="text" name="activity_name" id="activity_name" class="form-control" value="{{ old('activity_name') }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="activity_date">Tanggal Kegiatan <span style="font-weight:normal;color:#6b7280;">(opsional)</span></label>
+                                <input type="date" name="activity_date" id="activity_date" class="form-control" value="{{ old('activity_date') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="activity_location">Lokasi Kegiatan <span style="font-weight:normal;color:#6b7280;">(opsional)</span></label>
+                                <input type="text" name="activity_location" id="activity_location" class="form-control" value="{{ old('activity_location') }}">
+                            </div>
+                            <div class="form-group full">
+                                <label for="participant_list">Daftar Mahasiswa yang Mengikuti Kegiatan</label>
+                                <textarea name="participant_list" id="participant_list" class="form-control" rows="5" placeholder="Tuliskan nama, NIM, dan prodi setiap mahasiswa. Satu baris untuk satu mahasiswa." required>{{ old('participant_list') }}</textarea>
+                            </div>
+                            @if($slug === 'surat-tugas-mahasiswa')
+                                <div class="form-group full">
+                                    <label for="proposal_or_invitation">Data Dukung - Proposal atau Surat Undangan</label>
+                                    <input type="file" name="proposal_or_invitation" id="proposal_or_invitation" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                                </div>
+                            @endif
+                            @if($slug === 'nota-dinas-dispen-kegiatan-mahasiswa')
+                                <div class="form-group full">
+                                    <label for="invitation_or_proposal">Data Dukung - Bukti Undangan / Proposal</label>
+                                    <input type="file" name="invitation_or_proposal" id="invitation_or_proposal" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                                </div>
+                            @endif
+                        @endif
+
+                        @if($isReactivation)
+                            <div class="form-group">
+                                <label for="previous_status">Status Sebelumnya</label>
+                                <select name="previous_status" id="previous_status" class="form-select" required>
+                                    <option value="">-- Pilih Status --</option>
+                                    @foreach(($config['previous_status_options'] ?? ['Cuti', 'Keluar']) as $statusOption)
+                                        <option value="{{ $statusOption }}" @selected(old('previous_status') == $statusOption)>{{ $statusOption }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="semester">Semester <span style="font-weight:normal;color:#6b7280;">(opsional)</span></label>
+                                <input type="text" name="semester" id="semester" class="form-control" value="{{ old('semester') }}">
+                            </div>
+                            <div class="form-group full">
+                                <label for="reactivation_reason">Alasan Pengaktifan Kembali <span style="font-weight:normal;color:#6b7280;">(opsional)</span></label>
+                                <textarea name="reactivation_reason" id="reactivation_reason" class="form-control" rows="3">{{ old('reactivation_reason') }}</textarea>
+                            </div>
+                            <div class="form-group full">
+                                <label for="reactivation_registration_proof">Data Dukung - Bukti Registrasi Cuti ke Akademik Jurusan</label>
+                                <input type="file" name="reactivation_registration_proof" id="reactivation_registration_proof" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+                            <div class="form-group full">
+                                <label for="reactivation_statement_letter">Data Dukung - Surat Pernyataan Bermaterai Aktif Kembali</label>
+                                <input type="file" name="reactivation_statement_letter" id="reactivation_statement_letter" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
                             </div>
                         @endif
 

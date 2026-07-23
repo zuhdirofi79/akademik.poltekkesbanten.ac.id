@@ -31,37 +31,67 @@ class ProgressStatsService
         ];
     }
 
-    public function dashboardStats(): array
+    public function dashboardStats(?int $studyProgramId = null): array
     {
         $year = now()->year;
         $base = Submission::query()->whereYear('created_at', $year);
+
+        if ($studyProgramId !== null) {
+            $base->where('study_program_id', $studyProgramId);
+        }
+
+        $submissionScope = Submission::query();
+        if ($studyProgramId !== null) {
+            $submissionScope->where('study_program_id', $studyProgramId);
+        }
 
         $serviceQuery = ServiceType::query()
             ->orderByRaw('is_active DESC')
             ->orderBy('sort_order')
             ->orderBy('name');
 
+        $statusCounts = fn (string $status) => (clone $submissionScope)
+            ->where('status', $status)
+            ->count();
+
         return [
-            'total' => Submission::count(),
+            'total' => (clone $submissionScope)->count(),
             'year_total' => (clone $base)->count(),
             'by_status' => [
-                'Diajukan' => Submission::where('status', SubmissionStatus::Submitted->value)->count(),
-                'Diproses' => Submission::where('status', SubmissionStatus::Processing->value)->count(),
-                'Selesai / File Tersedia' => Submission::where('status', SubmissionStatus::Completed->value)->count(),
-                'Terkirim Email' => Submission::where('status', SubmissionStatus::EmailSent->value)->count(),
-                'Ditolak' => Submission::where('status', SubmissionStatus::Rejected->value)->count(),
+                'Diajukan' => $statusCounts(SubmissionStatus::Submitted->value),
+                'Diproses' => $statusCounts(SubmissionStatus::Processing->value),
+                'Diverifikasi ADAK Jurusan' => $statusCounts(SubmissionStatus::JurusanVerified->value),
+                'Diverifikasi Admin Pusat / Proses SK' => $statusCounts(SubmissionStatus::CentralVerified->value),
+                'Selesai / File Tersedia' => $statusCounts(SubmissionStatus::Completed->value),
+                'Terkirim Email' => $statusCounts(SubmissionStatus::EmailSent->value),
+                'Ditolak' => $statusCounts(SubmissionStatus::Rejected->value),
             ],
-            'by_service' => (clone $serviceQuery)->withCount('submissions')->get(),
+            'by_service' => (clone $serviceQuery)
+                ->withCount(['submissions' => fn ($q) => $this->scopeSubmissions($q, $studyProgramId)])
+                ->get(),
             'year_by_service' => (clone $serviceQuery)
-                ->withCount(['submissions as year_count' => fn ($q) => $q->whereYear('created_at', $year)])
+                ->withCount(['submissions as year_count' => function ($q) use ($year, $studyProgramId) {
+                    $q->whereYear('created_at', $year);
+                    $this->scopeSubmissions($q, $studyProgramId);
+                }])
                 ->get(),
             'active_services' => ServiceType::active()
-                ->withCount('submissions')
-                ->withCount(['submissions as year_count' => fn ($q) => $q->whereYear('created_at', $year)])
+                ->withCount(['submissions' => fn ($q) => $this->scopeSubmissions($q, $studyProgramId)])
+                ->withCount(['submissions as year_count' => function ($q) use ($year, $studyProgramId) {
+                    $q->whereYear('created_at', $year);
+                    $this->scopeSubmissions($q, $studyProgramId);
+                }])
                 ->orderBy('sort_order')
                 ->orderBy('id')
                 ->get(),
         ];
+    }
+
+    private function scopeSubmissions($query, ?int $studyProgramId): void
+    {
+        if ($studyProgramId !== null) {
+            $query->where('study_program_id', $studyProgramId);
+        }
     }
 
     public function serviceCards(): Collection

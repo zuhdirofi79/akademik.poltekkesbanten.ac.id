@@ -29,6 +29,12 @@
             <option value="{{ $status }}" @selected(request('status') == $status)>{{ $status }}</option>
         @endforeach
     </select>
+    <select name="verification_filter" class="form-select" style="max-width:220px;">
+        <option value="">Filter Verifikasi SK</option>
+        <option value="belum_jurusan" @selected(request('verification_filter') === 'belum_jurusan')>Belum Verifikasi Jurusan</option>
+        <option value="sudah_jurusan" @selected(request('verification_filter') === 'sudah_jurusan')>Sudah Verifikasi Jurusan</option>
+        <option value="sudah_pusat" @selected(request('verification_filter') === 'sudah_pusat')>Sudah Verifikasi Admin Pusat</option>
+    </select>
     <select name="study_program_id" class="form-select" style="max-width:200px;">
         <option value="">Semua Prodi</option>
         @foreach($studyPrograms as $program)
@@ -70,7 +76,19 @@
                     <td>{{ $submission->serviceType->name }}</td>
                     <td>{{ $submission->email }}</td>
                     <td>{{ $submission->whatsapp }}</td>
-                    <td><span class="status-badge">{{ $submission->status }}</span></td>
+                    <td>
+                        <span class="status-badge">{{ $submission->status }}</span>
+                        @if(in_array($submission->serviceType->slug, ['surat-cuti-mahasiswa', 'surat-keluar-mahasiswa'], true))
+                            <div style="margin-top:0.35rem;display:flex;flex-wrap:wrap;gap:0.25rem;">
+                                <span class="btn-sm {{ $submission->jurusan_verified_at ? 'btn-teal' : 'btn-gray' }}" style="pointer-events:none;font-size:0.7rem;padding:0.15rem 0.4rem;">
+                                    Verifikasi Jurusan
+                                </span>
+                                <span class="btn-sm {{ $submission->central_verified_at ? 'btn-blue' : 'btn-gray' }}" style="pointer-events:none;font-size:0.7rem;padding:0.15rem 0.4rem;">
+                                    Verifikasi Admin Pusat
+                                </span>
+                            </div>
+                        @endif
+                    </td>
                     <td class="no-print"><a href="{{ route('admin.submissions.show', $submission) }}" class="btn-sm btn-teal">Detail</a></td>
                 </tr>
             @empty
