@@ -32,6 +32,35 @@
     </div>
 </div>
 
+<div class="admin-card" style="margin-bottom:1rem;">
+    <div style="display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap;">
+        <h3 style="margin:0;">Antrean Layanan Akademik (Hari Ini)</h3>
+        <a href="{{ route('admin.queues.index') }}" class="btn-sm btn-teal">Lihat Antrean Layanan</a>
+    </div>
+    <div class="stats-grid" style="margin-top:1rem;">
+        <div class="stat-box">
+            <h4>Antrean Hari Ini</h4>
+            <div class="value">{{ $queueStats['total_today'] }}</div>
+        </div>
+        <div class="stat-box">
+            <h4>Sedang Menunggu</h4>
+            <div class="value">{{ $queueStats['waiting'] }}</div>
+        </div>
+        <div class="stat-box">
+            <h4>Dipanggil / Dilayani</h4>
+            <div class="value">{{ $queueStats['active'] }}</div>
+        </div>
+        <div class="stat-box">
+            <h4>Selesai Dilayani</h4>
+            <div class="value">{{ $queueStats['served'] }}</div>
+        </div>
+        <div class="stat-box">
+            <h4>Dilewati</h4>
+            <div class="value">{{ $queueStats['skipped'] }}</div>
+        </div>
+    </div>
+</div>
+
 <div class="admin-card" id="layanan-aktif">
     <h3>Daftar Layanan Aktif</h3>
     <table class="table">

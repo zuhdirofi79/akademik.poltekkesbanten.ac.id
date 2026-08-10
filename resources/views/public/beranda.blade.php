@@ -17,6 +17,7 @@
 </section>
 
 @include('partials.service-reminder-beranda')
+@include('partials.queue-cta')
 @include('partials.survey-cta')
 
 <section class="home-intro-section">

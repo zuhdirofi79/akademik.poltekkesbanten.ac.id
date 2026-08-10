@@ -28,6 +28,11 @@ class ServiceType extends Model
         return $this->hasMany(Submission::class);
     }
 
+    public function queues(): HasMany
+    {
+        return $this->hasMany(AcademicServiceQueue::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);

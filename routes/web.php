@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmailTemplateController;
+use App\Http\Controllers\Admin\QueueController;
+use App\Http\Controllers\Admin\QueueReportController;
 use App\Http\Controllers\Admin\SatisfactionSurveyController as AdminSatisfactionSurveyController;
 use App\Http\Controllers\Admin\SurveyDashboardController;
 use App\Http\Controllers\Admin\StudyProgramController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\PublicQueueController;
 use App\Http\Controllers\SatisfactionSurveyController;
 use App\Http\Controllers\ServiceFormController;
 use App\Support\ServiceFormConfig;
@@ -74,6 +77,16 @@ Route::post('/survei-kepuasan', [SatisfactionSurveyController::class, 'store'])
     ->name('survey.store')
     ->middleware('throttle:10,1');
 
+Route::get('/antrean', [PublicQueueController::class, 'index'])->name('queues.index');
+Route::post('/antrean/ambil', [PublicQueueController::class, 'take'])
+    ->name('queues.take')
+    ->middleware('throttle:queue-take');
+Route::get('/antrean/display', [PublicQueueController::class, 'display'])->name('queues.display');
+Route::get('/antrean/status', [PublicQueueController::class, 'status'])->name('queues.status');
+Route::get('/antrean/kiosk', [PublicQueueController::class, 'kiosk'])->name('queues.kiosk');
+Route::get('/antrean/{queue}/print', [PublicQueueController::class, 'print'])->name('queues.print');
+Route::get('/antrean/{queue}', [PublicQueueController::class, 'ticket'])->name('queues.ticket');
+
 Route::get('/download/{submission}/{file}', [FileDownloadController::class, 'download'])
     ->name('download.file');
 Route::get('/download-signed/{submission}/{file}', [FileDownloadController::class, 'download'])
@@ -108,6 +121,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/surveys/dashboard', [SurveyDashboardController::class, 'index'])->name('surveys.dashboard');
             Route::get('/surveys/export', [SurveyDashboardController::class, 'export'])->name('surveys.export');
             Route::get('/surveys/print', [SurveyDashboardController::class, 'print'])->name('surveys.print');
+
+            Route::get('/queues', [QueueController::class, 'index'])->name('queues.index');
+            Route::get('/queues/status', [QueueController::class, 'status'])->name('queues.status');
+            Route::post('/queues/call-next', [QueueController::class, 'callNext'])->name('queues.call-next');
+            Route::get('/queues/reports', [QueueReportController::class, 'index'])->name('queues.reports');
+            Route::get('/queues/reports/export', [QueueReportController::class, 'export'])->name('queues.reports.export');
+            Route::get('/queues/reports/print', [QueueReportController::class, 'print'])->name('queues.reports.print');
+            Route::post('/queues/{queue}/call', [QueueController::class, 'call'])->name('queues.call');
+            Route::post('/queues/{queue}/serve', [QueueController::class, 'serve'])->name('queues.serve');
+            Route::post('/queues/{queue}/finish', [QueueController::class, 'finish'])->name('queues.finish');
+            Route::post('/queues/{queue}/skip', [QueueController::class, 'skip'])->name('queues.skip');
+            Route::post('/queues/{queue}/cancel', [QueueController::class, 'cancel'])->name('queues.cancel');
+            Route::post('/queues/{queue}/note', [QueueController::class, 'note'])->name('queues.note');
 
             Route::middleware('role:superadmin')->group(function () {
                 Route::resource('study-programs', StudyProgramController::class)->except(['show']);

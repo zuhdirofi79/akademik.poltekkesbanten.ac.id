@@ -14,6 +14,8 @@
             <nav class="admin-sidebar-nav">
                 <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
                 <a href="{{ route('admin.submissions.index') }}" class="{{ request()->routeIs('admin.submissions.*') ? 'active' : '' }}">Pengajuan Layanan</a>
+                <a href="{{ route('admin.queues.index') }}" class="{{ request()->routeIs('admin.queues.index') ? 'active' : '' }}">Antrean Layanan</a>
+                <a href="{{ route('admin.queues.reports') }}" class="{{ request()->routeIs('admin.queues.reports*') ? 'active' : '' }}">Laporan Antrean</a>
                 <a href="{{ route('admin.surveys.dashboard') }}" class="{{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">Survei Kepuasan</a>
                 @if(auth()->user()->isSuperAdmin())
                     <a href="{{ route('admin.study-programs.index') }}" class="{{ request()->routeIs('admin.study-programs.*') ? 'active' : '' }}">Program Studi</a>
