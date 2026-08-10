@@ -29,7 +29,14 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultSimpleView('pagination.simple');
 
         RateLimiter::for('queue-take', function (Request $request) {
-            return Limit::perSeconds(30, 1)->by($request->ip());
+            return Limit::perSecond(1, 30)
+                ->by($request->ip())
+                ->response(function () {
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('error', 'Mohon tunggu beberapa saat sebelum mengambil nomor antrean lagi.');
+                });
         });
 
         View::composer('layouts.app', function ($view) {

@@ -42,6 +42,9 @@
             <h1>Antrean Layanan Akademik</h1>
             <p>{{ $todayLabel }}</p>
 
+            @if(session('error'))
+                <div class="alert alert-error" style="text-align:left;">{{ session('error') }}</div>
+            @endif
             @if($errors->any())
                 <div class="alert alert-error" style="text-align:left;">
                     <ul style="margin:0;padding-left:1.1rem;">
