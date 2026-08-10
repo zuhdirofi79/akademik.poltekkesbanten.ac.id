@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\QueueReportController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SatisfactionSurveyController as AdminSatisfactionSurveyController;
 use App\Http\Controllers\Admin\SurveyDashboardController;
 use App\Http\Controllers\Admin\StudyProgramController;
@@ -128,6 +129,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/queues/reports', [QueueReportController::class, 'index'])->name('queues.reports');
             Route::get('/queues/reports/export', [QueueReportController::class, 'export'])->name('queues.reports.export');
             Route::get('/queues/reports/print', [QueueReportController::class, 'print'])->name('queues.reports.print');
+
+            Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+            Route::get('/reports/submissions', [ReportController::class, 'submissions'])->name('reports.submissions');
+            Route::get('/reports/queues', [ReportController::class, 'queues'])->name('reports.queues');
+            Route::get('/reports/surveys', [ReportController::class, 'surveys'])->name('reports.surveys');
+            Route::get('/reports/combined', [ReportController::class, 'combined'])->name('reports.combined');
+            Route::get('/reports/submissions/export', [ReportController::class, 'exportSubmissions'])->name('reports.submissions.export');
+            Route::get('/reports/queues/export', [ReportController::class, 'exportQueues'])->name('reports.queues.export');
+            Route::get('/reports/surveys/export', [ReportController::class, 'exportSurveys'])->name('reports.surveys.export');
+            Route::get('/reports/combined/export', [ReportController::class, 'exportCombined'])->name('reports.combined.export');
+            Route::get('/reports/submissions/print', [ReportController::class, 'printSubmissions'])->name('reports.submissions.print');
+            Route::get('/reports/queues/print', [ReportController::class, 'printQueues'])->name('reports.queues.print');
+            Route::get('/reports/surveys/print', [ReportController::class, 'printSurveys'])->name('reports.surveys.print');
+            Route::get('/reports/combined/print', [ReportController::class, 'printCombined'])->name('reports.combined.print');
+
             Route::post('/queues/{queue}/call', [QueueController::class, 'call'])->name('queues.call');
             Route::post('/queues/{queue}/serve', [QueueController::class, 'serve'])->name('queues.serve');
             Route::post('/queues/{queue}/finish', [QueueController::class, 'finish'])->name('queues.finish');
