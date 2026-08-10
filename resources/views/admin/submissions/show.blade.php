@@ -20,7 +20,7 @@
         <tr><th>NIK</th><td>{{ $submission->nik ?: '-' }}</td></tr>
         <tr><th>Program Studi</th><td>{{ $submission->studyProgram->name }}</td></tr>
         <tr><th>Email</th><td>{{ $submission->email }}</td></tr>
-        <tr><th>WhatsApp</th><td>{{ $submission->whatsapp }}</td></tr>
+        <tr><th>Nomor HP/Telepon</th><td>{{ $submission->whatsapp }}</td></tr>
         @if($submission->semester)<tr><th>Semester</th><td>{{ $submission->semester }}</td></tr>@endif
         @if($submission->gpa_score !== null)<tr><th>IPS/IPK</th><td>{{ number_format((float) $submission->gpa_score, 2, '.', '') }}</td></tr>@endif
         @if($submission->mother_name)<tr><th>Nama Ibu Kandung</th><td>{{ $submission->mother_name }}</td></tr>@endif
@@ -232,10 +232,6 @@
         @csrf
         <button type="submit" class="btn-sm btn-teal" @disabled(! $submission->hasFinalFiles())>Kirim Ulang Email File Final</button>
     </form>
-
-    @if($whatsappUrl)
-        <a href="{{ $whatsappUrl }}" target="_blank" rel="noopener" class="btn-sm btn-green" style="margin-left:0.5rem;">Buka WhatsApp Mahasiswa</a>
-    @endif
 
     <div style="margin-top:1rem;">
         <label for="progress-link-copy" style="display:block;font-weight:600;margin-bottom:0.5rem;">Link Progres / Download Mahasiswa</label>

@@ -13,10 +13,8 @@ use App\Models\Submission;
 use App\Services\AdminActivityLogger;
 use App\Services\FileStorageService;
 use App\Services\SubmissionService;
-use App\Services\WhatsAppNormalizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SubmissionController extends Controller
@@ -24,7 +22,6 @@ class SubmissionController extends Controller
     public function __construct(
         private SubmissionService $submissionService,
         private FileStorageService $fileStorage,
-        private WhatsAppNormalizer $whatsApp,
         private AdminActivityLogger $activityLogger,
     ) {}
 
@@ -59,29 +56,11 @@ class SubmissionController extends Controller
             'satisfactionSurvey',
         ]);
 
-        $firstFinalFile = $submission->finalFiles()->first();
-        $signedDownloadUrl = $firstFinalFile
-            ? URL::temporarySignedRoute(
-                'download.signed',
-                now()->addDays(7),
-                ['submission' => $submission->id, 'file' => $firstFinalFile->id]
-            )
-            : null;
-
-        $whatsappMessage = "Halo {$submission->full_name},\n"
-            ."Pengajuan {$submission->serviceType->name} dengan nomor tiket {$submission->ticket_number}.\n"
-            .($signedDownloadUrl
-                ? "Silakan unduh file melalui link berikut:\n{$signedDownloadUrl}\n\n"
-                : "Silakan cek progres pengajuan Anda di halaman Progres Layanan.\n\n")
-            ."Terima kasih.\n"
-            .'Layanan Akademik Poltekkes Kemenkes Banten';
-
         $user = auth()->user();
 
         return view('admin.submissions.show', [
             'submission' => $submission,
             'statuses' => SubmissionStatus::adminOptions(),
-            'whatsappUrl' => $this->whatsApp->waLink($submission->whatsapp, $whatsappMessage),
             'progressPageUrl' => route('progress.index'),
             'canVerifyJurusan' => $user->canVerifyJurusan($submission),
             'canVerifyCentral' => $user->canVerifyCentral($submission),
@@ -275,7 +254,7 @@ class SubmissionController extends Controller
             $query = $query->with(['serviceType', 'studyProgram']);
             $handle = fopen('php://output', 'w');
             fputcsv($handle, [
-                'Nomor Tiket', 'Layanan', 'Program Studi', 'NIM', 'Nama', 'Email', 'WhatsApp',
+                'Nomor Tiket', 'Layanan', 'Program Studi', 'NIM', 'Nama', 'Email', 'Nomor HP/Telepon',
                 'Status', 'Tanggal Pengajuan',
             ]);
 

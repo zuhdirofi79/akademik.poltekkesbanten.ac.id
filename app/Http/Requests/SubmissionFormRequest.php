@@ -163,6 +163,13 @@ class SubmissionFormRequest extends FormRequest
         });
     }
 
+    public function attributes(): array
+    {
+        return [
+            'whatsapp' => 'Nomor HP/Telepon',
+        ];
+    }
+
     public function messages(): array
     {
         return [

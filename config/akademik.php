@@ -9,10 +9,8 @@ if (in_array(strtolower((string) $adminContactEmail), [
     $adminContactEmail = 'adak.direktorat@poltekesbanten.ac.id';
 }
 
-$adminContactWhatsappUrl = env(
-    'ADMIN_CONTACT_WHATSAPP_URL',
-    'https://api.whatsapp.com/send/?phone=6282117170875&text&type=phone_number&app_absent=0'
-);
+// Key lama dipertahankan untuk kompatibilitas; jangan dipakai di tampilan publik.
+$adminContactWhatsappUrl = env('ADMIN_CONTACT_WHATSAPP_URL', '');
 
 return [
     'admin_contact_email' => $adminContactEmail,
@@ -20,7 +18,7 @@ return [
     'admin_contact' => [
         'email' => $adminContactEmail,
         'whatsapp_url' => $adminContactWhatsappUrl,
-        'whatsapp_label' => 'Hubungi Admin via WhatsApp',
-        'help_message' => 'Jika email belum masuk atau mengalami kendala pengunduhan file, silakan hubungi admin layanan akademik.',
+        'whatsapp_label' => '',
+        'help_message' => 'Jika terdapat kendala, silakan hubungi admin layanan akademik melalui email.',
     ],
 ];

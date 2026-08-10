@@ -14,7 +14,7 @@
 <h1>Manajemen Pengajuan</h1>
 
 <form method="GET" class="filter-bar admin-card no-print">
-    <input type="text" name="search" class="form-control" placeholder="Cari tiket/NIM/nama/email/WA" value="{{ request('search') }}" style="max-width:220px;">
+    <input type="text" name="search" class="form-control" placeholder="Cari tiket/NIM/nama/email/HP" value="{{ request('search') }}" style="max-width:220px;">
     <select name="service_type_id" class="form-select" style="max-width:220px;">
         <option value="">Semua Layanan</option>
         @foreach($serviceTypes as $type)
@@ -60,7 +60,7 @@
                 <th>Program Studi</th>
                 <th>Jenis Layanan</th>
                 <th>Email</th>
-                <th>WhatsApp</th>
+                <th>Nomor HP/Telepon</th>
                 <th>Status</th>
                 <th class="no-print">Aksi</th>
             </tr>

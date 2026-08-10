@@ -23,11 +23,8 @@ Cek Progres Layanan
 
 ---
 
-{{ config('akademik.admin_contact.help_message') }}
-
-WhatsApp: [{{ config('akademik.admin_contact.whatsapp_label') }}]({{ config('akademik.admin_contact.whatsapp_url') }})
-
-Email: [{{ config('akademik.admin_contact.email') }}](mailto:{{ config('akademik.admin_contact.email') }})
+Jika terdapat kendala, silakan hubungi admin layanan akademik melalui email:
+[{{ config('akademik.admin_contact_email') }}](mailto:{{ config('akademik.admin_contact_email') }})
 
 Terima kasih,<br>
 Layanan Akademik Poltekkes Kemenkes Banten

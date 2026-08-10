@@ -49,7 +49,7 @@
                         <input type="text" name="visitor_identity" id="visitor_identity" class="form-control" value="{{ old('visitor_identity') }}" placeholder="NIM / NIP / NIK">
                     </div>
                     <div class="form-group">
-                        <label for="visitor_phone">Nomor WhatsApp <small>(opsional)</small></label>
+                        <label for="visitor_phone">Nomor HP/Telepon <small>(opsional)</small></label>
                         <input type="text" name="visitor_phone" id="visitor_phone" class="form-control" value="{{ old('visitor_phone') }}" placeholder="08xxxxxxxxxx">
                     </div>
                     <div class="form-group">

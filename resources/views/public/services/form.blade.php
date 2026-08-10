@@ -32,12 +32,9 @@
                     @endif
                     <div class="student-help-contact" style="margin-top:1rem;font-size:0.9rem;">
                         <p style="margin-bottom:0.5rem;"><strong>Kontak bantuan mahasiswa:</strong></p>
-                        <p style="margin-bottom:0.5rem;">
-                            Email Akademik:
-                            <a href="mailto:{{ config('akademik.admin_contact.email') }}">{{ config('akademik.admin_contact.email') }}</a>
-                        </p>
                         <p style="margin-bottom:0;">
-                            <a href="{{ config('akademik.admin_contact.whatsapp_url') }}" target="_blank" rel="noopener noreferrer">Hubungi via WhatsApp</a>
+                            Email Akademik:
+                            <a href="mailto:{{ config('akademik.admin_contact_email') }}">{{ config('akademik.admin_contact_email') }}</a>
                         </p>
                     </div>
                 @elseif($isAlumniVerifikasi)
@@ -154,9 +151,9 @@
                         <div class="form-group">
                             <label for="whatsapp">
                                 @if($isActivityGroup)
-                                    Nomor WhatsApp Perwakilan
+                                    Nomor HP/Telepon Perwakilan
                                 @else
-                                    Nomor WhatsApp
+                                    Nomor HP/Telepon
                                 @endif
                             </label>
                             <input type="text" name="whatsapp" id="whatsapp" class="form-control" value="{{ old('whatsapp') }}" placeholder="08xxxxxxxxxx" required>
