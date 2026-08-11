@@ -17,6 +17,7 @@
 </section>
 
 @include('partials.service-reminder-beranda')
+@include('partials.alumni-legalisir-cta')
 @include('partials.queue-cta')
 @include('partials.survey-cta')
 
