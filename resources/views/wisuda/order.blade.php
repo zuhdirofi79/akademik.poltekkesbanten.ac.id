@@ -85,17 +85,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="toga_size">Ukuran Toga <span style="color:#dc2626;">*</span></label>
-                        <select name="toga_size" id="toga_size" class="form-control" required>
-                            <option value="">-- Pilih Ukuran --</option>
-                            @foreach(['S','M','L','XL','XXL','Custom'] as $size)
-                                <option value="{{ $size }}" @selected(old('toga_size') === $size)>{{ $size }}</option>
-                            @endforeach
-                        </select>
+                        <label for="toga_size_display">Ukuran Toga</label>
+                        <input type="text" id="toga_size_display" class="form-control" value="All Size" readonly>
+                        <input type="hidden" name="toga_size" value="All Size">
                     </div>
                     <div class="form-group">
-                        <label for="size_note">Catatan Ukuran</label>
-                        <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Isi jika memilih ukuran custom atau ada catatan khusus.">{{ old('size_note') }}</textarea>
+                        <label for="size_note">Catatan Tambahan</label>
+                        <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk panitia.">{{ old('size_note') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Jumlah <span style="color:#dc2626;">*</span></label>

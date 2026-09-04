@@ -48,7 +48,7 @@ class WisudaController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'gender' => $data['gender'],
-            'toga_size' => $data['toga_size'],
+            'toga_size' => 'All Size',
             'size_note' => $data['size_note'] ?? null,
             'quantity' => $data['quantity'],
             'status' => 'pending_payment',

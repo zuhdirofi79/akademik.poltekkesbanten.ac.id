@@ -136,10 +136,8 @@
 
                     <div class="wisuda-option-group">
                         <div class="wisuda-option-label"><span>Ukuran</span></div>
-                        <div class="wisuda-option-buttons" id="wisudaSizeButtons">
-                            @foreach(['S','M','L','XL','XXL','Custom'] as $size)
-                                <button type="button" class="wisuda-option-btn {{ $size === 'M' ? 'active' : '' }}" data-size="{{ $size }}">{{ $size }}</button>
-                            @endforeach
+                        <div class="wisuda-option-buttons">
+                            <span class="wisuda-option-btn active" style="cursor:default;">All Size</span>
                         </div>
                     </div>
 
@@ -233,7 +231,7 @@
 
                 <div class="wisuda-checkout-summary" id="wisudaCheckoutSummary">
                     Ringkasan pilihan: <strong id="summaryProdi">Belum dipilih</strong> ·
-                    Ukuran <strong id="summarySize">M</strong> ·
+                    Ukuran <strong id="summarySize">All Size</strong> ·
                     Jumlah <strong id="summaryQty">1</strong>
                 </div>
 
@@ -249,7 +247,7 @@
 
                 <form method="POST" action="{{ route('wisuda.order.store') }}" id="wisudaCheckoutForm">
                     @csrf
-                    <input type="hidden" name="toga_size" id="formTogaSize" value="{{ old('toga_size', 'M') }}">
+                    <input type="hidden" name="toga_size" id="formTogaSize" value="All Size">
                     <input type="hidden" name="quantity" id="formQuantity" value="{{ old('quantity', 1) }}">
 
                     <div class="wisuda-checkout-grid">
@@ -293,9 +291,13 @@
                                 <option value="Perempuan" @selected(old('gender') === 'Perempuan')>Perempuan</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="toga_size_display">Ukuran Toga</label>
+                            <input type="text" id="toga_size_display" class="form-control" value="All Size" readonly>
+                        </div>
                         <div class="form-group full">
-                            <label for="size_note">Catatan Ukuran / Catatan Tambahan</label>
-                            <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Isi jika memilih ukuran custom atau ada catatan khusus.">{{ old('size_note') }}</textarea>
+                            <label for="size_note">Catatan Tambahan</label>
+                            <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk panitia.">{{ old('size_note') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="captcha_answer">Captcha: {{ $captcha['question'] }} <span style="color:#dc2626;">*</span></label>
@@ -334,7 +336,6 @@
     var mainImage = document.getElementById('wisudaMainImage');
     var thumbs = Array.prototype.slice.call(document.querySelectorAll('.wisuda-thumbnail'));
     var prodiButtons = Array.prototype.slice.call(document.querySelectorAll('#wisudaProdiButtons .wisuda-option-btn'));
-    var sizeButtons = Array.prototype.slice.call(document.querySelectorAll('#wisudaSizeButtons .wisuda-option-btn'));
     var qtyInput = document.getElementById('wisudaQtyInput');
     var formSize = document.getElementById('formTogaSize');
     var formQty = document.getElementById('formQuantity');
@@ -344,7 +345,7 @@
     var prodiNote = document.getElementById('wisudaProdiNote');
     var studySelect = document.getElementById('study_program_id');
     var selectedProdi = '';
-    var selectedSize = (formSize && formSize.value) ? formSize.value : 'M';
+    var selectedSize = 'All Size';
 
     function setMain(src, file) {
         if (!mainImage || !src) return;
@@ -377,9 +378,9 @@
 
     function updateSummary() {
         if (summaryProdi) summaryProdi.textContent = selectedProdi || 'Belum dipilih';
-        if (summarySize) summarySize.textContent = selectedSize || 'M';
+        if (summarySize) summarySize.textContent = 'All Size';
         if (summaryQty) summaryQty.textContent = qtyInput ? qtyInput.value : '1';
-        if (formSize) formSize.value = selectedSize || 'M';
+        if (formSize) formSize.value = 'All Size';
         if (formQty) formQty.value = qtyInput ? qtyInput.value : '1';
     }
 
@@ -391,15 +392,6 @@
             if (prodiNote) prodiNote.textContent = btn.getAttribute('data-note') || '';
             setMain(btn.getAttribute('data-primary'), btn.getAttribute('data-file'));
             matchStudyProgram(btn.getAttribute('data-prodi'));
-            updateSummary();
-        });
-    });
-
-    sizeButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            sizeButtons.forEach(function (b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            selectedSize = btn.getAttribute('data-size') || 'M';
             updateSummary();
         });
     });

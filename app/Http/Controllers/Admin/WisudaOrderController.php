@@ -22,7 +22,7 @@ class WisudaOrderController extends Controller
             'filters' => $request->all(),
             'statuses' => $this->orderStatuses(),
             'paymentStatuses' => $this->paymentStatuses(),
-            'togaSizes' => ['S', 'M', 'L', 'XL', 'XXL', 'Custom'],
+            'togaSizes' => ['All Size'],
         ]);
     }
 
