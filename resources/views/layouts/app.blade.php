@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Layanan Akademik Poltekkes Kemenkes Banten')</title>
     <link rel="stylesheet" href="{{ env('CSS_URL', asset('css/akademik.css')) }}">
+    @stack('styles')
 </head>
 <body>
     @include('partials.navbar')

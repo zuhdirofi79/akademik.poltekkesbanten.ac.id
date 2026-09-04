@@ -1,0 +1,434 @@
+/* Scoped product-detail styles for /wisuda — always load via asset('css/wisuda.css') */
+.wisuda-page {
+    background: #f5f5f5;
+    padding: 24px 0 48px;
+    width: 100%;
+}
+
+.wisuda-page * {
+    box-sizing: border-box;
+}
+
+.wisuda-container {
+    max-width: 1188px;
+    margin: 0 auto;
+    padding: 0 16px;
+    width: 100%;
+}
+
+.wisuda-product-shell {
+    width: 100%;
+}
+
+.wisuda-product-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 480px minmax(0, 1fr);
+    gap: 28px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    align-items: start;
+}
+
+.wisuda-gallery {
+    min-width: 0;
+    width: 100%;
+}
+
+.wisuda-main-image {
+    width: 100%;
+    height: 460px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.wisuda-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.wisuda-thumbnails {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.wisuda-thumbnail {
+    width: 64px;
+    height: 64px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #fff;
+    flex: 0 0 auto;
+    padding: 4px;
+    display: block;
+}
+
+.wisuda-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.wisuda-thumbnail.active {
+    border: 2px solid #0ea5b7;
+}
+
+.wisuda-product-info {
+    min-width: 0;
+}
+
+.wisuda-product-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.wisuda-badge {
+    display: inline-block;
+    background: #ecfeff;
+    color: #0e7490;
+    border: 1px solid #99f6e4;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.wisuda-badge-warn {
+    background: #fff7ed;
+    color: #c2410c;
+    border-color: #fdba74;
+}
+
+.wisuda-product-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.35;
+    margin: 0 0 10px;
+}
+
+.wisuda-product-subtitle {
+    margin: 0 0 8px;
+    color: #4b5563;
+    font-size: 15px;
+}
+
+.wisuda-rating-line {
+    margin: 0 0 14px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.wisuda-price-box {
+    background: #fff7f2;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 16px 0;
+}
+
+.wisuda-price-main {
+    color: #0f766e;
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.wisuda-price-note {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.wisuda-meta-list {
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+    color: #374151;
+    font-size: 14px;
+}
+
+.wisuda-meta-list li {
+    margin-bottom: 6px;
+}
+
+.wisuda-option-group,
+.wisuda-option-row {
+    margin: 18px 0;
+}
+
+.wisuda-option-label {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111827;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.wisuda-option-label small {
+    font-weight: 500;
+    color: #0e7490;
+}
+
+.wisuda-option-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.wisuda-option-btn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    border-radius: 6px;
+    padding: 9px 14px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #111827;
+}
+
+.wisuda-option-btn.active {
+    border-color: #0ea5b7;
+    color: #0e7490;
+    background: #ecfeff;
+}
+
+.wisuda-qty-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wisuda-qty-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.wisuda-qty-input {
+    width: 64px;
+    height: 36px;
+    text-align: center;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.wisuda-cta-row {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.wisuda-btn-primary {
+    background: #0f766e;
+    color: #fff !important;
+    border: none;
+    border-radius: 6px;
+    padding: 13px 22px;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wisuda-btn-primary:hover {
+    background: #115e59;
+}
+
+.wisuda-btn-outline {
+    background: #fff;
+    color: #0f766e !important;
+    border: 1px solid #0f766e;
+    border-radius: 6px;
+    padding: 13px 22px;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wisuda-seller-box {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.wisuda-seller-box strong {
+    display: block;
+    color: #111827;
+}
+
+.wisuda-seller-box span {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.wisuda-detail-section {
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.wisuda-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fafafa;
+}
+
+.wisuda-tab-btn {
+    border: none;
+    background: transparent;
+    padding: 14px 18px;
+    font-weight: 700;
+    color: #6b7280;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.wisuda-tab-btn.active {
+    color: #0f766e;
+    border-bottom-color: #0f766e;
+    background: #fff;
+}
+
+.wisuda-tab-panels {
+    padding: 20px 22px 24px;
+}
+
+.wisuda-tab-panel {
+    display: none;
+    color: #374151;
+    line-height: 1.7;
+}
+
+.wisuda-tab-panel.active {
+    display: block;
+}
+
+.wisuda-tab-panel ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.15rem;
+}
+
+.wisuda-tab-panel li {
+    margin-bottom: 0.45rem;
+}
+
+.wisuda-checkout-card {
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    padding: 22px 24px;
+}
+
+.wisuda-checkout-card h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #111827;
+}
+
+.wisuda-checkout-summary {
+    background: #f0fdfa;
+    border: 1px solid #99f6e4;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 12px 0 18px;
+    color: #134e4a;
+}
+
+.wisuda-checkout-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px;
+}
+
+.wisuda-checkout-grid .form-group {
+    margin: 0;
+}
+
+.wisuda-checkout-grid .full {
+    grid-column: 1 / -1;
+}
+
+.wisuda-contact-inline {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+    .wisuda-product-card {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 18px;
+    }
+
+    .wisuda-main-image {
+        height: 360px;
+    }
+
+    .wisuda-checkout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .wisuda-main-image {
+        height: 300px;
+    }
+
+    .wisuda-product-title {
+        font-size: 20px;
+    }
+
+    .wisuda-price-main {
+        font-size: 22px;
+    }
+
+    .wisuda-cta-row {
+        flex-direction: column;
+    }
+
+    .wisuda-btn-primary,
+    .wisuda-btn-outline {
+        width: 100%;
+    }
+}

@@ -16,6 +16,8 @@ class WisudaController extends Controller
     {
         return view('wisuda.index', [
             'config' => config('wisuda'),
+            'studyPrograms' => StudyProgram::active()->orderBy('name')->get(),
+            'captcha' => $this->generateCaptcha(),
         ]);
     }
 
