@@ -16,6 +16,7 @@
         <p><strong>NIM:</strong> {{ $order->nim }}</p>
         <p><strong>NIK:</strong> {{ $order->nik ?: '-' }}</p>
         <p><strong>Program Studi:</strong> {{ $order->programDisplayName() }}</p>
+        <p><strong>Tahun Lulus:</strong> {{ $order->graduation_year ?: '-' }}</p>
         <p><strong>Email:</strong> {{ $order->email }}</p>
         <p><strong>Nomor HP/Telepon:</strong> {{ $order->phone }}</p>
         <p><strong>Jenis Kelamin:</strong> {{ $order->genderLabel() }}</p>

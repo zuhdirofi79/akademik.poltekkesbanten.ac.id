@@ -29,6 +29,7 @@
                 <p><strong>Kode Pesanan:</strong> {{ $order->order_code }}</p>
                 <p><strong>Nama Pemesan:</strong> {{ $order->student_name }}</p>
                 <p><strong>Program Studi:</strong> {{ $order->programDisplayName() }}</p>
+                <p><strong>Tahun Lulus:</strong> {{ $order->graduation_year ?: '-' }}</p>
                 <p><strong>Ukuran Toga:</strong> {{ $order->toga_size }}</p>
                 <p><strong>Jumlah:</strong> {{ $order->quantity }}</p>
                 <p><strong>Status Pembayaran:</strong>
@@ -47,7 +48,7 @@
             </div>
 
             <div class="wisuda-status-waiting">
-                <strong>Untuk informasi rekening pembayaran, silakan hubungi admin HUMAS.</strong>
+                <strong>Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat.</strong>
                 <p style="margin:0.5rem 0 0;">
                     Setelah mendapat info rekening dan menyelesaikan pembayaran, unggah bukti di form bawah.
                 </p>
@@ -73,10 +74,10 @@
 
                 <div class="wisuda-hero-actions" style="margin-top:1rem;">
                     <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">
-                        Hubungi Dias Arliadini
+                        Hubungi Tim Sekretariat
                     </a>
                     <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-blue">
-                        Hubungi Kontak Alternatif
+                        Kontak Alternatif
                     </a>
                 </div>
             </div>
@@ -87,7 +88,7 @@
                     @if($order->payment_status === 'rejected')
                         — status ditolak, Anda dapat mengunggah ulang.
                     @elseif($order->payment_status === 'uploaded')
-                        — menunggu verifikasi admin HUMAS.
+                        — menunggu verifikasi Tim Sekretariat.
                     @endif
                 </div>
             @endif

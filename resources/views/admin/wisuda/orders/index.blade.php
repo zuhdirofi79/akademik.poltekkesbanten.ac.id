@@ -35,6 +35,7 @@
             <option value="{{ $program->id }}" @selected(request('study_program_id') == $program->id)>{{ $program->name }}</option>
         @endforeach
     </select>
+    <input type="number" name="graduation_year" class="form-control" placeholder="Tahun Lulus" value="{{ request('graduation_year') }}" min="2000" max="2099" style="max-width:130px;">
     <select name="toga_size" class="form-select" style="max-width:120px;">
         <option value="">Ukuran</option>
         @foreach($togaSizes as $size)
@@ -74,6 +75,7 @@
                 <th>Nama Mahasiswa</th>
                 <th>NIM</th>
                 <th>Program Studi</th>
+                <th>Tahun Lulus</th>
                 <th>Email</th>
                 <th>Nomor HP/Telepon</th>
                 <th>Ukuran</th>
@@ -95,6 +97,7 @@
                     <td>{{ $order->student_name }}</td>
                     <td>{{ $order->nim }}</td>
                     <td>{{ $order->programDisplayName() }}</td>
+                    <td>{{ $order->graduation_year ?: '-' }}</td>
                     <td>{{ $order->email }}</td>
                     <td>{{ $order->phone }}</td>
                     <td>{{ $order->toga_size }}</td>
@@ -113,7 +116,7 @@
                     <td><a href="{{ route('admin.wisuda.orders.show', $order) }}" class="btn-sm btn-teal">Detail</a></td>
                 </tr>
             @empty
-                <tr><td colspan="16">Belum ada pesanan toga wisuda.</td></tr>
+                <tr><td colspan="17">Belum ada pesanan toga wisuda.</td></tr>
             @endforelse
         </tbody>
     </table>

@@ -104,14 +104,14 @@
                     <p class="wisuda-rating-line">★★★★★ 5.0 | Produk resmi Wisuda Poltekkes Kemenkes Banten</p>
 
                     <div class="wisuda-price-box">
-                        <p class="wisuda-price-main">Biaya: Hubungi Panitia</p>
-                        <p class="wisuda-price-note">Informasi rekening pembayaran akan dikonfirmasi oleh panitia/HUMAS.</p>
+                        <p class="wisuda-price-main">Biaya: Hubungi Tim Sekretariat</p>
+                        <p class="wisuda-price-note">Informasi rekening pembayaran akan dikonfirmasi oleh Tim Sekretariat.</p>
                     </div>
 
                     <ul class="wisuda-meta-list">
                         <li><strong>Pelaksanaan:</strong> {{ $config['event_date'] }}</li>
                         <li><strong>Lokasi:</strong> {{ $config['event_location'] }}</li>
-                        <li><strong>Pengambilan/Pemesanan:</strong> Koordinasi dengan Panitia/HUMAS</li>
+                        <li><strong>Pengambilan/Pemesanan:</strong> Silakan menghubungi Tim Sekretariat.</li>
                     </ul>
 
                     <div class="wisuda-option-group">
@@ -152,16 +152,16 @@
 
                     <div class="wisuda-cta-row">
                         <a href="#wisuda-checkout" class="wisuda-btn-primary" id="wisudaOrderCta">Pesan Baju Toga Sekarang</a>
-                        <a href="#tab-kontak" class="wisuda-btn-outline" id="wisudaContactCta">Hubungi Panitia</a>
+                        <a href="#tab-kontak" class="wisuda-btn-outline" id="wisudaContactCta">Hubungi Tim Sekretariat</a>
                     </div>
 
                     <div class="wisuda-seller-box">
                         <div>
-                            <strong>Panitia Wisuda / HUMAS</strong>
+                            <strong>Tim Sekretariat</strong>
                             <span>{{ $config['contact_name'] }} · Pelayanan {{ $config['service_hours'] }}</span>
                         </div>
                         <div class="wisuda-option-buttons">
-                            <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline" style="padding:8px 12px;font-size:13px;">Hubungi Dias Arliadini</a>
+                            <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline" style="padding:8px 12px;font-size:13px;">Hubungi Tim Sekretariat</a>
                             <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline" style="padding:8px 12px;font-size:13px;">Kontak Alternatif</a>
                         </div>
                     </div>
@@ -174,13 +174,12 @@
                     <button type="button" class="wisuda-tab-btn active" data-tab="deskripsi">Deskripsi Produk</button>
                     <button type="button" class="wisuda-tab-btn" data-tab="isi-paket">Isi Paket</button>
                     <button type="button" class="wisuda-tab-btn" data-tab="ketentuan">Ketentuan Wisuda</button>
-                    <button type="button" class="wisuda-tab-btn" data-tab="kontak" id="tab-kontak">Kontak Panitia</button>
+                    <button type="button" class="wisuda-tab-btn" data-tab="kontak" id="tab-kontak">Kontak Sekretariat</button>
                 </div>
                 <div class="wisuda-tab-panels">
                     <div class="wisuda-tab-panel active" data-panel="deskripsi">
                         <p>
-                            Paket baju toga wisuda resmi untuk mahasiswa Poltekkes Kemenkes Banten Tahun {{ $config['event_year'] }}.
-                            Digunakan pada prosesi wisuda di {{ $config['event_location'] }} pada tanggal {{ $config['event_date'] }}.
+                            Paket Baju Toga Wisuda kini bisa dipesan melalui Dharma Wanita Persatuan Poltekkes Kemenkes Banten.
                         </p>
                         <p>
                             Gambar di galeri adalah referensi resmi atribut toga (jubah, topi, slebber/kerah, serta kerah &amp; kalung per program studi).
@@ -199,16 +198,16 @@
                     <div class="wisuda-tab-panel" data-panel="ketentuan">
                         <ul>
                             <li>Wisuda Poltekkes Kemenkes Banten Tahun {{ $config['event_year'] }} dilaksanakan di Gedung Auditorium UIN SMH Banten pada tanggal {{ $config['event_date'] }}.</li>
-                            <li>Peserta wisuda adalah mahasiswa yang telah dinyatakan lulus secara akademik, ditetapkan melalui Keputusan Direktur, serta telah menyelesaikan kewajiban akademik dan administrasi.</li>
+                            <li>Peserta wisuda adalah mahasiswa yang telah dinyatakan lulus secara akademik, telah mengikuti seluruh rangkaian akademik, telah menyelesaikan/lulus Uji Kompetensi Nasional, telah melaksanakan yudisium, ditetapkan melalui Keputusan Direktur, serta telah menyelesaikan kewajiban akademik dan administrasi.</li>
                             <li>Wisudawati mengenakan kebaya dan kain.</li>
                             <li>Wisudawan mengenakan kemeja polos berkerah.</li>
-                            <li>Wajib menggunakan toga yang telah ditetapkan Poltekkes Kemenkes Banten secara lengkap, rapi, dan sesuai tata cara pemakaian.</li>
+                            <li>Penggunaan baju toga wisuda telah ditetapkan secara resmi sesuai ketentuan Poltekkes Kemenkes Banten, dengan pemakaian secara lengkap, rapi, dan sesuai tata cara pemakaian.</li>
                             <li>Tidak diperkenankan melakukan modifikasi toga dan atribut wisuda.</li>
                             <li>Pemesanan minimal 10 hari sebelum wisuda dilaksanakan.</li>
                         </ul>
                     </div>
                     <div class="wisuda-tab-panel" data-panel="kontak">
-                        <p>Bila ada pertanyaan silahkan hubungi panitia.</p>
+                        <p>Bila ada pertanyaan, silakan menghubungi Tim Sekretariat.</p>
                         <p>Pelayanan pukul 08.00–17.00 WIB. Di luar jam tersebut, silahkan menunggu hari berikutnya.</p>
                         <p>{{ $config['order_deadline_note'] }}</p>
                         <div class="wisuda-contact-inline">
@@ -216,8 +215,8 @@
                             <p style="margin:6px 0;">{{ $config['contact_phone_primary'] }}</p>
                             <p style="margin:6px 0;">atau {{ $config['contact_phone_secondary'] }}</p>
                             <div class="wisuda-cta-row" style="margin-top:10px;">
-                                <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-primary">Hubungi Dias Arliadini</a>
-                                <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline">Hubungi Kontak Alternatif</a>
+                                <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-primary">Hubungi Tim Sekretariat</a>
+                                <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline">Kontak Alternatif</a>
                             </div>
                         </div>
                     </div>
@@ -227,7 +226,7 @@
             {{-- Checkout form --}}
             <section class="wisuda-checkout-card" id="wisuda-checkout">
                 <h2>Checkout Pemesanan Toga</h2>
-                <p style="margin:0;color:#6b7280;">Lengkapi data pemesanan. Setelah submit, Anda mendapat kode pesanan dan dapat mengunggah bukti pembayaran setelah mendapat info rekening dari panitia.</p>
+                <p style="margin:0;color:#6b7280;">Lengkapi data pemesanan. Setelah submit, Anda mendapat kode pesanan dan dapat mengunggah bukti pembayaran setelah mendapat info rekening dari Tim Sekretariat.</p>
 
                 <div class="wisuda-checkout-summary" id="wisudaCheckoutSummary">
                     Ringkasan pilihan: <strong id="summaryProdi">Belum dipilih</strong> ·
@@ -276,6 +275,23 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="graduation_year">Tahun Lulus <span style="color:#dc2626;">*</span></label>
+                            <input
+                                type="number"
+                                name="graduation_year"
+                                id="graduation_year"
+                                class="form-control"
+                                value="{{ old('graduation_year') }}"
+                                placeholder="Contoh: 2026"
+                                min="2000"
+                                max="2099"
+                                required
+                            >
+                            @error('graduation_year')
+                                <div style="color:#dc2626;font-size:0.875rem;margin-top:0.25rem;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="email">Email <span style="color:#dc2626;">*</span></label>
                             <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
                         </div>
@@ -297,7 +313,7 @@
                         </div>
                         <div class="form-group full">
                             <label for="size_note">Catatan Tambahan</label>
-                            <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk panitia.">{{ old('size_note') }}</textarea>
+                            <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk Tim Sekretariat.">{{ old('size_note') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="captcha_answer">Captcha: {{ $captcha['question'] }} <span style="color:#dc2626;">*</span></label>
@@ -320,10 +336,10 @@
 
                 <div class="wisuda-contact-inline">
                     <strong>Butuh info rekening?</strong>
-                    <p style="margin:6px 0;">Untuk informasi rekening pembayaran, silakan hubungi Panitia/HUMAS.</p>
+                    <p style="margin:6px 0;">Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat.</p>
                     <div class="wisuda-cta-row" style="margin-top:8px;">
-                        <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline">Hubungi Dias Arliadini</a>
-                        <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline">Hubungi Kontak Alternatif</a>
+                        <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline">Hubungi Tim Sekretariat</a>
+                        <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline">Kontak Alternatif</a>
                     </div>
                 </div>
             </section>

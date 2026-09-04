@@ -14,12 +14,12 @@
                 <p>Pelaksanaan: <strong>{{ $config['event_date'] }}</strong></p>
                 <p>Lokasi: <strong>{{ $config['event_location'] }}</strong></p>
                 <p>{{ $config['order_deadline_note'] }}</p>
-                <p>Isi data dengan benar. Setelah submit, Anda mendapat kode pesanan. Untuk info rekening, hubungi admin HUMAS lalu unggah bukti pembayaran.</p>
+                <p>Isi data dengan benar. Setelah submit, Anda mendapat kode pesanan. Untuk info rekening, hubungi Tim Sekretariat lalu unggah bukti pembayaran.</p>
                 <div class="wisuda-contact-box" style="margin-top:1rem;">
                     <strong>{{ $config['contact_name'] }}</strong>
                     <p style="margin:0.35rem 0;">{{ $config['contact_phone_primary'] }}</p>
                     <div class="wisuda-hero-actions">
-                        <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">Hubungi Dias Arliadini</a>
+                        <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">Hubungi Tim Sekretariat</a>
                         <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-blue">Kontak Alternatif</a>
                     </div>
                 </div>
@@ -69,6 +69,23 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="graduation_year">Tahun Lulus <span style="color:#dc2626;">*</span></label>
+                        <input
+                            type="number"
+                            name="graduation_year"
+                            id="graduation_year"
+                            class="form-control"
+                            value="{{ old('graduation_year') }}"
+                            placeholder="Contoh: 2026"
+                            min="2000"
+                            max="2099"
+                            required
+                        >
+                        @error('graduation_year')
+                            <div style="color:#dc2626;font-size:0.875rem;margin-top:0.25rem;">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="email">Email <span style="color:#dc2626;">*</span></label>
                         <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
@@ -91,7 +108,7 @@
                     </div>
                     <div class="form-group">
                         <label for="size_note">Catatan Tambahan</label>
-                        <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk panitia.">{{ old('size_note') }}</textarea>
+                        <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk Tim Sekretariat.">{{ old('size_note') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Jumlah <span style="color:#dc2626;">*</span></label>

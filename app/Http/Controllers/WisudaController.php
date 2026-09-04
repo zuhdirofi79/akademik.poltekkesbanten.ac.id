@@ -45,6 +45,7 @@ class WisudaController extends Controller
             'nik' => $data['nik'] ?? null,
             'study_program_id' => $program->id,
             'study_program_name' => $program->name,
+            'graduation_year' => (int) $data['graduation_year'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'gender' => $data['gender'],
@@ -61,7 +62,7 @@ class WisudaController extends Controller
                 'orderCode' => $order->order_code,
                 'token' => $order->public_token,
             ])
-            ->with('success', 'Pesanan toga wisuda berhasil dibuat. Untuk informasi rekening, hubungi admin HUMAS lalu unggah bukti pembayaran.');
+            ->with('success', 'Pesanan toga wisuda berhasil dibuat. Untuk informasi rekening, hubungi Tim Sekretariat lalu unggah bukti pembayaran.');
     }
 
     public function showOrder(Request $request, string $orderCode)
@@ -126,7 +127,7 @@ class WisudaController extends Controller
                 'orderCode' => $order->order_code,
                 'token' => $order->public_token,
             ])
-            ->with('success', 'Bukti pembayaran berhasil diunggah. Panitia akan melakukan verifikasi.');
+            ->with('success', 'Bukti pembayaran berhasil diunggah. Tim Sekretariat akan melakukan verifikasi.');
     }
 
     private function findPublicOrder(Request $request, string $orderCode): GraduationTogaOrder

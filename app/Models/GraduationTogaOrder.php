@@ -15,6 +15,7 @@ class GraduationTogaOrder extends Model
         'nik',
         'study_program_id',
         'study_program_name',
+        'graduation_year',
         'email',
         'phone',
         'gender',
@@ -43,6 +44,7 @@ class GraduationTogaOrder extends Model
     {
         return [
             'quantity' => 'integer',
+            'graduation_year' => 'integer',
             'payment_amount' => 'decimal:2',
             'payment_proof_size' => 'integer',
             'payment_uploaded_at' => 'datetime',

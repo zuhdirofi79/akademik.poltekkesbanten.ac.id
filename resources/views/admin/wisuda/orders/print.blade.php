@@ -45,6 +45,7 @@
                 <th>Nama</th>
                 <th>NIM</th>
                 <th>Prodi</th>
+                <th>Tahun Lulus</th>
                 <th>HP/Telepon</th>
                 <th>Ukuran</th>
                 <th>Jml</th>
@@ -64,6 +65,7 @@
                     <td>{{ $order->student_name }}</td>
                     <td>{{ $order->nim }}</td>
                     <td>{{ $order->programDisplayName() }}</td>
+                    <td>{{ $order->graduation_year ?: '-' }}</td>
                     <td>{{ $order->phone }}</td>
                     <td>{{ $order->toga_size }}</td>
                     <td>{{ $order->quantity }}</td>
@@ -74,7 +76,7 @@
                     <td>{{ $order->paymentVerifiedBy?->name ?: '-' }}</td>
                 </tr>
             @empty
-                <tr><td colspan="14">Tidak ada data untuk periode/filter ini.</td></tr>
+                <tr><td colspan="15">Tidak ada data untuk periode/filter ini.</td></tr>
             @endforelse
         </tbody>
     </table>

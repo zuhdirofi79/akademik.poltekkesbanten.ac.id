@@ -153,6 +153,7 @@ class WisudaOrderController extends Controller
                 'NIM',
                 'NIK',
                 'Program Studi',
+                'Tahun Lulus',
                 'Email',
                 'Nomor HP/Telepon',
                 'Jenis Kelamin',
@@ -181,6 +182,7 @@ class WisudaOrderController extends Controller
                         $row->nim,
                         $row->nik ?: '-',
                         $row->programDisplayName(),
+                        $row->graduation_year ?: '-',
                         $row->email,
                         $row->phone,
                         $row->genderLabel(),
@@ -262,6 +264,9 @@ class WisudaOrderController extends Controller
         }
         if ($request->filled('study_program_id')) {
             $query->where('study_program_id', $request->study_program_id);
+        }
+        if ($request->filled('graduation_year')) {
+            $query->where('graduation_year', (int) $request->graduation_year);
         }
         if ($request->filled('toga_size')) {
             $query->where('toga_size', $request->toga_size);

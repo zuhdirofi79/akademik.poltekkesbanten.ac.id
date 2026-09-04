@@ -24,13 +24,14 @@
                     {{ $order->paymentStatusLabel() }}
                 @endif
                 <br>
-                Untuk informasi rekening pembayaran, silakan hubungi admin HUMAS.
+                Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat.
             </div>
 
             <div class="wisuda-order-summary">
                 <p><strong>Nama:</strong> {{ $order->student_name }}</p>
                 <p><strong>NIM:</strong> {{ $order->nim }}</p>
                 <p><strong>Program Studi:</strong> {{ $order->programDisplayName() }}</p>
+                <p><strong>Tahun Lulus:</strong> {{ $order->graduation_year ?: '-' }}</p>
                 <p><strong>Email:</strong> {{ $order->email }}</p>
                 <p><strong>Nomor HP / WhatsApp:</strong> {{ $order->phone }}</p>
                 <p><strong>Jenis Kelamin:</strong> {{ $order->genderLabel() }}</p>
@@ -46,10 +47,10 @@
                     Lanjut ke Upload Bukti Pembayaran
                 </a>
                 <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">
-                    Hubungi Dias Arliadini
+                    Hubungi Tim Sekretariat
                 </a>
                 <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-blue">
-                    Hubungi Kontak Alternatif
+                    Kontak Alternatif
                 </a>
                 <a href="{{ route('wisuda.index') }}" class="btn-sm btn-gray">Kembali ke Wisuda</a>
             </div>

@@ -27,6 +27,7 @@ class StoreGraduationTogaOrderRequest extends FormRequest
             'nim' => ['required', 'string', 'max:50'],
             'nik' => ['nullable', 'string', 'max:30'],
             'study_program_id' => ['required', 'exists:study_programs,id'],
+            'graduation_year' => ['required', 'integer', 'digits:4', 'min:2000', 'max:2099'],
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required', 'string', 'max:30'],
             'gender' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
@@ -44,6 +45,8 @@ class StoreGraduationTogaOrderRequest extends FormRequest
         return [
             'confirm.accepted' => 'Anda harus menyetujui pernyataan kebenaran data pemesanan.',
             'study_program_id.required' => 'Program studi wajib dipilih.',
+            'graduation_year.required' => 'Tahun lulus wajib diisi.',
+            'graduation_year.digits' => 'Tahun lulus harus 4 digit.',
             'phone.required' => 'Nomor HP/Telepon wajib diisi.',
         ];
     }
