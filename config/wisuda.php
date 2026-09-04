@@ -4,7 +4,7 @@ return [
     'payment_title' => env('WISUDA_PAYMENT_TITLE', 'Informasi Pembayaran Toga Wisuda'),
     'payment_instruction' => env(
         'WISUDA_PAYMENT_INSTRUCTION',
-        'Informasi nominal dan rekening pembayaran akan dikonfirmasi oleh panitia. Silakan unggah bukti pembayaran jika sudah melakukan pembayaran sesuai arahan panitia.'
+        'Untuk informasi rekening pembayaran, silakan hubungi admin HUMAS. Setelah mendapat informasi rekening dan melakukan pembayaran, unggah bukti pembayaran di halaman ini.'
     ),
     'payment_account_name' => env('WISUDA_PAYMENT_ACCOUNT_NAME'),
     'payment_account_number' => env('WISUDA_PAYMENT_ACCOUNT_NUMBER'),
@@ -25,6 +25,86 @@ return [
     'event_year' => '2026/2027',
     'event_date' => '30 September 2026',
     'event_location' => 'Auditorium UIN SMH Banten',
-    'order_deadline_note' => 'Pelayanan pemesanan dibuka hingga minimal 10 hari sebelum wisuda dilaksanakan.',
+    'order_deadline_note' => 'Pelayanan dibuka hingga minimal 10 hari sebelum wisuda dilaksanakan.',
     'service_hours' => '08.00 sampai 17.00 WIB',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Galeri produk resmi (file lokal di public/src/img/wisuda)
+    |--------------------------------------------------------------------------
+    */
+    'product_images' => [
+        [
+            'file' => 'Baju-Toga-Mahasiswa.jpeg',
+            'label' => 'Baju Toga Mahasiswa',
+            'alt' => 'Baju Toga Mahasiswa Poltekkes Kemenkes Banten',
+        ],
+        [
+            'file' => 'Topi-Toga-Segi-Lima.jpeg',
+            'label' => 'Topi Toga Segi Lima',
+            'alt' => 'Topi Toga Segi Lima Poltekkes Kemenkes Banten',
+        ],
+        [
+            'file' => 'sleber-kerah-wisuda.jpeg',
+            'label' => 'Slebber / Kerah Wisuda',
+            'alt' => 'Slebber Kerah Wisuda Poltekkes Kemenkes Banten',
+        ],
+        [
+            'file' => 'kerah-dan-kalung-wisuda-keperawatan.jpeg',
+            'label' => 'Kerah & Kalung Keperawatan',
+            'alt' => 'Kerah dan Kalung Wisuda Keperawatan',
+            'prodi' => 'keperawatan',
+        ],
+        [
+            'file' => 'kerah-dan-kalung-wisuda-kebidanan.jpeg',
+            'label' => 'Kerah & Kalung Kebidanan',
+            'alt' => 'Kerah dan Kalung Wisuda Kebidanan',
+            'prodi' => 'kebidanan',
+        ],
+        [
+            'file' => 'kerah-dan-kalung-wisuda-tlm.jpeg',
+            'label' => 'Kerah & Kalung TLM',
+            'alt' => 'Kerah dan Kalung Wisuda TLM',
+            'prodi' => 'tlm',
+        ],
+        [
+            'file' => 'kalung-wisuda-keperawatan.jpeg',
+            'label' => 'Kalung Keperawatan',
+            'alt' => 'Kalung Wisuda Keperawatan',
+            'prodi' => 'keperawatan',
+        ],
+        [
+            'file' => 'kalung-wisuda-kebidanan.jpeg',
+            'label' => 'Kalung Kebidanan',
+            'alt' => 'Kalung Wisuda Kebidanan',
+            'prodi' => 'kebidanan',
+        ],
+        [
+            'file' => 'kalung-wisuda-tlm.jpeg',
+            'label' => 'Kalung TLM',
+            'alt' => 'Kalung Wisuda TLM',
+            'prodi' => 'tlm',
+        ],
+    ],
+
+    'prodi_variants' => [
+        'keperawatan' => [
+            'label' => 'Keperawatan',
+            'note' => 'Atribut kerah dan kalung sesuai ketentuan Jurusan Keperawatan.',
+            'primary' => 'kerah-dan-kalung-wisuda-keperawatan.jpeg',
+            'secondary' => 'kalung-wisuda-keperawatan.jpeg',
+        ],
+        'kebidanan' => [
+            'label' => 'Kebidanan',
+            'note' => 'Atribut kerah dan kalung sesuai ketentuan Jurusan Kebidanan.',
+            'primary' => 'kerah-dan-kalung-wisuda-kebidanan.jpeg',
+            'secondary' => 'kalung-wisuda-kebidanan.jpeg',
+        ],
+        'tlm' => [
+            'label' => 'TLM',
+            'note' => 'Atribut kerah dan kalung sesuai ketentuan Jurusan Teknologi Laboratorium Medis.',
+            'primary' => 'kerah-dan-kalung-wisuda-tlm.jpeg',
+            'secondary' => 'kalung-wisuda-tlm.jpeg',
+        ],
+    ],
 ];

@@ -856,68 +856,10 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ===== Wisuda / Toga ===== */
-.wisuda-hero {
-    background: linear-gradient(135deg, #0f766e 0%, #155e75 45%, #1e3a5f 100%);
-    color: #fff;
-    padding: 3rem 0 2.5rem;
-}
-
-.wisuda-hero-inner {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 2rem;
-    align-items: center;
-}
-
-.wisuda-hero h1 {
-    margin: 0.75rem 0 0.85rem;
-    font-size: clamp(1.6rem, 3vw, 2.35rem);
-    line-height: 1.25;
-}
-
-.wisuda-hero p {
-    margin: 0 0 1.25rem;
-    color: #e2e8f0;
-    max-width: 38rem;
-}
-
-.wisuda-badge-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.wisuda-badge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    border-radius: 999px;
-    padding: 0.35rem 0.75rem;
-    font-size: 0.85rem;
-}
-
-.wisuda-badge-alt {
-    background: rgba(251, 191, 36, 0.2);
-}
-
-.wisuda-badge-soft {
-    background: rgba(125, 211, 252, 0.2);
-}
-
 .wisuda-hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-}
-
-.wisuda-mockup-image {
-    width: 100%;
-    max-width: 520px;
-    display: block;
-    margin: 0 auto;
-    border-radius: 18px;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
-    background: #fff;
 }
 
 .wisuda-section {
@@ -934,81 +876,337 @@ a { color: inherit; text-decoration: none; }
     font-size: 1.45rem;
 }
 
-.wisuda-product-card {
+.wisuda-pdp-wrap {
+    padding: 1.5rem 0 2rem;
+    background: #f8fafc;
+}
+
+.wisuda-pdp {
     display: grid;
-    grid-template-columns: 1fr 1.1fr;
+    grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1.05fr);
     gap: 1.5rem;
     background: #fff;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #e2e8f0;
     border-radius: 16px;
-    overflow: hidden;
+    padding: 1.25rem;
     box-shadow: var(--shadow);
 }
 
-.wisuda-product-media {
-    background: linear-gradient(180deg, #ecfeff, #f8fafc);
-    padding: 1.25rem;
+.wisuda-pdp-gallery {
+    min-width: 0;
+}
+
+.wisuda-pdp-main {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fff;
+    aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
-.wisuda-product-media img {
+.wisuda-pdp-main img {
     width: 100%;
-    max-width: 420px;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
-.wisuda-product-info {
-    padding: 1.5rem 1.5rem 1.5rem 0.5rem;
+.wisuda-pdp-thumbs-wrap {
+    display: grid;
+    grid-template-columns: 36px 1fr 36px;
+    gap: 0.4rem;
+    align-items: center;
+    margin-top: 0.75rem;
 }
 
-.wisuda-product-badge {
+.wisuda-pdp-thumbs {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0.15rem 0;
+}
+
+.wisuda-thumb {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0;
+    background: #fff;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.wisuda-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.wisuda-thumb.is-active {
+    border-color: #0f766e;
+    box-shadow: 0 0 0 1px #0f766e;
+}
+
+.wisuda-thumb-nav {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: #0f172a;
+}
+
+.wisuda-gallery-caption {
+    margin: 0.6rem 0 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.wisuda-pdp-info {
+    min-width: 0;
+}
+
+.wisuda-pdp-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 0.75rem;
+}
+
+.wisuda-chip {
     display: inline-block;
     background: #ecfeff;
     color: #0f766e;
     border: 1px solid #99f6e4;
     border-radius: 999px;
-    padding: 0.3rem 0.7rem;
+    padding: 0.28rem 0.7rem;
     font-size: 0.8rem;
     font-weight: 600;
 }
 
-.wisuda-product-info h2 {
-    margin: 0.75rem 0;
+.wisuda-chip-alt {
+    background: #fff7ed;
+    color: #c2410c;
+    border-color: #fdba74;
+}
+
+.wisuda-pdp-title {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    line-height: 1.3;
     color: #0f172a;
 }
 
-.wisuda-product-highlight {
-    color: #334155;
+.wisuda-pdp-subtitle {
     margin: 0 0 1rem;
-}
-
-.wisuda-product-points {
-    margin: 0 0 1.25rem;
-    padding-left: 1.1rem;
     color: #475569;
 }
 
-.wisuda-product-points li {
-    margin-bottom: 0.4rem;
+.wisuda-pdp-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-bottom: 1rem;
 }
 
-.wisuda-preview-grid {
+.wisuda-pdp-meta div {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.7rem 0.8rem;
+}
+
+.wisuda-pdp-meta span {
+    display: block;
+    color: #64748b;
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+}
+
+.wisuda-pdp-meta strong {
+    color: #0f172a;
+    font-size: 0.92rem;
+}
+
+.wisuda-pdp-package-brief {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+    color: #334155;
+}
+
+.wisuda-option-block {
+    margin-bottom: 1rem;
+}
+
+.wisuda-option-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    align-items: baseline;
+    margin-bottom: 0.55rem;
+    flex-wrap: wrap;
+}
+
+.wisuda-option-label span {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.wisuda-option-label small,
+.wisuda-size-guide {
+    color: #0369a1;
+    font-size: 0.85rem;
+}
+
+.wisuda-variant-row,
+.wisuda-size-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.wisuda-variant-btn,
+.wisuda-size-pill {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #0f172a;
+    border-radius: 8px;
+    padding: 0.55rem 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.wisuda-variant-btn.is-active {
+    border-color: #0f766e;
+    color: #0f766e;
+    box-shadow: inset 0 0 0 1px #0f766e;
+    background: #ecfeff;
+}
+
+.wisuda-size-pill {
+    cursor: default;
+    color: #475569;
+    font-weight: 500;
+}
+
+.wisuda-cta-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr auto;
+    gap: 0.6rem;
+    margin: 1.1rem 0;
+}
+
+.wisuda-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    background: #0f766e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.02rem;
+    border: 2px solid #0f766e;
+}
+
+.wisuda-cta-primary:hover {
+    background: #115e59;
+}
+
+.wisuda-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 88px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #334155;
+    font-weight: 600;
+    padding: 0.85rem 0.9rem;
+}
+
+.wisuda-seller-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+    margin-top: 0.25rem;
+}
+
+.wisuda-seller-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    color: #475569;
+}
+
+.wisuda-seller-info strong {
+    color: #0f172a;
+}
+
+.wisuda-seller-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.wisuda-official-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
 }
 
-.wisuda-preview-grid img {
-    width: 100%;
-    border-radius: 14px;
-    box-shadow: var(--shadow);
+.wisuda-official-preview-card {
     background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.wisuda-official-preview-card h3 {
+    margin: 0 0 0.75rem;
+    color: #0f766e;
+}
+
+.wisuda-official-preview-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-bottom: 0.55rem;
+}
+
+.wisuda-official-preview-card p {
+    color: #475569;
+    margin: 0.35rem 0 0.85rem;
+    min-height: 3.2em;
 }
 
 .wisuda-package-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 0.85rem;
 }
 
@@ -1017,10 +1215,22 @@ a { color: inherit; text-decoration: none; }
     border: 1px solid #bae6fd;
     border-left: 4px solid var(--primary);
     border-radius: 12px;
-    padding: 1rem 1.1rem;
+    padding: 0.85rem;
     box-shadow: var(--shadow);
     color: #0f172a;
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.wisuda-package-item img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
 }
 
 .wisuda-rules-card,
@@ -1067,18 +1277,27 @@ a { color: inherit; text-decoration: none; }
     margin: 0.4rem 0;
 }
 
+.wisuda-status-waiting {
+    background: #fff7ed;
+    border: 1px solid #fdba74;
+    color: #9a3412;
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    margin: 1rem 0;
+}
+
 @media (max-width: 900px) {
-    .wisuda-hero-inner,
-    .wisuda-product-card,
-    .wisuda-preview-grid {
+    .wisuda-pdp,
+    .wisuda-official-preview-grid,
+    .wisuda-pdp-meta {
         grid-template-columns: 1fr;
     }
 
-    .wisuda-product-info {
-        padding: 0 1.25rem 1.25rem;
+    .wisuda-cta-row {
+        grid-template-columns: 1fr;
     }
 
-    .wisuda-hero {
-        padding: 2rem 0;
+    .wisuda-pdp-main {
+        aspect-ratio: 4 / 3;
     }
 }

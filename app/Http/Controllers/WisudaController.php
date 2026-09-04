@@ -19,12 +19,15 @@ class WisudaController extends Controller
         ]);
     }
 
-    public function createOrder()
+    public function createOrder(Request $request)
     {
+        $prodiHint = strtolower((string) $request->query('prodi', ''));
+
         return view('wisuda.order', [
             'studyPrograms' => StudyProgram::active()->orderBy('name')->get(),
             'captcha' => $this->generateCaptcha(),
             'config' => config('wisuda'),
+            'prodiHint' => $prodiHint,
         ]);
     }
 
@@ -56,7 +59,7 @@ class WisudaController extends Controller
                 'orderCode' => $order->order_code,
                 'token' => $order->public_token,
             ])
-            ->with('success', 'Pesanan toga wisuda berhasil dibuat. Silakan lanjut ke pembayaran.');
+            ->with('success', 'Pesanan toga wisuda berhasil dibuat. Untuk informasi rekening, hubungi admin HUMAS lalu unggah bukti pembayaran.');
     }
 
     public function showOrder(Request $request, string $orderCode)

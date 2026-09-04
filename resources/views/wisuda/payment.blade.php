@@ -31,13 +31,26 @@
                 <p><strong>Program Studi:</strong> {{ $order->programDisplayName() }}</p>
                 <p><strong>Ukuran Toga:</strong> {{ $order->toga_size }}</p>
                 <p><strong>Jumlah:</strong> {{ $order->quantity }}</p>
-                <p><strong>Status Pembayaran:</strong> {{ $order->paymentStatusLabel() }}</p>
+                <p><strong>Status Pembayaran:</strong>
+                    @if($order->payment_status === 'unpaid')
+                        Menunggu informasi pembayaran
+                    @else
+                        {{ $order->paymentStatusLabel() }}
+                    @endif
+                </p>
                 @if($order->payment_uploaded_at)
                     <p><strong>Tanggal Upload Bukti:</strong> {{ $order->payment_uploaded_at->format('d/m/Y H:i') }}</p>
                 @endif
                 @if($order->rejection_note)
                     <p><strong>Catatan Penolakan:</strong> {{ $order->rejection_note }}</p>
                 @endif
+            </div>
+
+            <div class="wisuda-status-waiting">
+                <strong>Untuk informasi rekening pembayaran, silakan hubungi admin HUMAS.</strong>
+                <p style="margin:0.5rem 0 0;">
+                    Setelah mendapat info rekening dan menyelesaikan pembayaran, unggah bukti di form bawah.
+                </p>
             </div>
 
             <div class="wisuda-payment-box">
@@ -56,12 +69,16 @@
                             <p><strong>Nomor Rekening:</strong> {{ $config['payment_account_number'] }}</p>
                         @endif
                     </div>
-                @else
-                    <p class="wisuda-note">
-                        Nominal dan nomor rekening belum dipublikasikan di website.
-                        Silakan ikuti arahan panitia, lalu unggah bukti pembayaran di form berikut.
-                    </p>
                 @endif
+
+                <div class="wisuda-hero-actions" style="margin-top:1rem;">
+                    <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">
+                        Hubungi Dias Arliadini
+                    </a>
+                    <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-blue">
+                        Hubungi Kontak Alternatif
+                    </a>
+                </div>
             </div>
 
             @if($order->hasPaymentProof())
@@ -69,6 +86,8 @@
                     Bukti pembayaran sudah diunggah: <strong>{{ $order->payment_proof_original_name }}</strong>
                     @if($order->payment_status === 'rejected')
                         — status ditolak, Anda dapat mengunggah ulang.
+                    @elseif($order->payment_status === 'uploaded')
+                        — menunggu verifikasi admin HUMAS.
                     @endif
                 </div>
             @endif
@@ -92,9 +111,6 @@
             <div class="wisuda-hero-actions" style="margin-top:1.25rem;">
                 <a href="{{ route('wisuda.order.show', ['orderCode' => $order->order_code, 'token' => $order->public_token]) }}" class="btn-sm btn-gray">
                     Lihat Detail Pesanan
-                </a>
-                <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">
-                    Hubungi Dias Arliadini
                 </a>
             </div>
         </div>

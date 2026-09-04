@@ -14,8 +14,16 @@
                 <p>Pelaksanaan: <strong>{{ $config['event_date'] }}</strong></p>
                 <p>Lokasi: <strong>{{ $config['event_location'] }}</strong></p>
                 <p>{{ $config['order_deadline_note'] }}</p>
-                <p>Isi data dengan benar. Setelah submit, Anda akan mendapat kode pesanan dan dapat lanjut ke halaman pembayaran.</p>
-                <a href="{{ route('wisuda.index') }}" class="btn-sm btn-gray">Kembali ke Halaman Wisuda</a>
+                <p>Isi data dengan benar. Setelah submit, Anda mendapat kode pesanan. Untuk info rekening, hubungi admin HUMAS lalu unggah bukti pembayaran.</p>
+                <div class="wisuda-contact-box" style="margin-top:1rem;">
+                    <strong>{{ $config['contact_name'] }}</strong>
+                    <p style="margin:0.35rem 0;">{{ $config['contact_phone_primary'] }}</p>
+                    <div class="wisuda-hero-actions">
+                        <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-green">Hubungi Dias Arliadini</a>
+                        <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-blue">Kontak Alternatif</a>
+                    </div>
+                </div>
+                <a href="{{ route('wisuda.index') }}" class="btn-sm btn-gray" style="margin-top:0.75rem;display:inline-block;">Kembali ke Halaman Wisuda</a>
             </div>
 
             <div class="form-main">
@@ -48,7 +56,15 @@
                         <select name="study_program_id" id="study_program_id" class="form-control" required>
                             <option value="">-- Pilih Program Studi --</option>
                             @foreach($studyPrograms as $program)
-                                <option value="{{ $program->id }}" @selected(old('study_program_id') == $program->id)>{{ $program->name }}</option>
+                                @php
+                                    $nameLower = strtolower($program->name);
+                                    $hintMatched = filled($prodiHint ?? null) && (
+                                        str_contains($nameLower, $prodiHint)
+                                        || ($prodiHint === 'tlm' && (str_contains($nameLower, 'laboratorium') || str_contains($nameLower, 'tlm')))
+                                    );
+                                    $isSelected = old('study_program_id') == $program->id || (! old('study_program_id') && $hintMatched);
+                                @endphp
+                                <option value="{{ $program->id }}" @selected($isSelected)>{{ $program->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -57,7 +73,7 @@
                         <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Nomor HP/Telepon <span style="color:#dc2626;">*</span></label>
+                        <label for="phone">Nomor HP / WhatsApp <span style="color:#dc2626;">*</span></label>
                         <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') }}" placeholder="08xxxxxxxxxx" required>
                     </div>
                     <div class="form-group">

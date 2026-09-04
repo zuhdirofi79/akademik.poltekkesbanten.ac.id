@@ -100,8 +100,8 @@ class GraduationTogaOrder extends Model
     public function paymentStatusLabel(): string
     {
         return match ($this->payment_status) {
-            'unpaid' => 'Belum Bayar',
-            'uploaded' => 'Bukti Diunggah',
+            'unpaid' => 'Menunggu informasi pembayaran',
+            'uploaded' => 'Menunggu verifikasi',
             'verified' => 'Terverifikasi',
             'rejected' => 'Ditolak',
             default => ucfirst((string) $this->payment_status),
