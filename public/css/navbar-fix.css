@@ -1,0 +1,215 @@
+/* Navbar fix — always loaded via asset(), independent of CSS_URL */
+.site-header {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.site-header .container.site-header-inner,
+.site-header-inner {
+    max-width: 1280px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 14px 24px;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+.site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+    max-width: 260px;
+    min-width: 0;
+    text-decoration: none;
+    color: #0f172a;
+    overflow: hidden;
+    position: static;
+}
+
+.site-brand-logo,
+.site-logo {
+    width: 54px;
+    height: 54px;
+    max-width: 54px;
+    object-fit: contain;
+    flex: 0 0 auto;
+    display: block;
+}
+
+.site-brand-text {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.site-nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    position: static;
+}
+
+.site-nav > a,
+.site-nav > .site-nav-dropdown,
+.site-nav .site-nav-link,
+.site-nav .site-nav-dropdown-toggle,
+.site-nav .site-nav-button,
+.site-nav .site-admin-login,
+.site-nav .poltekkes-button,
+.site-nav .institution-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    position: static;
+}
+
+.site-nav-link,
+.site-nav-dropdown-toggle {
+    font-size: 15px;
+    padding: 8px 0;
+}
+
+.site-nav-button,
+.poltekkes-button,
+.institution-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 999px;
+    white-space: nowrap;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.site-admin-login {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 13px;
+}
+
+@media (max-width: 1280px) {
+    .site-header .container.site-header-inner,
+    .site-header-inner {
+        gap: 16px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .site-brand {
+        max-width: 220px;
+    }
+
+    .site-brand-text {
+        font-size: 18px;
+        max-width: 150px;
+    }
+
+    .site-nav {
+        gap: 12px;
+    }
+
+    .site-nav-link,
+    .site-nav-dropdown-toggle {
+        font-size: 13px;
+    }
+
+    .site-nav-button,
+    .poltekkes-button,
+    .institution-button {
+        padding: 0 14px;
+        font-size: 12px;
+        min-height: 40px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .site-brand {
+        max-width: 190px;
+    }
+
+    .site-brand-text {
+        font-size: 16px;
+        max-width: 120px;
+    }
+
+    .site-nav {
+        gap: 10px;
+    }
+
+    .site-nav-link,
+    .site-nav-dropdown-toggle {
+        font-size: 12px;
+    }
+
+    .site-nav-button,
+    .poltekkes-button,
+    .institution-button {
+        padding: 0 12px;
+        font-size: 11px;
+    }
+
+    .site-admin-login {
+        padding: 0 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 900px) {
+    .site-header .container.site-header-inner,
+    .site-header-inner {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        min-height: auto;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .site-brand {
+        max-width: none;
+        width: auto;
+        flex: 1 1 auto;
+    }
+
+    .site-brand-text {
+        max-width: none;
+        white-space: nowrap;
+        font-size: 16px;
+    }
+
+    .site-nav {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        white-space: normal;
+    }
+
+    .site-nav-button,
+    .poltekkes-button,
+    .institution-button,
+    .site-admin-login {
+        font-size: 12px;
+    }
+}
