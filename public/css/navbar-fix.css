@@ -1,4 +1,4 @@
-/* Navbar fix — always loaded via asset(), independent of CSS_URL */
+/* Navbar fix — logo only, no brand text overlap */
 .site-header {
     width: 100%;
     background: #ffffff;
@@ -14,54 +14,49 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding: 14px 24px;
+    padding: 12px 24px;
     min-height: 72px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 24px;
+    gap: 28px;
     box-sizing: border-box;
 }
 
-.site-brand {
+.site-brand,
+.site-brand-logo-only {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
     flex: 0 0 auto;
-    max-width: 260px;
-    min-width: 0;
+    width: 68px;
+    min-width: 68px;
+    max-width: 68px;
     text-decoration: none;
-    color: #0f172a;
     overflow: hidden;
     position: static;
 }
 
 .site-brand-logo,
 .site-logo {
-    width: 54px;
-    height: 54px;
-    max-width: 54px;
+    width: 58px;
+    height: 58px;
+    max-width: 58px;
     object-fit: contain;
-    flex: 0 0 auto;
     display: block;
+    flex: 0 0 auto;
 }
 
 .site-brand-text {
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1.15;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
+    display: none !important;
 }
 
 .site-nav {
-    margin-left: auto;
+    margin-left: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 18px;
+    gap: 22px;
     flex: 1 1 auto;
     min-width: 0;
     flex-wrap: nowrap;
@@ -108,49 +103,63 @@
     font-size: 13px;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1200px) {
     .site-header .container.site-header-inner,
     .site-header-inner {
-        gap: 16px;
+        gap: 18px;
         padding-left: 18px;
         padding-right: 18px;
     }
 
-    .site-brand {
-        max-width: 220px;
+    .site-brand,
+    .site-brand-logo-only {
+        width: 60px;
+        min-width: 60px;
+        max-width: 60px;
     }
 
-    .site-brand-text {
-        font-size: 18px;
-        max-width: 150px;
+    .site-brand-logo,
+    .site-logo {
+        width: 52px;
+        height: 52px;
+        max-width: 52px;
     }
 
     .site-nav {
-        gap: 12px;
+        gap: 14px;
     }
 
     .site-nav-link,
     .site-nav-dropdown-toggle {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .site-nav-button,
     .poltekkes-button,
     .institution-button {
-        padding: 0 14px;
-        font-size: 12px;
-        min-height: 40px;
+        padding: 0 16px;
+        font-size: 13px;
     }
 }
 
-@media (max-width: 1100px) {
-    .site-brand {
-        max-width: 190px;
+@media (max-width: 1024px) {
+    .site-header .container.site-header-inner,
+    .site-header-inner {
+        gap: 12px;
     }
 
-    .site-brand-text {
-        font-size: 16px;
-        max-width: 120px;
+    .site-brand,
+    .site-brand-logo-only {
+        width: 54px;
+        min-width: 54px;
+        max-width: 54px;
+    }
+
+    .site-brand-logo,
+    .site-logo {
+        width: 48px;
+        height: 48px;
+        max-width: 48px;
     }
 
     .site-nav {
@@ -159,19 +168,7 @@
 
     .site-nav-link,
     .site-nav-dropdown-toggle {
-        font-size: 12px;
-    }
-
-    .site-nav-button,
-    .poltekkes-button,
-    .institution-button {
-        padding: 0 12px;
-        font-size: 11px;
-    }
-
-    .site-admin-login {
-        padding: 0 12px;
-        font-size: 12px;
+        font-size: 13px;
     }
 }
 
@@ -179,22 +176,17 @@
     .site-header .container.site-header-inner,
     .site-header-inner {
         flex-wrap: wrap;
-        align-items: flex-start;
+        align-items: center;
         min-height: auto;
         padding-top: 12px;
         padding-bottom: 12px;
     }
 
-    .site-brand {
-        max-width: none;
-        width: auto;
-        flex: 1 1 auto;
-    }
-
-    .site-brand-text {
-        max-width: none;
-        white-space: nowrap;
-        font-size: 16px;
+    .site-brand,
+    .site-brand-logo-only {
+        width: 58px;
+        min-width: 58px;
+        max-width: 58px;
     }
 
     .site-nav {
@@ -204,12 +196,5 @@
         flex-wrap: wrap;
         gap: 10px 14px;
         white-space: normal;
-    }
-
-    .site-nav-button,
-    .poltekkes-button,
-    .institution-button,
-    .site-admin-login {
-        font-size: 12px;
     }
 }

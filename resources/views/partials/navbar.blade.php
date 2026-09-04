@@ -1,8 +1,7 @@
 <header class="site-header">
     <div class="container site-header-inner">
-        <a href="{{ route('beranda') }}" class="site-brand">
-            <img src="{{ asset('src/img/logo.png') }}" alt="Logo Poltekkes Kemenkes Banten" class="site-brand-logo">
-            <span class="site-brand-text">Layanan Polkesten</span>
+        <a href="{{ route('beranda') }}" class="site-brand site-brand-logo-only" aria-label="Beranda Layanan Akademik Poltekkes Kemenkes Banten">
+            <img src="{{ asset('src/img/logo.png') }}" alt="Logo Poltekkes Kemenkes Banten" class="site-brand-logo site-logo">
         </a>
 
         <nav class="site-nav">

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Layanan Akademik Poltekkes Kemenkes Banten')</title>
     <link rel="stylesheet" href="{{ env('CSS_URL', asset('css/akademik.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar-fix.css') }}?v=20260904-nav1">
+    <link rel="stylesheet" href="{{ asset('css/navbar-fix.css') }}?v=20260904-nav2">
     @stack('styles')
 </head>
 <body>
