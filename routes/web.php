@@ -14,12 +14,14 @@ use App\Http\Controllers\Admin\StudyProgramController;
 use App\Http\Controllers\Admin\SubmissionController;
 use App\Http\Controllers\Admin\TestEmailController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WisudaOrderController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\PublicQueueController;
 use App\Http\Controllers\SatisfactionSurveyController;
 use App\Http\Controllers\ServiceFormController;
+use App\Http\Controllers\WisudaController;
 use App\Support\ServiceFormConfig;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +90,17 @@ Route::get('/antrean/kiosk', [PublicQueueController::class, 'kiosk'])->name('que
 Route::get('/antrean/{queue}/print', [PublicQueueController::class, 'print'])->name('queues.print');
 Route::get('/antrean/{queue}', [PublicQueueController::class, 'ticket'])->name('queues.ticket');
 
+Route::get('/wisuda', [WisudaController::class, 'index'])->name('wisuda.index');
+Route::get('/wisuda/pesan', [WisudaController::class, 'createOrder'])->name('wisuda.order.create');
+Route::post('/wisuda/pesan', [WisudaController::class, 'storeOrder'])
+    ->name('wisuda.order.store')
+    ->middleware('throttle:10,1');
+Route::get('/wisuda/pesanan/{orderCode}', [WisudaController::class, 'showOrder'])->name('wisuda.order.show');
+Route::get('/wisuda/pesanan/{orderCode}/pembayaran', [WisudaController::class, 'payment'])->name('wisuda.payment');
+Route::post('/wisuda/pesanan/{orderCode}/upload-bukti-pembayaran', [WisudaController::class, 'uploadPaymentProof'])
+    ->name('wisuda.payment.upload')
+    ->middleware('throttle:10,1');
+
 Route::get('/download/{submission}/{file}', [FileDownloadController::class, 'download'])
     ->name('download.file');
 Route::get('/download-signed/{submission}/{file}', [FileDownloadController::class, 'download'])
@@ -143,6 +156,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/reports/queues/print', [ReportController::class, 'printQueues'])->name('reports.queues.print');
             Route::get('/reports/surveys/print', [ReportController::class, 'printSurveys'])->name('reports.surveys.print');
             Route::get('/reports/combined/print', [ReportController::class, 'printCombined'])->name('reports.combined.print');
+
+            Route::get('/wisuda/orders', [WisudaOrderController::class, 'index'])->name('wisuda.orders.index');
+            Route::get('/wisuda/orders/export', [WisudaOrderController::class, 'export'])->name('wisuda.orders.export');
+            Route::get('/wisuda/orders/print', [WisudaOrderController::class, 'print'])->name('wisuda.orders.print');
+            Route::get('/wisuda/orders/{order}', [WisudaOrderController::class, 'show'])->name('wisuda.orders.show');
+            Route::get('/wisuda/orders/{order}/download-payment-proof', [WisudaOrderController::class, 'downloadPaymentProof'])->name('wisuda.orders.download-payment-proof');
+            Route::get('/wisuda/orders/{order}/preview-payment-proof', [WisudaOrderController::class, 'previewPaymentProof'])->name('wisuda.orders.preview-payment-proof');
+            Route::patch('/wisuda/orders/{order}/verify-payment', [WisudaOrderController::class, 'verifyPayment'])->name('wisuda.orders.verify-payment');
+            Route::patch('/wisuda/orders/{order}/reject-payment', [WisudaOrderController::class, 'rejectPayment'])->name('wisuda.orders.reject-payment');
+            Route::patch('/wisuda/orders/{order}/complete', [WisudaOrderController::class, 'complete'])->name('wisuda.orders.complete');
+            Route::patch('/wisuda/orders/{order}/cancel', [WisudaOrderController::class, 'cancel'])->name('wisuda.orders.cancel');
 
             Route::post('/queues/{queue}/call', [QueueController::class, 'call'])->name('queues.call');
             Route::post('/queues/{queue}/serve', [QueueController::class, 'serve'])->name('queues.serve');

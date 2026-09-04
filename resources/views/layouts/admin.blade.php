@@ -17,6 +17,7 @@
                 <a href="{{ route('admin.queues.index') }}" class="{{ request()->routeIs('admin.queues.index') ? 'active' : '' }}">Antrean Layanan</a>
                 <a href="{{ route('admin.queues.reports') }}" class="{{ request()->routeIs('admin.queues.reports*') ? 'active' : '' }}">Laporan Antrean</a>
                 <a href="{{ route('admin.surveys.dashboard') }}" class="{{ request()->routeIs('admin.surveys.*') ? 'active' : '' }}">Survei Kepuasan</a>
+                <a href="{{ route('admin.wisuda.orders.index') }}" class="{{ request()->routeIs('admin.wisuda.*') ? 'active' : '' }}">Wisuda / Pesanan Toga</a>
                 <a href="{{ route('admin.reports.index') }}" class="{{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">Laporan / Audit</a>
                 @if(auth()->user()->isSuperAdmin())
                     <a href="{{ route('admin.study-programs.index') }}" class="{{ request()->routeIs('admin.study-programs.*') ? 'active' : '' }}">Program Studi</a>

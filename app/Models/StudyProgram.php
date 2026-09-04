@@ -24,6 +24,11 @@ class StudyProgram extends Model
         return $this->hasMany(Submission::class);
     }
 
+    public function graduationTogaOrders(): HasMany
+    {
+        return $this->hasMany(GraduationTogaOrder::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);

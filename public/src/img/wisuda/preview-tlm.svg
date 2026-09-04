@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" role="img" aria-label="Preview Toga TLM">
+  <rect width="420" height="280" rx="18" fill="#eff6ff"/>
+  <rect x="24" y="24" width="372" height="232" rx="16" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="210" y="58" text-anchor="middle" fill="#1d4ed8" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">Preview TLM</text>
+  <path d="M150 90 L210 120 L270 90 L295 220 L210 245 L125 220 Z" fill="#111827"/>
+  <rect x="168" y="72" width="84" height="18" rx="3" fill="#0f172a"/>
+  <ellipse cx="210" cy="90" rx="42" ry="10" fill="#111827"/>
+  <path d="M190 130 L210 155 L230 130" fill="#2563eb"/>
+  <text x="210" y="268" text-anchor="middle" fill="#64748b" font-family="Segoe UI, Arial, sans-serif" font-size="12">Samir aksen biru</text>
+</svg>

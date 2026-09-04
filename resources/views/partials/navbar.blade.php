@@ -22,7 +22,9 @@
 
             <a href="{{ route('progress.index') }}" class="site-nav-link {{ request()->routeIs('progress.*') ? 'active' : '' }}">Progres Layanan</a>
             <a href="{{ route('queues.index') }}" class="site-nav-link {{ request()->routeIs('queues.*') ? 'active' : '' }}">Antrean Layanan</a>
+            <a href="{{ route('survey.create') }}" class="site-nav-link {{ request()->routeIs('survey.*') ? 'active' : '' }}">Survei Kepuasan</a>
             <a href="{{ route('about') }}" class="site-nav-link {{ request()->routeIs('about', 'tentang') ? 'active' : '' }}">Tentang</a>
+            <a href="{{ route('wisuda.index') }}" class="site-nav-link {{ request()->routeIs('wisuda.*') ? 'active' : '' }}">Wisuda</a>
             <a href="https://poltekkesbanten.ac.id" target="_blank" rel="noopener" class="site-nav-button">POLTEKKES KEMENKES BANTEN</a>
             <a href="{{ route('admin.login') }}" class="site-admin-login">Login Admin</a>
         </nav>
