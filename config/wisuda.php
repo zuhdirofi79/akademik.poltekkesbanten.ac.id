@@ -4,13 +4,13 @@ return [
     'payment_title' => env('WISUDA_PAYMENT_TITLE', 'Informasi Pembayaran Toga Wisuda'),
     'payment_instruction' => env(
         'WISUDA_PAYMENT_INSTRUCTION',
-        'Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat. Setelah mendapat informasi rekening dan melakukan pembayaran, unggah bukti pembayaran di halaman ini.'
+        'Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat DWP Poltekkes Kemenkes Banten. Setelah mendapat informasi rekening dan melakukan pembayaran, unggah bukti pembayaran di halaman ini.'
     ),
     'payment_account_name' => env('WISUDA_PAYMENT_ACCOUNT_NAME'),
     'payment_account_number' => env('WISUDA_PAYMENT_ACCOUNT_NUMBER'),
     'payment_bank_name' => env('WISUDA_PAYMENT_BANK_NAME'),
 
-    'contact_name' => env('WISUDA_CONTACT_NAME', 'Dias Arliadini (Tim Sekretariat DPW Poltekkes Kemenkes Banten)'),
+    'contact_name' => env('WISUDA_CONTACT_NAME', 'Dias Arliadini (Tim Sekretariat DWP Poltekkes Kemenkes Banten)'),
     'contact_phone_primary' => env('WISUDA_CONTACT_PHONE_PRIMARY', '+62 851-8777-8838'),
     'contact_phone_secondary' => env('WISUDA_CONTACT_PHONE_SECONDARY', '+62 877-4112-1505'),
     'contact_wa_primary' => env(

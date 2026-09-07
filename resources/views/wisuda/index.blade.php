@@ -105,13 +105,13 @@
 
                     <div class="wisuda-price-box">
                         <p class="wisuda-price-main">Biaya: Hubungi Tim Sekretariat</p>
-                        <p class="wisuda-price-note">Informasi rekening pembayaran akan dikonfirmasi oleh Tim Sekretariat.</p>
+                        <p class="wisuda-price-note">Informasi rekening pembayaran akan dikonfirmasi oleh Tim Sekretariat DWP Poltekkes Kemenkes Banten.</p>
                     </div>
 
                     <ul class="wisuda-meta-list">
                         <li><strong>Pelaksanaan:</strong> {{ $config['event_date'] }}</li>
                         <li><strong>Lokasi:</strong> {{ $config['event_location'] }}</li>
-                        <li><strong>Pengambilan/Pemesanan:</strong> Silakan menghubungi Tim Sekretariat.</li>
+                        <li><strong>Pengambilan/Pemesanan:</strong> Mengenai pengambilan, silakan menghubungi Tim Sekretariat DWP Poltekkes Kemenkes Banten.</li>
                     </ul>
 
                     <div class="wisuda-option-group">
@@ -157,7 +157,7 @@
 
                     <div class="wisuda-seller-box">
                         <div>
-                            <strong>Tim Sekretariat</strong>
+                            <strong>Tim Sekretariat DWP Poltekkes Kemenkes Banten</strong>
                             <span>{{ $config['contact_name'] }} · Pelayanan {{ $config['service_hours'] }}</span>
                         </div>
                         <div class="wisuda-option-buttons">
@@ -207,7 +207,7 @@
                         </ul>
                     </div>
                     <div class="wisuda-tab-panel" data-panel="kontak">
-                        <p>Bila ada pertanyaan, silakan menghubungi Tim Sekretariat.</p>
+                        <p>Bila ada pertanyaan, silakan menghubungi Tim Sekretariat DWP Poltekkes Kemenkes Banten.</p>
                         <p>Pelayanan pukul 08.00–17.00 WIB. Di luar jam tersebut, silahkan menunggu hari berikutnya.</p>
                         <p>{{ $config['order_deadline_note'] }}</p>
                         <div class="wisuda-contact-inline">
@@ -226,7 +226,7 @@
             {{-- Checkout form --}}
             <section class="wisuda-checkout-card" id="wisuda-checkout">
                 <h2>Checkout Pemesanan Toga</h2>
-                <p style="margin:0;color:#6b7280;">Lengkapi data pemesanan. Setelah submit, Anda mendapat kode pesanan dan dapat mengunggah bukti pembayaran setelah mendapat info rekening dari Tim Sekretariat.</p>
+                <p style="margin:0;color:#6b7280;">Lengkapi data pemesanan. Setelah submit, Anda mendapat kode pesanan dan dapat mengunggah bukti pembayaran setelah mendapat info rekening dari Tim Sekretariat DWP Poltekkes Kemenkes Banten.</p>
 
                 <div class="wisuda-checkout-summary" id="wisudaCheckoutSummary">
                     Ringkasan pilihan: <strong id="summaryProdi">Belum dipilih</strong> ·
@@ -313,7 +313,7 @@
                         </div>
                         <div class="form-group full">
                             <label for="size_note">Catatan Tambahan</label>
-                            <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk Tim Sekretariat.">{{ old('size_note') }}</textarea>
+                            <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk Tim Sekretariat DWP Poltekkes Kemenkes Banten.">{{ old('size_note') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="captcha_answer">Captcha: {{ $captcha['question'] }} <span style="color:#dc2626;">*</span></label>
@@ -336,7 +336,7 @@
 
                 <div class="wisuda-contact-inline">
                     <strong>Butuh info rekening?</strong>
-                    <p style="margin:6px 0;">Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat.</p>
+                    <p style="margin:6px 0;">Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat DWP Poltekkes Kemenkes Banten.</p>
                     <div class="wisuda-cta-row" style="margin-top:8px;">
                         <a href="{{ $config['contact_wa_primary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline">Hubungi Tim Sekretariat</a>
                         <a href="{{ $config['contact_wa_secondary'] }}" target="_blank" rel="noopener noreferrer" class="wisuda-btn-outline">Kontak Alternatif</a>

@@ -48,7 +48,7 @@
             </div>
 
             <div class="wisuda-status-waiting">
-                <strong>Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat.</strong>
+                <strong>Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat DWP Poltekkes Kemenkes Banten.</strong>
                 <p style="margin:0.5rem 0 0;">
                     Setelah mendapat info rekening dan menyelesaikan pembayaran, unggah bukti di form bawah.
                 </p>
@@ -88,7 +88,7 @@
                     @if($order->payment_status === 'rejected')
                         — status ditolak, Anda dapat mengunggah ulang.
                     @elseif($order->payment_status === 'uploaded')
-                        — menunggu verifikasi Tim Sekretariat.
+                        — menunggu verifikasi Tim Sekretariat DWP Poltekkes Kemenkes Banten.
                     @endif
                 </div>
             @endif

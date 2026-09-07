@@ -14,7 +14,7 @@
                 <p>Pelaksanaan: <strong>{{ $config['event_date'] }}</strong></p>
                 <p>Lokasi: <strong>{{ $config['event_location'] }}</strong></p>
                 <p>{{ $config['order_deadline_note'] }}</p>
-                <p>Isi data dengan benar. Setelah submit, Anda mendapat kode pesanan. Untuk info rekening, hubungi Tim Sekretariat lalu unggah bukti pembayaran.</p>
+                <p>Isi data dengan benar. Setelah submit, Anda mendapat kode pesanan. Untuk info rekening, hubungi Tim Sekretariat DWP Poltekkes Kemenkes Banten lalu unggah bukti pembayaran.</p>
                 <div class="wisuda-contact-box" style="margin-top:1rem;">
                     <strong>{{ $config['contact_name'] }}</strong>
                     <p style="margin:0.35rem 0;">{{ $config['contact_phone_primary'] }}</p>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="form-group">
                         <label for="size_note">Catatan Tambahan</label>
-                        <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk Tim Sekretariat.">{{ old('size_note') }}</textarea>
+                        <textarea name="size_note" id="size_note" class="form-control" rows="3" placeholder="Opsional: catatan tambahan untuk Tim Sekretariat DWP Poltekkes Kemenkes Banten.">{{ old('size_note') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Jumlah <span style="color:#dc2626;">*</span></label>

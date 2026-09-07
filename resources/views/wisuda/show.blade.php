@@ -24,7 +24,7 @@
                     {{ $order->paymentStatusLabel() }}
                 @endif
                 <br>
-                Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat.
+                Untuk informasi rekening pembayaran, silakan hubungi Tim Sekretariat DWP Poltekkes Kemenkes Banten.
             </div>
 
             <div class="wisuda-order-summary">

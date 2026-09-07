@@ -62,7 +62,7 @@ class WisudaController extends Controller
                 'orderCode' => $order->order_code,
                 'token' => $order->public_token,
             ])
-            ->with('success', 'Pesanan toga wisuda berhasil dibuat. Untuk informasi rekening, hubungi Tim Sekretariat lalu unggah bukti pembayaran.');
+            ->with('success', 'Pesanan toga wisuda berhasil dibuat. Untuk informasi rekening, hubungi Tim Sekretariat DWP Poltekkes Kemenkes Banten lalu unggah bukti pembayaran.');
     }
 
     public function showOrder(Request $request, string $orderCode)
@@ -127,7 +127,7 @@ class WisudaController extends Controller
                 'orderCode' => $order->order_code,
                 'token' => $order->public_token,
             ])
-            ->with('success', 'Bukti pembayaran berhasil diunggah. Tim Sekretariat akan melakukan verifikasi.');
+            ->with('success', 'Bukti pembayaran berhasil diunggah. Tim Sekretariat DWP Poltekkes Kemenkes Banten akan melakukan verifikasi.');
     }
 
     private function findPublicOrder(Request $request, string $orderCode): GraduationTogaOrder
